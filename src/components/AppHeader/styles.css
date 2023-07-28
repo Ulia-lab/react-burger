@@ -1,0 +1,10 @@
+.nav {
+    height: 88px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.button {
+    width: 20px; 
+    height: 16px;
+}
