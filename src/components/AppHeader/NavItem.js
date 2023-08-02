@@ -1,10 +1,14 @@
+import React from "react";
 import "./styles.css";
-import React from 'react';
+import "@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css";
+import "@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css";
 
-const NavItem = ({ text, icon }) => (
-  <a className="button" href="/">
-    {icon}
-    <p className="text text_type_main-default">{text}</p>
+const NavItem = ({ className, text, icon }) => (
+  <a href="/">
+    <div className="pb-2 pt-3 pr-3 pl-3 button">
+      <div className="pr-2">{icon}</div>
+      <p className={className}>{text}</p>
+    </div>
   </a>
 );
 

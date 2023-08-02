@@ -1,10 +1,17 @@
 .nav {
-    height: 88px;
     display: flex;
     justify-content: space-between;
 }
 
+.menu {
+    display: flex;
+    justify-content: space-between;
+    min-width: 310px;
+}
+
 .button {
-    width: 20px; 
-    height: 16px;
+    border: dashed #4C4CFF;
+    border-radius: 30px;
+    display: flex;
+    justify-content: space-between;
 }

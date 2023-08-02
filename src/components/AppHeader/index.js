@@ -10,18 +10,22 @@ import NavItem from "./NavItem.js";
 
 class AppHeader extends React.Component {
   render() {
-    const burgerIcon = <BurgerIcon type="primary" />;
-    const listIcon = <ListIcon type="primary" />;
-    const profileIcon = <ProfileIcon type="primary" />;
+    let isActive = true;
+
+    const primary = 'primary';
+    const secondary = 'secondary';
+    const burgerIcon = <BurgerIcon type={isActive ? primary : secondary} />
+    const listIcon = <ListIcon type={!isActive ? primary : secondary} />
+    const profileIcon = <ProfileIcon type={!isActive ? primary : secondary} />
 
     return (
-      <nav>
-        <ul className="nav">
+      <header>
+        <ul className="mb-4 mt-4 nav">
           <li>
-            <NavItem text="Конструктор" icon={burgerIcon} />
-          </li>
-          <li>
-            <NavItem text="Лента заказов" icon={listIcon} />
+            <nav className="menu">
+              <NavItem className="text text_type_main-default" text="Конструктор" icon={burgerIcon} />
+              <NavItem className="text text_type_main-default text_color_inactive" text="Лента заказов" icon={listIcon} />
+            </nav>
           </li>
           <li>
             <a href="/">
@@ -29,10 +33,10 @@ class AppHeader extends React.Component {
             </a>
           </li>
           <li>
-            <NavItem text="Личный кабинет" icon={profileIcon} />
+            <NavItem className="text text_type_main-default text_color_inactive" text="Личный кабинет" icon={profileIcon} />
           </li>
         </ul>
-      </nav>
+      </header>
     );
   }
 }

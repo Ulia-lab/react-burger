@@ -1,0 +1,40 @@
+::-webkit-scrollbar {
+    width: 8px; 
+    background-color: #8585AD;
+  }
+  
+::-webkit-scrollbar-thumb {
+    background-color: #c5c5c5; 
+}
+
+.burger-constructor-block {
+    min-width: 600px;
+    margin: auto;
+}
+
+.burger-constructor {
+    overflow: auto;
+    scrollbar-width: thin;
+    max-height: calc(100vh - 264px - 40px);
+}
+
+.burger-constructor-element{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.burger-constructor-element:last-child {
+    margin-bottom: 0px;
+}
+
+.burger-constructor-item{
+    min-width: 532px;
+}
+
+.total {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin-bottom: -50px;
+}
