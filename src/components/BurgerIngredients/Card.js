@@ -1,6 +1,7 @@
 import React from "react";
 import "./styles.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
+import PropTypes from 'prop-types';
 
 const Card = ({ card }) => (
     <button className="card">
@@ -17,3 +18,7 @@ const Card = ({ card }) => (
 
 
 export default Card;
+
+Card.propTypes = {
+    card: PropTypes.array.isRequired,
+  }; 

@@ -2,6 +2,7 @@ import React from "react";
 import "./styles.css";
 import "@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css";
 import "@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css";
+import PropTypes from 'prop-types';
 
 const NavItem = ({ className, text, icon }) => (
   <a href="/">
@@ -13,3 +14,9 @@ const NavItem = ({ className, text, icon }) => (
 );
 
 export default NavItem;
+
+NavItem.propTypes = {
+  className: PropTypes.string,
+  text: PropTypes.string.isRequired,
+  icon: PropTypes.elementType.isRequired,
+}; 
