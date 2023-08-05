@@ -5,11 +5,12 @@ import {
   ProfileIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
 import { Logo } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/logo";
-import "./styles.css";
+import headerStyles from "./header.module.css";
+import cn from 'classnames'
 import NavItem from "./NavItem.js";
 
 function AppHeader() {
-
+  console.log('headerStyles', headerStyles.menu)
   let isActive = true;
   const primary = 'primary';
   const secondary = 'secondary';
@@ -19,9 +20,9 @@ function AppHeader() {
 
   return (
     <header>
-      <ul className="mb-4 mt-4 nav">
+      <ul className={cn('mb-4 mt-4', headerStyles.nav)}>
         <li>
-          <nav className="menu">
+          <nav className={headerStyles.menu}>
             <NavItem className="text text_type_main-default" text="Конструктор" icon={burgerIcon} />
             <NavItem className="text text_type_main-default text_color_inactive" text="Лента заказов" icon={listIcon} />
           </nav>
