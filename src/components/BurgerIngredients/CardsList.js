@@ -1,11 +1,12 @@
 import React from "react";
-import "./styles.css";
 import Card from "./Card.js";
 import PropTypes from 'prop-types';
+import burgerIngredientsStyle from "./burgerIngredients.module.css";
+import cn from 'classnames'
 
 const CardsList = ({ cardsTitle, cards }) => (
-    <div className="mb-10 ml-4 mr-4 cardsList">
-        <h2 className="cardTitle">
+    <div className={cn('mb-10 ml-4 mr-4', burgerIngredientsStyle.cardsList)}>
+        <h2 className={burgerIngredientsStyle.cardTitle}>
             {cardsTitle}
         </h2>
         {cards.map((card) => (

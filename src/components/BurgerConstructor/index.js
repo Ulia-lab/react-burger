@@ -4,18 +4,19 @@ import { DragIcon } from "@ya.praktikum/react-developer-burger-ui-components/dis
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/button";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
 import data from '../../utils/data'
-import "./styles.css";
+import burgerConstructorStyle from "./burgerConstructor.module.css";
+import cn from 'classnames'
 
 function BurgerConstructor() {
     const isLocked = true;
     const totalPrice = data.reduce((acc, card) => acc + card.price, 0);
     return (
-        <section className="burger-constructor-block mt-25">
-            <div className="burger-constructor ml-4">
+        <section className={cn('mt-25', burgerConstructorStyle.block)}>
+            <div className={cn('ml-4', burgerConstructorStyle.bconstructor)}>
                 {data.map((card) => (
-                    <div className="burger-constructor-element mb-4">
+                    <div className={cn('mb-4', burgerConstructorStyle.element)}>
                         {isLocked && <DragIcon type="primary" />}
-                        <div className="burger-constructor-item ml-2 mr-2">
+                        <div className={cn('ml-2 mr-2', burgerConstructorStyle.item)}>
                             <ConstructorElement
                                 type={card.type}
                                 isLocked={isLocked}
@@ -27,7 +28,7 @@ function BurgerConstructor() {
                     </div>
                 ))}
             </div>
-            <div className="mt-10 ml-4 mr-4 total">
+            <div className={cn('mt-10 ml-4 mr-4', burgerConstructorStyle.total)}>
                 <p className="text text_type_digits-default">{totalPrice}</p>
                 <div className="mr-10 ml-2"><CurrencyIcon type="primary" /></div>
                 <Button htmlType="button" type="primary" size="large">

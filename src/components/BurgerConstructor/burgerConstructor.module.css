@@ -7,28 +7,28 @@
     background-color: #c5c5c5; 
 }
 
-.burger-constructor-block {
+.block {
     min-width: 600px;
     margin: auto;
 }
 
-.burger-constructor {
+.bconstructor {
     overflow: auto;
     scrollbar-width: thin;
     max-height: calc(100vh - 264px - 40px);
 }
 
-.burger-constructor-element{
+.element{
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.burger-constructor-element:last-child {
+.element:last-child {
     margin-bottom: 0px;
 }
 
-.burger-constructor-item{
+.item{
     min-width: 532px;
 }
 

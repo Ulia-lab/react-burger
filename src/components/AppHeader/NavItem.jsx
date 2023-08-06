@@ -1,5 +1,5 @@
 import React from "react";
-import { headerStyles } from "./header.module.css";
+import headerStyles from "./header.module.css";
 import "@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css";
 import "@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css";
 import PropTypes from 'prop-types';

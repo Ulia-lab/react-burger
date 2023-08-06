@@ -1,4 +1,4 @@
-.ingredients-block {
+.block {
     max-width: 600px;
     display: flex;
     flex-direction: column;
@@ -14,7 +14,7 @@
     flex-direction: row;
 }
 
-.card-list-block {
+.cardListBlock {
     overflow: auto;
     scrollbar-width: thin;
     max-height: calc(100vh - 264px);
@@ -49,11 +49,11 @@ background-color: #c5c5c5;
     width: 100%;
 }
 
-.card-price {
+.price {
     display: flex;
     justify-content: center;
 }
 
-.card-name {
+.name {
     text-align: center;
 }

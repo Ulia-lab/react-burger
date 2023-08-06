@@ -1,6 +1,6 @@
 import React from 'react';
 import './index.css';
-import AppHeader from './components/AppHeader';
+import AppHeader from './components/AppHeader/index.jsx';
 import BurgerConstructor from './components/BurgerConstructor';
 import BurgerIngredients from './components/BurgerIngredients';
 

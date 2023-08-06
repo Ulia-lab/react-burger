@@ -1,8 +1,9 @@
 import React from "react";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/tab";
-import "./styles.css";
 import CardsList from "./CardsList.js";
 import data from '../../utils/data'
+import burgerIngredientsStyle from "./burgerIngredients.module.css";
+import cn from 'classnames'
 
 function BurgerIngredients() {
 
@@ -17,9 +18,9 @@ function BurgerIngredients() {
 
     const setCurrent = function () { return }
     return (
-        <section className="ingredients-block mt-10 mr-10">
-            <h1 className="text text_type_main-large title">Соберите бургер</h1>
-            <div className="tabs mt-5 mb-6">
+        <section className={cn('mt-10 mr-10', burgerIngredientsStyle.block)}>
+            <h1 className={cn('text text_type_main-large', burgerIngredientsStyle.title)}>Соберите бургер</h1>
+            <div className={cn('mt-5 mb-6', burgerIngredientsStyle.tabs)}>
                 <Tab value="Булки" active='true' onClick={setCurrent}>
                     Булки
                 </Tab>
@@ -30,7 +31,7 @@ function BurgerIngredients() {
                     Начинки
                 </Tab>
             </div>
-            <div className="card-list-block">
+            <div className={burgerIngredientsStyle.cardListBlock}>
                 <CardsList cardsTitle="Булки" cards={buns} />
                 <CardsList cardsTitle="Соусы" cards={sauces} />
                 <CardsList cardsTitle="Начинки" cards={mains} />
