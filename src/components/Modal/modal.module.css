@@ -1,0 +1,63 @@
+.visible{
+    visibility: visible;
+    opacity: 1;
+}
+
+.visibleOverlay{
+    visibility: visible;
+    opacity: 0.6;
+    z-index: 3;
+}
+
+.hidden {
+    opacity: 0;
+    z-index: -1;
+    visibility: hidden;
+}
+
+.block {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    min-height: 400px;
+    width: 720px;
+    max-height: 718px;
+    background-color: #1c1c20;
+    border-radius: 15px;
+    z-index: 7;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    margin: auto;
+    transition: visibility 0s, opacity 0.1s linear;
+}
+
+.overlay {
+    background: rgba(0, 0, 0);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.closeIcon {
+    position: absolute;
+    top: 40px;
+    right: 5px;
+}
+
+.content {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.button {
+    padding: 0;
+    border: none;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+}

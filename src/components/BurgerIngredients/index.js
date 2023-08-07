@@ -1,11 +1,11 @@
 import React from "react";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/tab";
 import CardsList from "./CardsList.js";
-import data from '../../utils/data'
 import burgerIngredientsStyle from "./burgerIngredients.module.css";
 import cn from 'classnames'
+import PropTypes from 'prop-types';
 
-function BurgerIngredients() {
+function BurgerIngredients({data}) {
 
     const result = data.reduce((acc, item) => {
         acc[item.type].push(item);
@@ -40,5 +40,8 @@ function BurgerIngredients() {
     );
 }
 
+BurgerIngredients.propTypes = {
+    data: PropTypes.array.isRequired,
+}; 
 
 export default BurgerIngredients;
