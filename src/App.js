@@ -3,30 +3,16 @@ import appStyles from './app.module.css';
 import AppHeader from './components/AppHeader/index.js';
 import BurgerConstructor from './components/BurgerConstructor';
 import BurgerIngredients from './components/BurgerIngredients';
+import { URL } from './utils/constants'
+import fetchData from './utils/fetchData'
 
 function App() {
   const [data, setData] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false)
   const [error, setError] = React.useState();
 
-  const url = 'https://norma.nomoreparties.space/api/ingredients';
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error('Ошибка fetch(url)')
-        }
-        const jsonData = await response.json();
-        setData(jsonData.data);
-        setIsLoading(false);
-      }
-      catch (error) {
-        setError(error.message);
-        setIsLoading(false);
-      }
-    }
-    fetchData();
+    fetchData({ url: URL, setData: setData, setIsLoading: setIsLoading, setError: setError });
   }, [])
 
   if (isLoading) {

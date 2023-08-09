@@ -1,40 +1,40 @@
 ::-webkit-scrollbar {
-    width: 8px; 
-    background-color: #8585AD;
-  }
-  
+  width: 8px;
+  background-color: #8585ad;
+}
+
 ::-webkit-scrollbar-thumb {
-    background-color: #c5c5c5; 
+  background-color: #c5c5c5;
 }
 
 .block {
-    min-width: 600px;
-    margin: auto;
+  min-width: 600px;
+  margin: auto;
 }
 
 .bconstructor {
-    overflow: auto;
-    scrollbar-width: thin;
-    max-height: calc(100vh - 264px - 40px);
+  overflow: auto;
+  scrollbar-width: thin;
+  max-height: calc(100vh - 264px - 40px);
 }
 
-.element{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.element {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .element:last-child {
-    margin-bottom: 0px;
+  margin-bottom: 0px;
 }
 
-.item{
-    min-width: 532px;
+.item {
+  min-width: 532px;
 }
 
 .total {
-    display: flex;
-    justify-content: end;
-    align-items: center;
-    margin-bottom: -50px;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  margin-bottom: -50px;
 }

@@ -19,5 +19,5 @@ export default NavItem;
 NavItem.propTypes = {
   className: PropTypes.string,
   text: PropTypes.string.isRequired,
-  icon: PropTypes.object.isRequired,
+  icon: PropTypes.element.isRequired,
 }; 

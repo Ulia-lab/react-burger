@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/constructor-element";
 import { DragIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/button";
@@ -10,15 +10,15 @@ import { v4 as uuidv4 } from 'uuid';
 import OrderDetails from './OrderDetails';
 import PropTypes from 'prop-types';
 
-function BurgerConstructor({data}) {
+function BurgerConstructor({ data }) {
     const isLocked = true;
-    const totalPrice = data.reduce((acc, card) => acc + card.price, 0);
+    const totalPrice = useMemo(() =>  data.reduce((acc, card) => acc + card.price, 0), [data]);
 
-    const [visible, setVisible] = React.useState(false);
+    const [openIngredientDetails, setIngredientDetails] = React.useState(false);
     const handleOpenModal = () => {
-        setVisible(true);
+        setIngredientDetails(true);
     }
-  
+
     return (
         <><section className={cn('mt-25', burgerConstructorStyle.block)}>
             <div className={cn('ml-4', burgerConstructorStyle.bconstructor)}>
@@ -44,13 +44,26 @@ function BurgerConstructor({data}) {
                 </Button>
             </div>
         </section>
-        <Modal visible={visible} content={visible && <OrderDetails />} />
-        </> 
+            {openIngredientDetails && <Modal content={<OrderDetails />} setIngredientDetails={setIngredientDetails} />}
+        </>
     );
 }
 
 BurgerConstructor.propTypes = {
-    data: PropTypes.array.isRequired,
-}; 
+    data: PropTypes.arrayOf(PropTypes.shape({
+        calories: PropTypes.number,
+        carbohydrates: PropTypes.number,
+        fat: PropTypes.number,
+        image: PropTypes.string,
+        image_large: PropTypes.string,
+        image_mobile: PropTypes.string,
+        name: PropTypes.string,
+        price: PropTypes.number,
+        proteins: PropTypes.number,
+        type: PropTypes.string,
+        __v: PropTypes.number,
+        _id: PropTypes.string,
+    })).isRequired
+};
 
 export default BurgerConstructor;

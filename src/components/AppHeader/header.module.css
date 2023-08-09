@@ -1,17 +1,17 @@
 .nav {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .menu {
-    display: flex;
-    justify-content: space-between;
-    min-width: 310px;
+  display: flex;
+  justify-content: space-between;
+  min-width: 310px;
 }
 
 .button {
-    border: dashed #4C4CFF;
-    border-radius: 30px;
-    display: flex;
-    justify-content: space-between;
+  border: dashed #4c4cff;
+  border-radius: 30px;
+  display: flex;
+  justify-content: space-between;
 }
