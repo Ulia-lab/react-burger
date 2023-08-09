@@ -1,0 +1,21 @@
+.block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.number {
+  text-shadow: #4c4cff 1px 0 10px;
+}
+
+.checkMarkIcon {
+  border-radius: 50%;
+  background-color: #27213f;
+  min-width: 110px;
+  min-height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

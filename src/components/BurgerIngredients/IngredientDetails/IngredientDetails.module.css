@@ -1,0 +1,21 @@
+.block {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.ingredient {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.value {
+  display: flex;
+  align-items: center;
+  align-self: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-direction: row;
+}

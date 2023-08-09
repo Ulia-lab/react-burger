@@ -1,0 +1,17 @@
+.nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+.menu {
+  display: flex;
+  justify-content: space-between;
+  min-width: 310px;
+}
+
+.button {
+  border: dashed #4c4cff;
+  border-radius: 30px;
+  display: flex;
+  justify-content: space-between;
+}

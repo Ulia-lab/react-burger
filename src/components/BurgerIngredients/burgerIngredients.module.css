@@ -1,0 +1,59 @@
+.block {
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  display: block;
+  width: 100%;
+}
+
+.tabs {
+  display: flex;
+  flex-direction: row;
+}
+
+.cardListBlock {
+  overflow: auto;
+  scrollbar-width: thin;
+  max-height: calc(100vh - 264px);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  background-color: #8585ad;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #c5c5c5;
+}
+
+.cardsList {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.card {
+  margin-bottom: 32px;
+  padding: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+}
+
+.cardTitle {
+  display: block;
+  width: 100%;
+}
+
+.price {
+  display: flex;
+  justify-content: center;
+}
+
+.name {
+  text-align: center;
+}
