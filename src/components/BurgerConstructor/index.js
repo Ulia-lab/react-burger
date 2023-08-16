@@ -1,40 +1,52 @@
-import React, { useMemo } from "react";
-import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/constructor-element";
-import { DragIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
+import React, { useMemo, useContext } from "react";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/button";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
 import burgerConstructorStyle from "./burgerConstructor.module.css";
 import cn from 'classnames'
 import Modal from '../Modal';
-import { v4 as uuidv4 } from 'uuid';
 import OrderDetails from './OrderDetails';
 import PropTypes from 'prop-types';
+import ConstructorCard from './constructorCard';
+import { v4 as uuidv4 } from 'uuid';
+import { BurgerConstructorContext } from '../../services/BurgerConstructorContext';
 
-function BurgerConstructor({ data }) {
+function BurgerConstructor() {
+    const data = useContext(BurgerConstructorContext);
+
     const isLocked = true;
-    const totalPrice = useMemo(() =>  data.reduce((acc, card) => acc + card.price, 0), [data]);
+    const totalPrice = useMemo(() => data.reduce((acc, card) => acc + card.price, 0), [data]);
 
     const [openIngredientDetails, setIngredientDetails] = React.useState(false);
     const handleOpenModal = () => {
         setIngredientDetails(true);
     }
 
+    const bunCards = useMemo(() => {
+        const bun = data.find(item => item.type === "bun")
+        return bun;
+    }, [data]);
+
+    const cards = useMemo(() => {
+        const bun = data.filter(item => (item.type !== "bun"))
+        return bun;
+    }, [data]);
+
+    const orderId = useMemo(() => {
+        return cards.reduce((acc, card) => {
+            acc.ingredients.push(card._id);
+
+            return acc;
+        }, { ingredients: [] })
+    }, [cards]);
+
     return (
         <><section className={cn('mt-25', burgerConstructorStyle.block)}>
             <div className={cn('ml-4', burgerConstructorStyle.bconstructor)}>
-                {data.map((card) => (
-                    <div key={uuidv4()} className={cn('mb-4', burgerConstructorStyle.element)}>
-                        {isLocked && <DragIcon type="primary" />}
-                        <div className={cn('ml-2 mr-2', burgerConstructorStyle.item)}>
-                            <ConstructorElement
-                                type={card.type}
-                                isLocked={isLocked}
-                                text={card.name}
-                                price={card.price}
-                                thumbnail={card.image} />
-                        </div>
-                    </div>
+                {bunCards && <ConstructorCard card={bunCards} isLocked={isLocked} additionalName=' (верх)' />}
+                {cards.map((card) => (
+                    <ConstructorCard key={uuidv4()} card={card} isLocked={isLocked} />
                 ))}
+                {bunCards && <ConstructorCard card={bunCards} isLocked={isLocked} additionalName=' (низ)' />}
             </div>
             <div className={cn('mt-10 ml-4 mr-4', burgerConstructorStyle.total)}>
                 <p className="text text_type_digits-default">{totalPrice}</p>
@@ -44,7 +56,7 @@ function BurgerConstructor({ data }) {
                 </Button>
             </div>
         </section>
-            {openIngredientDetails && <Modal content={<OrderDetails />} setIngredientDetails={setIngredientDetails} />}
+            {openIngredientDetails && <Modal content={<OrderDetails orderId={orderId} />} setIngredientDetails={setIngredientDetails} />}
         </>
     );
 }
@@ -63,7 +75,7 @@ BurgerConstructor.propTypes = {
         type: PropTypes.string,
         __v: PropTypes.number,
         _id: PropTypes.string,
-    })).isRequired
+    }))
 };
 
 export default BurgerConstructor;
