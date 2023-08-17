@@ -5,7 +5,7 @@ import BurgerConstructor from './components/BurgerConstructor';
 import BurgerIngredients from './components/BurgerIngredients';
 import { URL } from './utils/constants'
 import fetchData from './utils/fetchData'
-import { BurgerConstructorContext } from '../src/services/BurgerConstructorContext';
+import { BurgerContext } from './services/BurgerContext';
 
 function App() {
   const [data, setData] = React.useState([]);
@@ -29,10 +29,10 @@ function App() {
     <><div className={appStyles.app}>
       <AppHeader />
       <main className={appStyles.main}>
-          <BurgerIngredients data={data} />
-          <BurgerConstructorContext.Provider value={data}>
+        <BurgerContext.Provider value={data}>
+          <BurgerIngredients />
           <BurgerConstructor />
-        </BurgerConstructorContext.Provider>
+        </BurgerContext.Provider>
       </main>
     </div></>
   )

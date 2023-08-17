@@ -1,33 +1,41 @@
-import React, { useMemo, useContext } from "react";
+import React, { useMemo, useContext, useState } from "react";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/button";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
 import burgerConstructorStyle from "./burgerConstructor.module.css";
 import cn from 'classnames'
 import Modal from '../Modal';
 import OrderDetails from './OrderDetails';
-import PropTypes from 'prop-types';
 import ConstructorCard from './constructorCard';
 import { v4 as uuidv4 } from 'uuid';
-import { BurgerConstructorContext } from '../../services/BurgerConstructorContext';
+import { BurgerContext } from '../../services/BurgerContext';
+import postOrder from "../../utils/postOrder";
+import { ORDER_URL } from '../../utils/constants'
 
 function BurgerConstructor() {
-    const data = useContext(BurgerConstructorContext);
+    const data = useContext(BurgerContext);
 
     const isLocked = true;
     const totalPrice = useMemo(() => data.reduce((acc, card) => acc + card.price, 0), [data]);
 
     const [openIngredientDetails, setIngredientDetails] = React.useState(false);
-    const handleOpenModal = () => {
+    const [isLoading, setIsLoading] = React.useState(false)
+    const [error, setError] = React.useState();
+    const [order, setOrder] = useState(null);
+
+    const handleOpenModal = async () => {
+        await postOrder({ url: ORDER_URL, orderId: orderId, setOrder: setOrder, setIsLoading: setIsLoading, setError: setError });
         setIngredientDetails(true);
     }
 
+    const bunType = 'bun';
+
     const bunCards = useMemo(() => {
-        const bun = data.find(item => item.type === "bun")
+        const bun = data.find(item => item.type === bunType)
         return bun;
     }, [data]);
 
     const cards = useMemo(() => {
-        const bun = data.filter(item => (item.type !== "bun"))
+        const bun = data.filter(item => (item.type !== bunType))
         return bun;
     }, [data]);
 
@@ -38,6 +46,14 @@ function BurgerConstructor() {
             return acc;
         }, { ingredients: [] })
     }, [cards]);
+
+    if (isLoading) {
+        return <div>Загрузка...</div>
+    }
+
+    if (error) {
+        return <div>Ошибка: {error}</div>
+    }
 
     return (
         <><section className={cn('mt-25', burgerConstructorStyle.block)}>
@@ -56,7 +72,7 @@ function BurgerConstructor() {
                 </Button>
             </div>
         </section>
-            {openIngredientDetails && <Modal content={<OrderDetails orderId={orderId} />} setIngredientDetails={setIngredientDetails} />}
+            {openIngredientDetails && <Modal content={<OrderDetails order={order} />} setIngredientDetails={setIngredientDetails} />}
         </>
     );
 }
