@@ -10,8 +10,8 @@ export default async function postOrder({ ...props }) {
           if (!response.ok) {
             throw new Error('Ошибка post(url)')
         }
-
         const result = await response.json();
+        props.setOrder(result);
         return result;
     }
     catch (error) {
