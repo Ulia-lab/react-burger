@@ -21,7 +21,7 @@ function BurgerConstructor() {
     const isOpen = useSelector(state => state.postOrder.isOpen);
     const loading = useSelector(state => state.postOrder.loading);
     const error = useSelector(state => state.postOrder.error);
-    const orderNum = useSelector(state => state.postOrder.item.order.number);
+    const orderNum = useSelector(state => state.postOrder.items);
 
     const isLocked = true;
     const totalPrice = useMemo(() => data.reduce((acc, card) => acc + card.price, 0), [data]);

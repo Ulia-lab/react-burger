@@ -1,6 +1,6 @@
 export const items = [
   {
-    _id: "60666c42cc7b410027a1a9b1",
+    _id: "643d69a5c3f7b9001cfa0943",
     name: "Краторная булка N-200i",
     type: "bun",
     proteins: 80,
@@ -14,7 +14,7 @@ export const items = [
     __v: 0,
   },
   {
-    _id: "60666c42cc7b410027a1a9b5",
+    _id: "643d69a5c3f7b9001cfa093c",
     name: "Говяжий метеорит (отбивная)",
     type: "main",
     proteins: 800,

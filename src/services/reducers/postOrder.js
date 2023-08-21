@@ -1,7 +1,7 @@
 import { POST_ORDER_ERROR, POST_ORDER_SUCCESS, POST_ORDER_REQUEST, REMOVE_ORDER_MODAL_ITEM } from "../actions/postOrder";
 
 const initialState = {
-    item: {
+    items: {
         name: '',
         order: {
             number: 0,
