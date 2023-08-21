@@ -1,15 +1,15 @@
-export default async function fetchData({ ...props }) {
+import { fetchDataRequest, fetchDataSuccess, fetchDataFailure } from '../services/reducers/fetchData'
+
+export const fetchDataAction = (url) => async (dispatch) => {
+    dispatch(fetchDataRequest());
     try {
-        const response = await fetch(props.url);
+        const response = await fetch(url);
         if (!response.ok) {
-            throw new Error('Ошибка fetch(url)')
+            throw new Error("Ошибка fetch(url)");
         }
         const jsonData = await response.json();
-        props.setData(jsonData.data);
-        props.setIsLoading(false);
+        dispatch(fetchDataSuccess(jsonData.data));
+    } catch (error) {
+        dispatch(fetchDataFailure(error.message));
     }
-    catch (error) {
-        props.setError(error.message);
-        props.setIsLoading(false);
-    }
-}
+};

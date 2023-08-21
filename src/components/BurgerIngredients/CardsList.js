@@ -6,6 +6,7 @@ import cn from 'classnames'
 import { v4 as uuidv4 } from 'uuid';
 
 const CardsList = ({ cardsTitle, cards }) => {
+    
     return (
         <div className={cn('mb-10 ml-4 mr-4', burgerIngredientsStyle.cardsList)}>
             <h2 className={burgerIngredientsStyle.cardTitle}>

@@ -40,3 +40,27 @@ ConstructorCard.propTypes = {
     isLocked: PropTypes.bool,
     additionalName: PropTypes.string,
 }; 
+
+// const ConstructorCard = ({ card, isLocked, additionalName = '', data }) => {
+//     const { id } = data;
+//     const [{isDrag}, dragRef] = useDrag({
+//         type: "animal",
+//         item: { id },
+//         collect: monitor => ({
+//             isDrag: monitor.isDragging()
+//         })
+//     });
+//     return (
+//         !isDrag && <div ref={dragRef} className={cn('mb-4', burgerConstructorStyle.element)}>
+//             {isLocked && <DragIcon type="primary" />}
+//             <div className={cn('ml-2 mr-2', burgerConstructorStyle.item)}>
+//                 <ConstructorElement
+//                     type={card.type}
+//                     isLocked={isLocked}
+//                     text={`${card.name}${additionalName}`}
+//                     price={card.price}
+//                     thumbnail={card.image} />
+//             </div>
+//         </div>
+//     )
+// };

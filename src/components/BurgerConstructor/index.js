@@ -1,4 +1,4 @@
-import React, { useMemo, useContext, useState } from "react";
+import React, { useMemo } from "react";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/button";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
 import burgerConstructorStyle from "./burgerConstructor.module.css";
@@ -7,25 +7,24 @@ import Modal from '../Modal';
 import OrderDetails from './OrderDetails';
 import ConstructorCard from './constructorCard';
 import { v4 as uuidv4 } from 'uuid';
-import { BurgerContext } from '../../services/BurgerContext';
-import postOrder from "../../utils/postOrder";
+import { postOrder } from "../../utils/postOrder";
 import { ORDER_URL } from '../../utils/constants'
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { postOrderModal } from '../../services/reducers/postOrder';
 
 function BurgerConstructor() {
-    const data = useContext(BurgerContext);
+    const dispatch = useDispatch();
+
+    const data = useSelector(state => state.constructorItems.items);
+
+    const isOpen = useSelector(state => state.postOrder.isOpen);
+    const loading = useSelector(state => state.postOrder.loading);
+    const error = useSelector(state => state.postOrder.error);
+    const orderNum = useSelector(state => state.postOrder.item.order.number);
 
     const isLocked = true;
     const totalPrice = useMemo(() => data.reduce((acc, card) => acc + card.price, 0), [data]);
-
-    const [openIngredientDetails, setIngredientDetails] = React.useState(false);
-    const [isLoading, setIsLoading] = React.useState(false)
-    const [error, setError] = React.useState();
-    const [order, setOrder] = useState(null);
-
-    const handleOpenModal = async () => {
-        await postOrder({ url: ORDER_URL, orderId: orderId, setOrder: setOrder, setIsLoading: setIsLoading, setError: setError });
-        setIngredientDetails(true);
-    }
 
     const bunType = 'bun';
 
@@ -40,14 +39,24 @@ function BurgerConstructor() {
     }, [data]);
 
     const orderId = useMemo(() => {
-        return cards.reduce((acc, card) => {
+        return data.reduce((acc, card) => {
             acc.ingredients.push(card._id);
 
             return acc;
         }, { ingredients: [] })
-    }, [cards]);
+    }, [data]);
 
-    if (isLoading) {
+    console.log('orderId', orderId)
+    
+    const handleOpenModal = async () => {
+        dispatch(postOrder(ORDER_URL, orderId));
+    }
+
+    const handleCloseModal = () => {
+        dispatch(postOrderModal());
+    }
+
+    if (loading) {
         return <div>Загрузка...</div>
     }
 
@@ -72,7 +81,7 @@ function BurgerConstructor() {
                 </Button>
             </div>
         </section>
-            {openIngredientDetails && <Modal content={<OrderDetails order={order} />} setIngredientDetails={setIngredientDetails} />}
+            {isOpen && <Modal content={<OrderDetails order={orderNum} />} closeModal={handleCloseModal} />}
         </>
     );
 }

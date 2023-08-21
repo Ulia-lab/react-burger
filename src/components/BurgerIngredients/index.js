@@ -1,12 +1,12 @@
-import React, { useMemo, useContext} from "react";
+import React, { useMemo } from "react";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/tab";
 import CardsList from "./CardsList.js";
 import burgerIngredientsStyle from "./burgerIngredients.module.css";
 import cn from 'classnames'
-import { BurgerContext } from '../../services/BurgerContext';
+import { useSelector } from 'react-redux';
 
 function BurgerIngredients() {
-    const data = useContext(BurgerContext);
+    const data = useSelector(state => state.fetchData.data);
 
     const result  = useMemo(() => data.reduce((acc, item) => {
         acc[item.type].push(item);

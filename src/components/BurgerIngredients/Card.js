@@ -5,16 +5,27 @@ import burgerIngredientsStyle from "./burgerIngredients.module.css";
 import cn from 'classnames'
 import IngredientDetails from './IngredientDetails/index.js';
 import Modal from '../Modal';
+import { useDispatch } from 'react-redux';
+import { openCardModal, closeCardModal } from '../../services/reducers/modalIngredients'
+import { useSelector } from 'react-redux';
 
 const Card = ({ card }) => {
-    const [openIngredientDetails, setIngredientDetails] = React.useState(false);
+
+    const dispatch = useDispatch();
 
     const handleOpenModal = () => {
-        setIngredientDetails(true);
+      dispatch(openCardModal(card));
     }
 
+    const handleCloseModal = () => {
+        dispatch(closeCardModal());
+      }
+
+    const isOpen = useSelector(state => state.modalIngredients.isOpen);
+    const selectedCard = useSelector(state => state.modalIngredients.selectedCard);
+
     return (
-        <><button onClick={() => handleOpenModal()} className={burgerIngredientsStyle.card}>
+        <><button onClick={handleOpenModal} className={burgerIngredientsStyle.card}>
             <img alt={card.name} src={card.image} card={card} className="ml-4 mr-4 mb-1" />
             <div className={burgerIngredientsStyle.price}>
                 <p className="text text_type_digits-default">{card.price}</p>
@@ -24,8 +35,8 @@ const Card = ({ card }) => {
             </div>
             <p className={cn('text text_type_main-small mt-1', burgerIngredientsStyle.name)}>{card.name}</p>
         </button>
-        { openIngredientDetails && <Modal content={<IngredientDetails card={card} />} setIngredientDetails={setIngredientDetails}/> }
-        </>
+        { isOpen && <Modal content={<IngredientDetails card={selectedCard} />} closeModal={handleCloseModal}/> }
+        </> 
     )
 };
 
