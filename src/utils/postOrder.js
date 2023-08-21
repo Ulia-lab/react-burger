@@ -1,9 +1,6 @@
 import { postOrderRequest, postOrderSuccess, postOrderFailure } from '../services/reducers/postOrder'
 
 export const postOrder = (url, orderId) => async (dispatch) => {
-  console.log('url', url)
-  console.log('orderId', orderId)
-
   dispatch(postOrderRequest());
   try {
     const response = await fetch(url, {

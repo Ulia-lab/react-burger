@@ -45,8 +45,6 @@ function BurgerConstructor() {
             return acc;
         }, { ingredients: [] })
     }, [data]);
-
-    console.log('orderId', orderId)
     
     const handleOpenModal = async () => {
         dispatch(postOrder(ORDER_URL, orderId));
