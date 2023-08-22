@@ -13,7 +13,7 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { postOrderModal } from '../../services/actions/postOrder';
 import { useDrop } from 'react-dnd';
-import { UPDATE_TYPE, removeBCItems } from '../../services/actions/constructorItems';
+import { UPDATE_TYPE, CHANGE_ORDER_ELEMENTS, removeBCItems } from '../../services/actions/constructorItems';
 
 function BurgerConstructor() {
     const bunType = 'bun';
@@ -76,41 +76,14 @@ function BurgerConstructor() {
         },
     });
 
-    // const [, dropElement] = useDrop({
-    //     accept: "element",
-    //     drop() {
-    //         dispatch({
-    //             type: CHANGE_ORDER_ELEMENTS,
-    //         });
-    //     },
-    // });
-
-    // const ref = useRef(null);
-    // const [, dropElement] = useDrop({
-    //     accept: 'element',
-    //     hover(item, monitor) {
-    //       if (!ref.current) {
-    //         return;
-    //       }
-    //       const dragIndex = item.index;
-    //       const hoverIndex = index;
-    //       if (dragIndex === hoverIndex) {
-    //         return;
-    //       }
-    //       const hoverBoundingRect = ref.current.getBoundingClientRect();
-    //       const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
-    //       const clientOffset = monitor.getClientOffset();
-    //       const hoverClientY = clientOffset.y - hoverBoundingRect.top;
-    //       if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
-    //         return;
-    //       }
-    //       if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
-    //         return;
-    //       }
-    //       moveToDo(dragIndex, hoverIndex);
-    //       item.index = hoverIndex;
-    //     },
-    //   });
+    const [, dropElement] = useDrop({
+        accept: "element",
+        drop() {
+            dispatch({
+                type: CHANGE_ORDER_ELEMENTS,
+            });
+        },
+    });
 
     if (loading) {
         return <div>Загрузка...</div>
