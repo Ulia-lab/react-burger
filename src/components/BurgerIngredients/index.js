@@ -40,13 +40,13 @@ function BurgerIngredients() {
         <section className={cn('mt-10 mr-10', burgerIngredientsStyle.block)}>
             <h1 className={cn('text text_type_main-large', burgerIngredientsStyle.title)}>Соберите бургер</h1>
             <div className={cn('mt-5 mb-6', burgerIngredientsStyle.tabs)}>
-                <Tab value="Булки" active={active} onClick={setCurrent}>
+                <Tab value="Булки" active={active === 'Булки'} onClick={setCurrent}>
                     Булки
                 </Tab>
-                <Tab value="Соусы" active={active} onClick={setCurrent}>
+                <Tab value="Соусы" active={active === 'Соусы'} onClick={setCurrent}>
                     Соусы
                 </Tab>
-                <Tab value="Начинки" active={active} onClick={setCurrent}>
+                <Tab value="Начинки" active={active === 'Начинки'} onClick={setCurrent}>
                     Начинки
                 </Tab>
             </div>
