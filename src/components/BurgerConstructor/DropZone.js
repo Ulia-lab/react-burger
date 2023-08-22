@@ -28,7 +28,7 @@ export const DropZone = ({ index, children }) => {
     const isActive = canDrop && isOver;
 
     return (
-        <div ref={dropRef} style={{ opacity: isActive ? 0.5 : 1 }}>
+        <div ref={dropRef} className='mb-4' style={{ opacity: isActive ? 0.5 : 1 }}>
             {children}
         </div>)
 };
