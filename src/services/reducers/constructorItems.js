@@ -1,4 +1,4 @@
-import { ADD_BC_ITEMS, REMOVE_BC_ITEMS, UPDATE_TYPE } from "../actions/constructorItems";
+import { ADD_BC_ITEMS, REMOVE_BC_ITEMS, UPDATE_TYPE, CHANGE_ORDER_ELEMENTS } from "../actions/constructorItems";
 const initialState = {
     items: []
 };
@@ -32,6 +32,12 @@ export const constructorItemsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 items: [...state.items, action.item]
+            };
+        }
+        case CHANGE_ORDER_ELEMENTS: {
+            console.log('CHANGE_ORDER_ELEMENTS', CHANGE_ORDER_ELEMENTS)
+            return {
+                ...state,
             };
         }
         default: {

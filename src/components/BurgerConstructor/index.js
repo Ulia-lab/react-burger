@@ -66,7 +66,7 @@ function BurgerConstructor() {
         dispatch(removeBCItems(_id));
     }
     //dnd
-    const [, drop] = useDrop({
+    const [, dropItem] = useDrop({
         accept: "item",
         drop(itemId) {
             dispatch({
@@ -75,6 +75,42 @@ function BurgerConstructor() {
             });
         },
     });
+
+    // const [, dropElement] = useDrop({
+    //     accept: "element",
+    //     drop() {
+    //         dispatch({
+    //             type: CHANGE_ORDER_ELEMENTS,
+    //         });
+    //     },
+    // });
+
+    // const ref = useRef(null);
+    // const [, dropElement] = useDrop({
+    //     accept: 'element',
+    //     hover(item, monitor) {
+    //       if (!ref.current) {
+    //         return;
+    //       }
+    //       const dragIndex = item.index;
+    //       const hoverIndex = index;
+    //       if (dragIndex === hoverIndex) {
+    //         return;
+    //       }
+    //       const hoverBoundingRect = ref.current.getBoundingClientRect();
+    //       const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+    //       const clientOffset = monitor.getClientOffset();
+    //       const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+    //       if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
+    //         return;
+    //       }
+    //       if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
+    //         return;
+    //       }
+    //       moveToDo(dragIndex, hoverIndex);
+    //       item.index = hoverIndex;
+    //     },
+    //   });
 
     if (loading) {
         return <div>Загрузка...</div>
@@ -86,9 +122,9 @@ function BurgerConstructor() {
 
     return (
         <><section className={cn('mt-25', burgerConstructorStyle.block)}>
-            <div ref={drop} className={cn('ml-4', burgerConstructorStyle.bconstructor)}>
-                {(cards.length === 0) ? <div className="text text_type_digits-default" style={{height: "100%", wight: "100%"}} ref={drop} >Перетащите элементы бургера</div> : 
-                <div className={cn('ml-4', burgerConstructorStyle.bconstructorActive)} ref={drop}>
+            <div ref={dropItem} className={cn('ml-4', burgerConstructorStyle.bconstructor)}>
+                {(cards.length === 0) ? <div className="text text_type_digits-default" style={{height: "100%", wight: "100%"}} >Перетащите элементы бургера</div> : 
+                <div className={cn('ml-4', burgerConstructorStyle.bconstructorActive)} ref={dropItem}>
                     {bunCards && <ConstructorCard card={bunCards} isLocked={isLocked} additionalName=' (верх)' />}
                     {mainCards.map((card) => (
                         <ConstructorCard handleClose={() => handleRemoveBCItem(mainCards._id)} key={uuidv4()} card={card} />

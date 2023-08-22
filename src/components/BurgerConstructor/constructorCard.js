@@ -8,7 +8,7 @@ import { propTypesCard } from '../../utils/prop-types'
 const ConstructorCard = forwardRef(({ card, isLocked, additionalName = '' }, ref) => {
     return (
         <div ref={ref} className={cn('mb-4', burgerConstructorStyle.element)}>
-            {isLocked && <DragIcon type="primary" />}
+            {!isLocked && <DragIcon type="primary" />}
             <div className={cn('ml-2 mr-2', burgerConstructorStyle.item)}>
                 <ConstructorElement
                     type={card.type}
