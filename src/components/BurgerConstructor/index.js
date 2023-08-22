@@ -88,11 +88,14 @@ function BurgerConstructor() {
     return (
         <><section className={cn('mt-25', burgerConstructorStyle.block)}>
             <div ref={drop} className={cn('ml-4', burgerConstructorStyle.bconstructor)}>
-                {bunCards && <ConstructorCard card={bunCards} isLocked={isLocked} additionalName=' (верх)' />}
-                {mainCards.map((card) => (
-                    <ConstructorCard handleClose={() => handleRemoveBCItem(mainCards._id)} key={uuidv4()} card={card} />
-                ))}
-                {bunCards && <ConstructorCard card={bunCards} isLocked={isLocked} additionalName=' (низ)' />}
+                {(cards.length === 0) ? <div className="text text_type_digits-default" style={{height: "100%", wight: "100%"}} ref={drop} >Перетащите элементы бургера</div> : 
+                <div className={cn('ml-4', burgerConstructorStyle.bconstructorActive)} ref={drop}>
+                    {bunCards && <ConstructorCard card={bunCards} isLocked={isLocked} additionalName=' (верх)' />}
+                    {mainCards.map((card) => (
+                        <ConstructorCard handleClose={() => handleRemoveBCItem(mainCards._id)} key={uuidv4()} card={card} />
+                    ))}
+                    {bunCards && <ConstructorCard card={bunCards} isLocked={isLocked} additionalName=' (низ)' />}
+                </div>}
             </div>
             <div className={cn('mt-10 ml-4 mr-4', burgerConstructorStyle.total)}>
                 <p className="text text_type_digits-default">{totalPrice}</p>

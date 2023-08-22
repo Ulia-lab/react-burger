@@ -1,7 +1,6 @@
 import { ADD_BC_ITEMS, REMOVE_BC_ITEMS, UPDATE_TYPE } from "../actions/constructorItems";
-import { items } from '../../utils/items'
 const initialState = {
-    items: [items[0], items[1], items[2]]
+    items: []
 };
 
 export const constructorItemsReducer = (state = initialState, action) => {
