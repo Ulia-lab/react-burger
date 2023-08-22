@@ -1,4 +1,4 @@
-import { ADD_BC_ITEMS, REMOVE_BC_ITEMS, UPDATE_TYPE, CHANGE_ORDER_ELEMENTS } from "../actions/constructorItems";
+import { ADD_BC_ITEMS, REMOVE_BC_ITEMS, UPDATE_TYPE, MOVE_ITEM } from "../actions/constructorItems";
 const initialState = {
     items: []
 };
@@ -6,6 +6,9 @@ const initialState = {
 export const constructorItemsReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_BC_ITEMS: {
+            if (action.items.type === 'bun') {
+                return { ...state.items.unshift(action.items) };
+            }
             return {
                 ...state,
                 items: { ...state.items.push(action.items) }
@@ -28,18 +31,29 @@ export const constructorItemsReducer = (state = initialState, action) => {
                 if (bunIndex !== -1) {
                     state.items.splice(bunIndex, 1);
                 }
+                return {
+                    ...state,
+                    items: [action.item, ...state.items]
+                };
             }
             return {
                 ...state,
                 items: [...state.items, action.item]
             };
         }
-        case CHANGE_ORDER_ELEMENTS: {
-            console.log('CHANGE_ORDER_ELEMENTS', CHANGE_ORDER_ELEMENTS)
-            return {
-                ...state,
-            };
-        }
+        case MOVE_ITEM:
+            const { dragIndex, hoverIndex } = action.payload;
+            const newDragIndex = dragIndex + 1;
+            const newHoverIndex = hoverIndex + 1;
+
+            const { items } = state;
+            const updatedItems = [...items];
+            const item1 = updatedItems[newDragIndex];
+            const item2 = updatedItems[newHoverIndex];
+            updatedItems.splice(newDragIndex, 1, item2);
+            updatedItems.splice(newHoverIndex, 1, item1);
+
+            return { ...state, items: updatedItems };
         default: {
             return state;
         }

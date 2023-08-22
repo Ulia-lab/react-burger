@@ -13,7 +13,8 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { postOrderModal } from '../../services/actions/postOrder';
 import { useDrop } from 'react-dnd';
-import { UPDATE_TYPE, CHANGE_ORDER_ELEMENTS, removeBCItems } from '../../services/actions/constructorItems';
+import { UPDATE_TYPE } from '../../services/actions/constructorItems';
+import { DropZone } from './DropZone'
 
 function BurgerConstructor() {
     const bunType = 'bun';
@@ -41,11 +42,10 @@ function BurgerConstructor() {
     }, [cards]);
 
     const mainCards = useMemo(() => {
-        console.log('cards', cards)
         const bun = cards.filter(item => (item.type !== bunType))
         return bun;
     }, [cards]);
-    console.log('mainCards', mainCards)
+
     const orderId = useMemo(() => {
         return cards.reduce((acc, card) => {
             acc.ingredients.push(card._id);
@@ -62,9 +62,6 @@ function BurgerConstructor() {
         dispatch(postOrderModal());
     }
 
-    const handleRemoveBCItem = (_id) => {
-        dispatch(removeBCItems(_id));
-    }
     //dnd
     const [, dropItem] = useDrop({
         accept: "item",
@@ -72,15 +69,6 @@ function BurgerConstructor() {
             dispatch({
                 type: UPDATE_TYPE,
                 item: itemId.card,
-            });
-        },
-    });
-
-    const [, dropElement] = useDrop({
-        accept: "element",
-        drop() {
-            dispatch({
-                type: CHANGE_ORDER_ELEMENTS,
             });
         },
     });
@@ -97,10 +85,12 @@ function BurgerConstructor() {
         <><section className={cn('mt-25', burgerConstructorStyle.block)}>
             <div ref={dropItem} className={cn('ml-4', burgerConstructorStyle.bconstructor)}>
                 {(cards.length === 0) ? <div className="text text_type_digits-default" style={{height: "100%", wight: "100%"}} >Перетащите элементы бургера</div> : 
-                <div className={cn('ml-4', burgerConstructorStyle.bconstructorActive)} ref={dropItem}>
+                <div className={cn('ml-4', burgerConstructorStyle.bconstructorActive)}>
                     {bunCards && <ConstructorCard card={bunCards} isLocked={isLocked} additionalName=' (верх)' />}
-                    {mainCards.map((card) => (
-                        <ConstructorCard handleClose={() => handleRemoveBCItem(mainCards._id)} key={uuidv4()} card={card} />
+                    {mainCards.map((card, index) => (
+                        <DropZone key={index} index={index}>
+                            <ConstructorCard index={index} key={uuidv4()} card={card} />
+                        </DropZone>
                     ))}
                     {bunCards && <ConstructorCard card={bunCards} isLocked={isLocked} additionalName=' (низ)' />}
                 </div>}
