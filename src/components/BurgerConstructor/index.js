@@ -17,6 +17,8 @@ import { UPDATE_TYPE } from '../../services/actions/constructorItems';
 import { removeBCItems } from '../../services/reducers/constructorItems';
 
 function BurgerConstructor() {
+    const bunType = 'bun';
+
     const dispatch = useDispatch();
 
     const cards = useSelector(state => state.constructorItems.items);
@@ -27,9 +29,12 @@ function BurgerConstructor() {
     const orderNum = useSelector(state => state.postOrder.items);
 
     const isLocked = true;
-    const totalPrice = useMemo(() => cards.reduce((acc, card) => acc + card.price, 0), [cards]);
-
-    const bunType = 'bun';
+    const totalPrice = useMemo(() => {
+        return cards.reduce((acc, card) => {
+            const price = card.type === bunType ? (card.price * 2) : card.price;
+            return acc + price
+        }, 0)
+    }, [cards]);
 
     const bunCards = useMemo(() => {
         const bun = cards.find(item => item.type === bunType)
