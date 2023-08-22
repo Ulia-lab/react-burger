@@ -1,11 +1,12 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useContext} from "react";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/tab";
 import CardsList from "./CardsList.js";
 import burgerIngredientsStyle from "./burgerIngredients.module.css";
 import cn from 'classnames'
-import PropTypes from 'prop-types';
+import { BurgerContext } from '../../services/BurgerContext';
 
-function BurgerIngredients({ data }) {
+function BurgerIngredients() {
+    const data = useContext(BurgerContext);
 
     const result  = useMemo(() => data.reduce((acc, item) => {
         acc[item.type].push(item);
@@ -38,23 +39,6 @@ function BurgerIngredients({ data }) {
             </div>
         </section>
     );
-}
-
-BurgerIngredients.propTypes = {
-    data: PropTypes.arrayOf(PropTypes.shape({
-        calories: PropTypes.number,
-        carbohydrates: PropTypes.number,
-        fat: PropTypes.number,
-        image: PropTypes.string,
-        image_large: PropTypes.string,
-        image_mobile: PropTypes.string,
-        name: PropTypes.string,
-        price: PropTypes.number,
-        proteins: PropTypes.number,
-        type: PropTypes.string,
-        __v: PropTypes.number,
-        _id: PropTypes.string,
-    })).isRequired
 };
 
 export default BurgerIngredients;
