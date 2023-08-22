@@ -7,6 +7,8 @@ import { URL } from './utils/constants'
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { fetchDataAction } from './utils/fetchData'
+import { HTML5Backend } from "react-dnd-html5-backend";
+import { DndProvider } from "react-dnd";
 
 function App() {
   const dispatch = useDispatch();
@@ -30,8 +32,10 @@ function App() {
     <><div className={appStyles.app}>
       <AppHeader />
       <main className={appStyles.main}>
+        <DndProvider backend={HTML5Backend}>
           <BurgerIngredients />
           <BurgerConstructor />
+        </DndProvider>
       </main>
     </div></>
   )

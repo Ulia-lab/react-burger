@@ -12,40 +12,44 @@ import { ORDER_URL } from '../../utils/constants'
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { postOrderModal } from '../../services/reducers/postOrder';
+import { useDrop } from 'react-dnd';
+import { UPDATE_TYPE } from '../../services/actions/constructorItems';
+import { removeBCItems } from '../../services/reducers/constructorItems';
 
 function BurgerConstructor() {
     const dispatch = useDispatch();
 
-    const data = useSelector(state => state.constructorItems.items);
+    const cards = useSelector(state => state.constructorItems.items);
 
     const isOpen = useSelector(state => state.postOrder.isOpen);
     const loading = useSelector(state => state.postOrder.loading);
     const error = useSelector(state => state.postOrder.error);
     const orderNum = useSelector(state => state.postOrder.items);
 
-    const isLocked = true;
-    const totalPrice = useMemo(() => data.reduce((acc, card) => acc + card.price, 0), [data]);
+    const isLocked = false;
+    const totalPrice = useMemo(() => cards.reduce((acc, card) => acc + card.price, 0), [cards]);
 
     const bunType = 'bun';
 
     const bunCards = useMemo(() => {
-        const bun = data.find(item => item.type === bunType)
+        const bun = cards.find(item => item.type === bunType)
         return bun;
-    }, [data]);
+    }, [cards]);
 
-    const cards = useMemo(() => {
-        const bun = data.filter(item => (item.type !== bunType))
+    const mainCards = useMemo(() => {
+        console.log('cards', cards)
+        const bun = cards.filter(item => (item.type !== bunType))
         return bun;
-    }, [data]);
-
+    }, [cards]);
+    console.log('mainCards', mainCards)
     const orderId = useMemo(() => {
-        return data.reduce((acc, card) => {
+        return cards.reduce((acc, card) => {
             acc.ingredients.push(card._id);
 
             return acc;
         }, { ingredients: [] })
-    }, [data]);
-    
+    }, [cards]);
+
     const handleOpenModal = async () => {
         dispatch(postOrder(ORDER_URL, orderId));
     }
@@ -53,6 +57,20 @@ function BurgerConstructor() {
     const handleCloseModal = () => {
         dispatch(postOrderModal());
     }
+
+    const handleRemoveBCItem = (_id) => {
+        dispatch(removeBCItems(_id));
+    }
+    //dnd
+    const [, drop] = useDrop({
+        accept: "item",
+        drop(itemId) {
+            dispatch({
+                type: UPDATE_TYPE,
+                item: itemId.card,
+            });
+        },
+    });
 
     if (loading) {
         return <div>Загрузка...</div>
@@ -64,12 +82,12 @@ function BurgerConstructor() {
 
     return (
         <><section className={cn('mt-25', burgerConstructorStyle.block)}>
-            <div className={cn('ml-4', burgerConstructorStyle.bconstructor)}>
-                {bunCards && <ConstructorCard card={bunCards} isLocked={isLocked} additionalName=' (верх)' />}
-                {cards.map((card) => (
-                    <ConstructorCard key={uuidv4()} card={card} isLocked={isLocked} />
+            <div ref={drop} className={cn('ml-4', burgerConstructorStyle.bconstructor)}>
+                {bunCards && <ConstructorCard card={bunCards} isLocked={true} additionalName=' (верх)' />}
+                {mainCards.map((card) => (
+                    <ConstructorCard handleClose={() => handleRemoveBCItem(mainCards._id)} key={uuidv4()} card={card} isLocked={isLocked} />
                 ))}
-                {bunCards && <ConstructorCard card={bunCards} isLocked={isLocked} additionalName=' (низ)' />}
+                {bunCards && <ConstructorCard card={bunCards} isLocked={true} additionalName=' (низ)' />}
             </div>
             <div className={cn('mt-10 ml-4 mr-4', burgerConstructorStyle.total)}>
                 <p className="text text_type_digits-default">{totalPrice}</p>

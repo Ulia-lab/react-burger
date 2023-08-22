@@ -24,17 +24,17 @@ function BurgerIngredients() {
     const handleScroll = (event) => {
         const element = event.target;
         const { scrollTop, offsetHeight } = element;
-      
+
         const index = Math.floor((scrollTop + offsetHeight / 2) / offsetHeight);
-      
+
         if (index === 0) {
-          setActive('Булки');
+            setActive('Булки');
         } else if (index === 1) {
-          setActive('Соусы');
+            setActive('Соусы');
         } else if (index === 2) {
-          setActive('Начинки');
+            setActive('Начинки');
         }
-      };
+    };
 
     return (
         <section className={cn('mt-10 mr-10', burgerIngredientsStyle.block)}>
