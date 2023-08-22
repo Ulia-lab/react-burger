@@ -11,10 +11,9 @@ import { postOrder } from "../../utils/postOrder";
 import { ORDER_URL } from '../../utils/constants'
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { postOrderModal } from '../../services/reducers/postOrder';
+import { postOrderModal } from '../../services/actions/postOrder';
 import { useDrop } from 'react-dnd';
-import { UPDATE_TYPE } from '../../services/actions/constructorItems';
-import { removeBCItems } from '../../services/reducers/constructorItems';
+import { UPDATE_TYPE, removeBCItems } from '../../services/actions/constructorItems';
 
 function BurgerConstructor() {
     const bunType = 'bun';

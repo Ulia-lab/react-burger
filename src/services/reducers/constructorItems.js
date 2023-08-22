@@ -39,12 +39,3 @@ export const constructorItemsReducer = (state = initialState, action) => {
         }
     }
 }
-
-export const addBCItems = () => ({
-    type: ADD_BC_ITEMS,
-});
-
-export const removeBCItems = (_id) => ({
-    type: REMOVE_BC_ITEMS,
-    _id
-});

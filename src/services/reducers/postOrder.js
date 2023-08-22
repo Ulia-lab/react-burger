@@ -1,6 +1,6 @@
 import { POST_ORDER_ERROR, POST_ORDER_SUCCESS, POST_ORDER_REQUEST, REMOVE_ORDER_MODAL_ITEM } from "../actions/postOrder";
 
-const initialState = {
+export const initialState = {
     items: {
         name: '',
         order: {
@@ -50,24 +50,3 @@ export const postOrderReducer = (state = initialState, action) => {
         }
     }
 }
-
-export const postOrderRequest = () => ({
-    type: POST_ORDER_REQUEST,
-});
-
-export const postOrderSuccess = (data) => ({
-    type: POST_ORDER_SUCCESS,
-    payload: data,
-    isOpen: true,
-});
-
-export const postOrderFailure = (error) => ({
-    type: POST_ORDER_ERROR,
-    payload: error,
-});
-
-export const postOrderModal = () => ({
-    type: REMOVE_ORDER_MODAL_ITEM,
-    payload: initialState,
-    isOpen: false,
-});

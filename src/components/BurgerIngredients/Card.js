@@ -6,7 +6,7 @@ import cn from 'classnames'
 import IngredientDetails from './IngredientDetails/index.js';
 import Modal from '../Modal';
 import { useDispatch } from 'react-redux';
-import { openCardModal, closeCardModal } from '../../services/reducers/modalIngredients'
+import { openCardModal, closeCardModal } from '../../services/actions/modalngredients'
 import { useSelector } from 'react-redux';
 import { useDrag } from "react-dnd";
 import { propTypesCard } from '../../utils/prop-types'

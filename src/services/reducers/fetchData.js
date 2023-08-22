@@ -1,6 +1,6 @@
-import { FETCH_DATA_REQUEST } from "../actions";
-import { FETCH_DATA_SUCCESS } from "../actions";
-import { FETCH_DATA_FAILURE } from "../actions";
+import { FETCH_DATA_REQUEST } from "../actions/fetchData";
+import { FETCH_DATA_SUCCESS } from "../actions/fetchData";
+import { FETCH_DATA_FAILURE } from "../actions/fetchData";
 
 const initialState = {
     data: [],
@@ -32,17 +32,3 @@ export const fetchDataReducer = (state = initialState, action) => {
         return state;
     }
   };
-
-export const fetchDataRequest = () => ({
-    type: FETCH_DATA_REQUEST,
-});
-
-export const fetchDataSuccess = (data) => ({
-    type: FETCH_DATA_SUCCESS,
-    payload: data,
-});
-
-export const fetchDataFailure = (error) => ({
-    type: FETCH_DATA_FAILURE,
-    payload: error,
-});

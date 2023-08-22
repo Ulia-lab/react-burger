@@ -1,4 +1,4 @@
-import { fetchDataRequest, fetchDataSuccess, fetchDataFailure } from '../services/reducers/fetchData'
+import { fetchDataRequest, fetchDataSuccess, fetchDataFailure } from '../services/actions/fetchData'
 
 export const fetchDataAction = (url) => async (dispatch) => {
     dispatch(fetchDataRequest());

@@ -1,4 +1,4 @@
-import { postOrderRequest, postOrderSuccess, postOrderFailure } from '../services/reducers/postOrder'
+import { postOrderRequest, postOrderSuccess, postOrderFailure } from '../services/actions/postOrder'
 
 export const postOrder = (url, orderId) => async (dispatch) => {
   dispatch(postOrderRequest());
