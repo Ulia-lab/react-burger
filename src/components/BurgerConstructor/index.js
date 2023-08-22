@@ -26,7 +26,7 @@ function BurgerConstructor() {
     const error = useSelector(state => state.postOrder.error);
     const orderNum = useSelector(state => state.postOrder.items);
 
-    const isLocked = false;
+    const isLocked = true;
     const totalPrice = useMemo(() => cards.reduce((acc, card) => acc + card.price, 0), [cards]);
 
     const bunType = 'bun';
@@ -83,11 +83,11 @@ function BurgerConstructor() {
     return (
         <><section className={cn('mt-25', burgerConstructorStyle.block)}>
             <div ref={drop} className={cn('ml-4', burgerConstructorStyle.bconstructor)}>
-                {bunCards && <ConstructorCard card={bunCards} isLocked={true} additionalName=' (верх)' />}
+                {bunCards && <ConstructorCard card={bunCards} isLocked={isLocked} additionalName=' (верх)' />}
                 {mainCards.map((card) => (
-                    <ConstructorCard handleClose={() => handleRemoveBCItem(mainCards._id)} key={uuidv4()} card={card} isLocked={isLocked} />
+                    <ConstructorCard handleClose={() => handleRemoveBCItem(mainCards._id)} key={uuidv4()} card={card} />
                 ))}
-                {bunCards && <ConstructorCard card={bunCards} isLocked={true} additionalName=' (низ)' />}
+                {bunCards && <ConstructorCard card={bunCards} isLocked={isLocked} additionalName=' (низ)' />}
             </div>
             <div className={cn('mt-10 ml-4 mr-4', burgerConstructorStyle.total)}>
                 <p className="text text_type_digits-default">{totalPrice}</p>
