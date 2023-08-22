@@ -1,7 +1,6 @@
 import React, { useMemo } from "react";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
 import { Counter } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/counter";
-import PropTypes from 'prop-types';
 import burgerIngredientsStyle from "./burgerIngredients.module.css";
 import cn from 'classnames'
 import IngredientDetails from './IngredientDetails/index.js';
@@ -10,6 +9,7 @@ import { useDispatch } from 'react-redux';
 import { openCardModal, closeCardModal } from '../../services/reducers/modalIngredients'
 import { useSelector } from 'react-redux';
 import { useDrag } from "react-dnd";
+import { propTypesCard } from '../../utils/prop-types'
 
 const Card = ({ card }) => {
     const dispatch = useDispatch();
@@ -54,18 +54,5 @@ const Card = ({ card }) => {
 export default Card;
 
 Card.propTypes = {
-    card: PropTypes.shape({
-        calories: PropTypes.number,
-        carbohydrates: PropTypes.number,
-        fat: PropTypes.number,
-        image: PropTypes.string,
-        image_large: PropTypes.string,
-        image_mobile: PropTypes.string,
-        name: PropTypes.string,
-        price: PropTypes.number,
-        proteins: PropTypes.number,
-        type: PropTypes.string,
-        __v: PropTypes.number,
-        _id: PropTypes.string,
-    })
+    card: propTypesCard
 }; 
