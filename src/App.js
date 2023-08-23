@@ -4,18 +4,21 @@ import AppHeader from './components/AppHeader/index.js';
 import BurgerConstructor from './components/BurgerConstructor';
 import BurgerIngredients from './components/BurgerIngredients';
 import { URL } from './utils/constants'
-import fetchData from './utils/fetchData'
-import { BurgerContext } from './services/BurgerContext';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { fetchDataAction } from './utils/fetchData'
+import { HTML5Backend } from "react-dnd-html5-backend";
+import { DndProvider } from "react-dnd";
 
 function App() {
-  const [data, setData] = React.useState([]);
-
-  const [isLoading, setIsLoading] = React.useState(false)
-  const [error, setError] = React.useState();
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    fetchData({ url: URL, setData: setData, setIsLoading: setIsLoading, setError: setError });
-  }, [])
+    dispatch(fetchDataAction(URL));
+  }, [dispatch])
+
+  const isLoading = useSelector(state => state.fetchData.loading);
+  const error = useSelector(state => state.fetchData.error);
 
   if (isLoading) {
     return <div>Загрузка...</div>
@@ -29,10 +32,10 @@ function App() {
     <><div className={appStyles.app}>
       <AppHeader />
       <main className={appStyles.main}>
-        <BurgerContext.Provider value={data}>
+        <DndProvider backend={HTML5Backend}>
           <BurgerIngredients />
           <BurgerConstructor />
-        </BurgerContext.Provider>
+        </DndProvider>
       </main>
     </div></>
   )

@@ -1,7 +1,7 @@
 import React from "react";
 import IngredientDetailsStyles from "./IngredientDetails.module.css";
 import cn from 'classnames'
-import PropTypes from 'prop-types';
+import { propTypesCard } from '../../../utils/prop-types'
 
 function IngredientDetails({ ...props }) {
     return (
@@ -28,20 +28,7 @@ function IngredientDetails({ ...props }) {
 }
 
 IngredientDetails.propTypes = {
-    props: PropTypes.shape({
-        calories: PropTypes.number,
-        carbohydrates: PropTypes.number,
-        fat: PropTypes.number,
-        image: PropTypes.string,
-        image_large: PropTypes.string,
-        image_mobile: PropTypes.string,
-        name: PropTypes.string,
-        price: PropTypes.number,
-        proteins: PropTypes.number,
-        type: PropTypes.string,
-        __v: PropTypes.number,
-        _id: PropTypes.string,
-    })
+    props: propTypesCard
 };
 
 

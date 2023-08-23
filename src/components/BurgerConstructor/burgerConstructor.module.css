@@ -16,6 +16,15 @@
   overflow: auto;
   scrollbar-width: thin;
   max-height: calc(100vh - 264px - 40px);
+  min-height: 200px;
+  min-width: 200px;
+}
+
+.bconstructorActive {
+  display: flex;
+  flex-direction: column;
+  scrollbar-width: thin;
+  align-items: end;
 }
 
 .element {

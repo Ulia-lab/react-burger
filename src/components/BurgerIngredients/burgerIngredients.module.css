@@ -42,6 +42,7 @@
   font: inherit;
   color: inherit;
   background-color: transparent;
+  position: relative;
 }
 
 .cardTitle {
@@ -56,4 +57,10 @@
 
 .name {
   text-align: center;
+}
+
+.counter {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
