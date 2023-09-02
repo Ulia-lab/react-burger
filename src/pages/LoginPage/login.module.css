@@ -1,0 +1,34 @@
+.block {
+  width: 100%;
+  margin: auto;
+  max-width: 480px;
+}
+
+.gap{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px; 
+}
+
+.suggestions {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.suggestion {
+  display: flex;
+  gap: 12px;
+}
+
+.link{
+  color: #4C4CFF;
+  margin: auto;
+}
+
+.link:visited{
+  color: #4C4CFF;
+}
