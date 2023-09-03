@@ -9,7 +9,7 @@ export function SignUpPage() {
   const onChange = e => {
     setValue(e.target.value)
   }
-  const suggestions = [{ text: 'Уже зарегистрированы?', linkText: 'Войти', link: '/' }]
+  const suggestions = [{ text: 'Уже зарегистрированы?', linkText: 'Войти', link: '/login' }]
   return (
     <AuthForm title='Регистрация' btnTitle='Зарегистрироваться' suggestions={suggestions}>
       <Input

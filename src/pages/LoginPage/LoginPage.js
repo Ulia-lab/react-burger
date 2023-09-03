@@ -9,8 +9,8 @@ export function LoginPage() {
   const onChange = e => {
     setValue(e.target.value)
   }
-  const suggestions = [{ text: 'Вы — новый пользователь?', linkText: 'Зарегистрироваться', link: '/' },
-  { text: 'Забыли пароль?', linkText: 'Восстановить пароль', link: '/' }]
+  const suggestions = [{ text: 'Вы — новый пользователь?', linkText: 'Зарегистрироваться', link: '/register' },
+  { text: 'Забыли пароль?', linkText: 'Восстановить пароль', link: '/forgot-password' }]
   return (
     <AuthForm title='Вход' btnTitle='Войти' suggestions={suggestions}>
       <EmailInput
