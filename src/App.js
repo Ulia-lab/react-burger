@@ -5,24 +5,28 @@ import { NotFoundPage } from './pages/NotFoundPage/NotFoundPage'
 import { LoginPage } from './pages/LoginPage/LoginPage'
 import AppHeader from './components/AppHeader';
 import appStyles from './app.module.css';
+import { SignUpPage } from './pages/SignUpPage/SignUpPage';
+import { ForgotPasswordPage } from './pages/ForgotPasswordPage/ForgotPasswordPage';
+import { ResetPasswordPage } from './pages/ResetPasswordPage/ResetPasswordPage';
+import { ProfilePage } from './pages/ProfilePage/ProfilePage';
 
 function App() {
   return (
     <div className={appStyles.app}>
-    <AppHeader />
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<LoginPage />} />
-        {/* <Route path="/register" element={<CountryPage />} />
-        <Route path="/forgot-password" element={<PersonPage />} />
-        <Route path="/reset-password" element={<PersonPage />} />
-        <Route path="/profile" element={<PersonPage />} />
-        <Route path="/ingredients/:id" element={<PersonPage />} /> */}
+      <AppHeader />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<SignUpPage />} />
+          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+          <Route path="/reset-password" element={<ResetPasswordPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          {/*<Route path="/ingredients/:id" element={<PersonPage />} /> */}
 
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-    </BrowserRouter>
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   )
 }

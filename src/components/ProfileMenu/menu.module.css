@@ -1,0 +1,12 @@
+.block {
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  height: 64px;
+  border: dashed #4c4cff;
+}
