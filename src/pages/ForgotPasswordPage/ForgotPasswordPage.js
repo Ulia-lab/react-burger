@@ -5,6 +5,7 @@ import { EmailInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { AuthForm } from '../../components/AuthForm'
 import { PASSWORD_RESET_URL } from '../../utils/constants'
 import {postPasswordReset} from '../../utils/postPasswordReset'
+import AppHeader from '../../components/AppHeader';
 
 export function ForgotPasswordPage() {
   const [email, setEmail] = React.useState({ email: ''})
@@ -21,15 +22,14 @@ export function ForgotPasswordPage() {
 
   const suggestions = [{ text: 'Вспомнили пароль?', linkText: 'Войти', link: '/' }]
   return (
-    <AuthForm onClick={handleClick} title='Восстановление пароля' btnTitle='Восстановить' suggestions={suggestions}>
-       <EmailInput
+    <><AppHeader /><AuthForm onClick={handleClick} title='Восстановление пароля' btnTitle='Восстановить' suggestions={suggestions}>
+      <EmailInput
         onChange={onChange}
         value={email.email}
         name={'email'}
         isIcon={false}
-        placeholder='Укажите e-mail'
-      />
+        placeholder='Укажите e-mail' />
 
-    </AuthForm>
+    </AuthForm></>
   );
 }

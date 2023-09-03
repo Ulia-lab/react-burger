@@ -13,7 +13,6 @@ import { ProfilePage } from './pages/ProfilePage/ProfilePage';
 function App() {
   return (
     <div className={appStyles.app}>
-      <AppHeader />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />

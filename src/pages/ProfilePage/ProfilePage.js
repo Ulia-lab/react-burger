@@ -1,6 +1,7 @@
 import React from 'react';
 import ProfileMenu from '../../components/ProfileMenu';
 import { EmailInput, PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components';
+import AppHeader from '../../components/AppHeader';
 // import { useDispatch } from 'react-redux';
 // import { useSelector } from 'react-redux';
 
@@ -10,7 +11,7 @@ export function ProfilePage() {
         setValue(e.target.value)
     }
     return (
-        <div className='mt-20' style={{ display: 'flex' }}>
+        <><AppHeader /><div className='mt-20' style={{ display: 'flex' }}>
             <ProfileMenu />
             <div className='ml-15'>
                 <Input
@@ -23,23 +24,20 @@ export function ProfilePage() {
                     errorText={'Ошибка'}
                     size={'default'}
                     disabled={true}
-                    extraClass='mb-6'
-                />
+                    extraClass='mb-6' />
                 <EmailInput
                     onChange={onChange}
                     value={value}
                     name={'email'}
                     isIcon={false}
                     disabled={true}
-                    extraClass='mb-6'
-                />
+                    extraClass='mb-6' />
                 <PasswordInput
                     onChange={onChange}
                     value={value}
                     name={'password'}
-                    disabled={true}
-                />
+                    disabled={true} />
             </div>
-        </div>
+        </div></>
     );
 }

@@ -3,6 +3,7 @@ import React from 'react';
 // import { useSelector } from 'react-redux';
 import { EmailInput, PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import { AuthForm } from '../../components/AuthForm'
+import AppHeader from '../../components/AppHeader';
 
 export function SignUpPage() {
   const [value, setValue] = React.useState('password')
@@ -11,7 +12,7 @@ export function SignUpPage() {
   }
   const suggestions = [{ text: 'Уже зарегистрированы?', linkText: 'Войти', link: '/login' }]
   return (
-    <AuthForm title='Регистрация' btnTitle='Зарегистрироваться' suggestions={suggestions}>
+    <><AppHeader /><AuthForm title='Регистрация' btnTitle='Зарегистрироваться' suggestions={suggestions}>
       <Input
         type={'text'}
         placeholder={'Имя'}
@@ -20,19 +21,16 @@ export function SignUpPage() {
         name={'name'}
         error={false}
         errorText={'Ошибка'}
-        size={'default'}
-      />
+        size={'default'} />
       <EmailInput
         onChange={onChange}
         value={value}
         name={'email'}
-        isIcon={false}
-      />
+        isIcon={false} />
       <PasswordInput
         onChange={onChange}
         value={value}
-        name={'password'}
-      />
-    </AuthForm>
+        name={'password'} />
+    </AuthForm></>
   );
 }

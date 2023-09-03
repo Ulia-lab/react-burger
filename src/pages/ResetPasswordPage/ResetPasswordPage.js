@@ -5,6 +5,7 @@ import { PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-co
 import { AuthForm } from '../../components/AuthForm'
 import { PASSWORD_RESET_RESET_URL } from '../../utils/constants'
 import { postPasswordReset } from '../../utils/postPasswordReset'
+import AppHeader from '../../components/AppHeader';
 
 export function ResetPasswordPage() {
   const [password, setPassword] = React.useState({
@@ -26,7 +27,7 @@ export function ResetPasswordPage() {
   }
   const suggestions = [{ text: 'Вспомнили пароль?', linkText: 'Войти', link: '/' }]
   return (
-    <AuthForm onClick={handleClick}
+    <><AppHeader /><AuthForm onClick={handleClick}
       title='Восстановление пароля'
       btnTitle='Сохранить'
       suggestions={suggestions}>
@@ -39,6 +40,6 @@ export function ResetPasswordPage() {
         value={'123'}
         name={'password'}
         placeholder={'Код из письма'} />
-    </AuthForm>
+    </AuthForm></>
   );
 }
