@@ -1,7 +1,8 @@
-import { signInSuccess, signInRequest, signInFailure } from '../services/actions/signIn'
+import { authSuccess, authRequest, authFailure } from '../services/actions/auth'
 import { setCookie } from './getCookie';
-export const signIn = (url, user) => async (dispatch) => {
-  dispatch(signInRequest());
+
+export const auth = (url, user) => async (dispatch) => {
+  dispatch(authRequest());
   try {
     const response = await fetch(url, {
       method: 'POST',
@@ -14,7 +15,7 @@ export const signIn = (url, user) => async (dispatch) => {
       throw new Error('Ошибка post(url)')
     }
     const result = await response.json();
-    dispatch(signInSuccess(result));
+    dispatch(authSuccess(result));
 
     let authToken;
     if (result.accessToken.indexOf('Bearer') === 0) {
@@ -29,6 +30,6 @@ export const signIn = (url, user) => async (dispatch) => {
     return result;
   }
   catch (error) {
-    dispatch(signInFailure(error.message));
+    dispatch(authFailure(error.message));
   }
 }

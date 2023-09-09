@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { EmailInput, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { AuthForm } from '../../components/AuthForm'
 import AppHeader from '../../components/AppHeader';
-import { signIn } from '../../utils/signIn'
+import { auth } from '../../utils/auth'
 import { SIGN_IN_URL } from './../../utils/constants'
 import { Navigate } from 'react-router-dom';
 
@@ -27,7 +27,7 @@ export function LoginPage() {
   }
 
   const handleSignIn = () => {
-    dispatch(signIn(SIGN_IN_URL, inputData))
+    dispatch(auth(SIGN_IN_URL, inputData))
   }
 
   if (user) {

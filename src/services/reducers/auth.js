@@ -1,26 +1,20 @@
-import { SIGN_UP_REQUEST, SIGN_UP_SUCCESS, SIGN_UP_ERROR } from "../actions/signUp";
+import { AUTH_REQUEST, AUTH_SUCCESS, AUTH_ERROR } from "../actions/auth";
 
 const initialState = {
     loading: false,
     error: false,
     success: null,
-    user: {
-        email: "",
-        name: ""
-    },
-    accessToken: "",
-    refreshToken: ""
 };
 
-export const signUpReducer = (state = initialState, action) => {
+export const authReducer = (state = initialState, action) => {
     switch (action.type) {
-        case SIGN_UP_REQUEST: {
+        case AUTH_REQUEST: {
             return {
                 ...state,
                 loading: true,
             }
         }
-        case SIGN_UP_SUCCESS: {
+        case AUTH_SUCCESS: {
             return {
                 ...state,
                 loading: false,
@@ -29,11 +23,9 @@ export const signUpReducer = (state = initialState, action) => {
                     email: action.payload.user.email,
                     name: action.payload.user.name
                 },
-                accessToken: action.payload.accessToken,
-                refreshToken: action.payload.refreshToken,
             }
         }
-        case SIGN_UP_ERROR: {
+        case AUTH_ERROR: {
             return {
                 ...state,
                 loading: false,

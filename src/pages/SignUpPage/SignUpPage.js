@@ -1,11 +1,12 @@
 import React from 'react';
-// import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { EmailInput, PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import { AuthForm } from '../../components/AuthForm'
 import AppHeader from '../../components/AppHeader';
 import { useDispatch } from 'react-redux';
-import { signUp } from './../../utils/signUp'
+import { auth } from './../../utils/auth'
 import { SIGN_UP_URL } from './../../utils/constants'
+import { Navigate } from 'react-router-dom';
 
 export function SignUpPage() {
   const dispatch = useDispatch();
@@ -13,6 +14,15 @@ export function SignUpPage() {
   const [password, setPassword] = React.useState('')
   const [email, setEmail] = React.useState('')
   const [name, setName] = React.useState('')
+  const user = useSelector(state => state.signIn.user)
+
+  if (user) {
+    return (
+      <Navigate
+        to={'/'}
+      />
+    );
+  }
 
   const onChangePassword = e => {
     setPassword(e.target.value)
@@ -26,14 +36,14 @@ export function SignUpPage() {
     setName(e.target.value)
   }
 
-  const user = {
+  const inputData = {
     email: email,
     password: password,
     name: name
   }
 
   const handleSignUp = async () => {
-    dispatch(signUp(SIGN_UP_URL, user));
+    dispatch(auth(SIGN_UP_URL, inputData));
   }
   const suggestions = [{ text: 'Уже зарегистрированы?', linkText: 'Войти', link: '/login' }]
   return (
