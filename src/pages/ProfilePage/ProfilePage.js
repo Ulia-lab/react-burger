@@ -12,6 +12,7 @@ export function ProfilePage() {
     const dispatch = useDispatch();
 
     const user = useSelector(state => state?.auth.user)
+    const auth = useSelector(state => state?.auth)
 
     const [value, setValue] = React.useState('password')
     const onChange = e => {
@@ -27,6 +28,8 @@ export function ProfilePage() {
     }
 
     console.log('user', user)
+    console.log('auth', auth)
+
     if (!user) {
         return (
             <Navigate
