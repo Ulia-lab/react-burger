@@ -12,7 +12,6 @@ export function ForgotPasswordPage() {
   const dispatch = useDispatch();
 
   const handleClick = async () => {
-    console.log('email', email)
     dispatch(postPasswordReset(PASSWORD_RESET_URL, email));
 }
 

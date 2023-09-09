@@ -1,4 +1,5 @@
 import { postOrderRequest, postOrderSuccess, postOrderFailure } from '../services/actions/postOrder'
+import { getCookie } from './getCookie';
 
 export const postOrder = (url, orderId) => async (dispatch) => {
   dispatch(postOrderRequest());
@@ -7,6 +8,7 @@ export const postOrder = (url, orderId) => async (dispatch) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + getCookie("accessToken")
       },
       body: JSON.stringify(orderId)
     });

@@ -11,33 +11,36 @@ export function ProfilePage() {
         setValue(e.target.value)
     }
     return (
-        <><AppHeader /><div className='mt-20' style={{ display: 'flex' }}>
-            <ProfileMenu />
-            <div className='ml-15'>
-                <Input
-                    type={'text'}
-                    placeholder={'Имя'}
-                    onChange={e => setValue(e.target.value)}
-                    value={value}
-                    name={'name'}
-                    error={false}
-                    errorText={'Ошибка'}
-                    size={'default'}
-                    disabled={true}
-                    extraClass='mb-6' />
-                <EmailInput
-                    onChange={onChange}
-                    value={value}
-                    name={'email'}
-                    isIcon={false}
-                    disabled={true}
-                    extraClass='mb-6' />
-                <PasswordInput
-                    onChange={onChange}
-                    value={value}
-                    name={'password'}
-                    disabled={true} />
+        <>
+            <AppHeader />
+            <div className='mt-20' style={{ display: 'flex' }}>
+                <ProfileMenu />
+                <div className='ml-15'>
+                    <Input
+                        type={'text'}
+                        placeholder={'Имя'}
+                        onChange={e => setValue(e.target.value)}
+                        value={value}
+                        name={'name'}
+                        error={false}
+                        errorText={'Ошибка'}
+                        size={'default'}
+                        disabled={true}
+                        extraClass='mb-6' />
+                    <EmailInput
+                        onChange={onChange}
+                        value={value}
+                        name={'email'}
+                        isIcon={false}
+                        disabled={true}
+                        extraClass='mb-6' />
+                    <PasswordInput
+                        onChange={onChange}
+                        value={value}
+                        name={'password'}
+                        disabled={true} />
+                </div>
             </div>
-        </div></>
+        </>
     );
 }
