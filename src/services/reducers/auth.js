@@ -1,9 +1,10 @@
-import { AUTH_REQUEST, AUTH_SUCCESS, AUTH_ERROR } from "../actions/auth";
+import { AUTH_REQUEST, AUTH_SUCCESS, AUTH_LOGOUT_SUCCESS, AUTH_ERROR } from "../actions/auth";
 
 const initialState = {
     loading: false,
     error: false,
     success: null,
+    user: null
 };
 
 export const authReducer = (state = initialState, action) => {
@@ -23,6 +24,12 @@ export const authReducer = (state = initialState, action) => {
                     email: action.payload.user.email,
                     name: action.payload.user.name
                 },
+            }
+        }
+        case AUTH_LOGOUT_SUCCESS: {
+            return {
+                ...state,
+                initialState,
             }
         }
         case AUTH_ERROR: {

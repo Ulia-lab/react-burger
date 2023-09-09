@@ -14,7 +14,7 @@ export function SignUpPage() {
   const [password, setPassword] = React.useState('')
   const [email, setEmail] = React.useState('')
   const [name, setName] = React.useState('')
-  const user = useSelector(state => state.signIn.user)
+  const user = useSelector(state => state?.auth.user)
 
   if (user) {
     return (

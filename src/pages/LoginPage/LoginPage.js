@@ -10,7 +10,7 @@ import { Navigate } from 'react-router-dom';
 
 export function LoginPage() {
   const dispatch = useDispatch();
-  const user = useSelector(state => state.signIn.user)
+  const user = useSelector(state => state?.auth.user)
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
 

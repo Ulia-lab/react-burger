@@ -2,19 +2,44 @@ import React from 'react';
 import ProfileMenu from '../../components/ProfileMenu';
 import { EmailInput, PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import AppHeader from '../../components/AppHeader';
-// import { useDispatch } from 'react-redux';
-// import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { LOGOUT_URL } from '../../utils/constants';
+import { logout } from '../../utils/logout';
+import { Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 export function ProfilePage() {
+    const dispatch = useDispatch();
+
+    const user = useSelector(state => state?.auth.user)
+
     const [value, setValue] = React.useState('password')
     const onChange = e => {
         setValue(e.target.value)
     }
+
+    const token = {
+        token: localStorage.getItem('refreshToken')
+    }
+
+    const handleOnClick = () => {
+        dispatch(logout(LOGOUT_URL, token))
+    }
+
+    console.log('user', user)
+    if (!user) {
+        return (
+            <Navigate
+                to={'/login'}
+            />
+        );
+    }
+
     return (
         <>
             <AppHeader />
             <div className='mt-20' style={{ display: 'flex' }}>
-                <ProfileMenu />
+                <ProfileMenu onClick={handleOnClick} />
                 <div className='ml-15'>
                     <Input
                         type={'text'}
