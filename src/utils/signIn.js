@@ -1,6 +1,5 @@
 import { signInSuccess, signInRequest, signInFailure } from '../services/actions/signIn'
 import { setCookie } from './getCookie';
-//import { getCookie } from './getCookie'
 export const signIn = (url, user) => async (dispatch) => {
   dispatch(signInRequest());
   try {
