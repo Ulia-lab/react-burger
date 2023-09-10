@@ -1,25 +1,38 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-// import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { EmailInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { AuthForm } from '../../components/AuthForm'
-import { PASSWORD_RESET_URL } from '../../utils/constants'
-import {postPasswordReset} from '../../utils/postPasswordReset'
+import { FORGOT_PASSWORD_URL } from '../../utils/constants'
+import { postPasswordReset } from '../../utils/postPasswordReset'
+
 import AppHeader from '../../components/AppHeader';
+import { Navigate } from 'react-router-dom';
 
 export function ForgotPasswordPage() {
-  const [email, setEmail] = React.useState({ email: ''})
   const dispatch = useDispatch();
 
-  const handleClick = async () => {
-    dispatch(postPasswordReset(PASSWORD_RESET_URL, email));
-}
+  const [email, setEmail] = React.useState({ email: '' })
 
-  const onChange = e => {
-    setEmail({ email: e.target.value})
+  const handleClick = async () => {
+    dispatch(postPasswordReset(FORGOT_PASSWORD_URL, email));
+  }
+  const isEmailSend = useSelector(state => state?.postPasswordReset.data.success);
+  console.log('forgot', isEmailSend)
+
+  if (isEmailSend) {
+    return (
+      <Navigate
+        to={'/reset-password'}
+      />
+    );
   }
 
-  const suggestions = [{ text: 'Вспомнили пароль?', linkText: 'Войти', link: '/' }]
+  const onChange = e => {
+    setEmail({ email: e.target.value })
+  }
+
+  const suggestions = [{ text: 'Вспомнили пароль?', linkText: 'Войти', link: '/login' }]
   return (
     <><AppHeader /><AuthForm onClick={handleClick} title='Восстановление пароля' btnTitle='Восстановить' suggestions={suggestions}>
       <EmailInput

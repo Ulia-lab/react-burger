@@ -12,7 +12,6 @@ export function ProfilePage() {
     const dispatch = useDispatch();
 
     const user = useSelector(state => state?.auth.user)
-    const auth = useSelector(state => state?.auth)
 
     const [value, setValue] = React.useState('password')
     const onChange = e => {
@@ -26,9 +25,6 @@ export function ProfilePage() {
     const handleOnClick = () => {
         dispatch(logout(LOGOUT_URL, token))
     }
-
-    console.log('user', user)
-    console.log('auth', auth)
 
     if (!user) {
         return (

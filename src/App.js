@@ -15,7 +15,7 @@ function App() {
     <div className={appStyles.app}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<OnlyAuth component={<HomePage />} />} />
+          <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<OnlyUnAuth component={<LoginPage/>} />}  />
           <Route path="/register" element={<OnlyUnAuth component={<SignUpPage/>} />}  />
           <Route path="/forgot-password" element={<OnlyUnAuth component={<ForgotPasswordPage/>} />}  />

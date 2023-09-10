@@ -19,7 +19,7 @@ function AppHeader() {
       <ul className={cn('mb-4 mt-4', headerStyles.nav)}>
         <li>
           <nav className={headerStyles.menu}>
-            <NavLink to="/const">
+            <NavLink to="/">
               {({ isActive }) => (
                 <NavItem className={cn(isActive ? "text text_type_main-default" : "text text_type_main-default text_color_inactive")}
                   text="Конструктор" icon={<BurgerIcon type={isActive ? primary : secondary} />} />)}

@@ -1,5 +1,4 @@
 import { fetchDataRequest, fetchDataSuccess, fetchDataFailure } from '../services/actions/fetchData'
-import { getCookie } from './getCookie';
 
 export const fetchDataAction = (url) => async (dispatch) => {
     dispatch(fetchDataRequest());
@@ -11,7 +10,6 @@ export const fetchDataAction = (url) => async (dispatch) => {
             credentials: 'same-origin',
             headers: {
               'Content-Type': 'application/json',
-              Authorization: 'Bearer ' + getCookie("accessToken")
             },
             redirect: 'follow',
             referrerPolicy: 'no-referrer'

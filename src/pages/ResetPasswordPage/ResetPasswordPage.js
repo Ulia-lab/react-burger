@@ -1,31 +1,41 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 // import { useSelector } from 'react-redux';
 import { PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import { AuthForm } from '../../components/AuthForm'
-import { PASSWORD_RESET_RESET_URL } from '../../utils/constants'
+import { PASSWORD_RESET_URL } from '../../utils/constants'
 import { postPasswordReset } from '../../utils/postPasswordReset'
 import AppHeader from '../../components/AppHeader';
+import { passwordSetInitialState } from '../../services/actions/postPasswordReset';
 
 export function ResetPasswordPage() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(passwordSetInitialState());
+  }, [])
+
   const [password, setPassword] = React.useState({
     password: "",
     token: ""
   })
-  const dispatch = useDispatch();
 
   const onChangePw = e => {
-    setPassword({ ...password, password: e.target.value})
+    setPassword({ ...password, password: e.target.value })
   }
 
-  const onChangeCode = () => {
-    console.log('code')
+  const onChangeCode = e => {
+    setPassword({ ...password, token: e.target.value })
   }
+
+  console.log('password', password)
 
   const handleClick = async () => {
-    dispatch(postPasswordReset(PASSWORD_RESET_RESET_URL, password));
+    dispatch(postPasswordReset(PASSWORD_RESET_URL, password));
   }
+
   const suggestions = [{ text: 'Вспомнили пароль?', linkText: 'Войти', link: '/' }]
+
   return (
     <><AppHeader /><AuthForm onClick={handleClick}
       title='Восстановление пароля'
@@ -37,8 +47,8 @@ export function ResetPasswordPage() {
         name={'password'} />
       <Input
         onChange={onChangeCode}
-        value={'123'}
-        name={'password'}
+        value={password.token}
+        name={'token'}
         placeholder={'Код из письма'} />
     </AuthForm></>
   );
