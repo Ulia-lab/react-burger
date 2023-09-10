@@ -1,7 +1,9 @@
 import { postOrderRequest, postOrderSuccess, postOrderFailure } from '../services/actions/postOrder'
 import { getCookie } from './getCookie';
+import { getToken } from './token';
 
 export const postOrder = (url, orderId) => async (dispatch) => {
+  getToken();
   dispatch(postOrderRequest());
   try {
     const response = await fetch(url, {

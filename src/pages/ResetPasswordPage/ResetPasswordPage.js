@@ -28,8 +28,6 @@ export function ResetPasswordPage() {
     setPassword({ ...password, token: e.target.value })
   }
 
-  console.log('password', password)
-
   const handleClick = async () => {
     dispatch(postPasswordReset(PASSWORD_RESET_URL, password));
   }

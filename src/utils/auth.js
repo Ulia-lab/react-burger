@@ -1,4 +1,5 @@
 import { authSuccess, authRequest, authFailure } from '../services/actions/auth'
+import { userSuccess } from '../services/actions/user';
 import { setCookie } from './getCookie';
 
 export const auth = (url, user) => async (dispatch) => {
@@ -16,6 +17,7 @@ export const auth = (url, user) => async (dispatch) => {
     }
     const result = await response.json();
     dispatch(authSuccess(result));
+    dispatch(userSuccess(result));
 
     let authToken;
     if (result.accessToken.indexOf('Bearer') === 0) {

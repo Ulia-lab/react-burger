@@ -7,3 +7,5 @@ export const SIGN_UP_URL = 'https://norma.nomoreparties.space/api/auth/register'
 export const SIGN_IN_URL = 'https://norma.nomoreparties.space/api/auth/login';
 export const LOGOUT_URL = 'https://norma.nomoreparties.space/api/auth/logout';
 export const TOKEN_URL = 'https://norma.nomoreparties.space/api/auth/token';
+
+export const USER_URL = 'https://norma.nomoreparties.space/api/auth/user';

@@ -1,69 +1,115 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ProfileMenu from '../../components/ProfileMenu';
-import { EmailInput, PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components';
+import { EmailInput, PasswordInput, Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import AppHeader from '../../components/AppHeader';
 import { useDispatch } from 'react-redux';
-import { LOGOUT_URL } from '../../utils/constants';
+import { LOGOUT_URL, USER_URL } from '../../utils/constants';
 import { logout } from '../../utils/logout';
 import { Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { getUser, patchUser } from '../../utils/user';
+import { getCookie } from '../../utils/getCookie';
 
 export function ProfilePage() {
     const dispatch = useDispatch();
 
-    const user = useSelector(state => state?.auth.user)
+    useEffect(() => {
+        dispatch(getUser(USER_URL))
+    }, [])
 
-    const [value, setValue] = React.useState('password')
-    const onChange = e => {
-        setValue(e.target.value)
+    const loading = useSelector(state => state.user.loading);
+
+    const userEmail = useSelector(state => state?.user?.data?.user?.email);
+    const userName = useSelector(state => state?.user?.data?.user?.name);
+
+    const [editEmail, setEditEmail] = React.useState(userEmail)
+    const [editName, setEditName] = React.useState(userName)
+
+    const [isEditDisabled, setEditDisabled] = React.useState(true);
+    const handlerEditClick = () => {
+        setEditDisabled(!isEditDisabled)
+    }
+
+    const isUserAuth = getCookie('accessToken');
+
+    const onChangeName = e => {
+        setEditName(e.target.value)
+    }
+    const onChangeEmail = e => {
+        setEditEmail(e.target.value)
     }
 
     const token = {
         token: localStorage.getItem('refreshToken')
     }
 
-    const handleOnClick = () => {
-        dispatch(logout(LOGOUT_URL, token))
+    const handleLogoutOnClick = () => {
+        dispatch(logout(LOGOUT_URL, token));
     }
 
-    if (!user) {
+    const handleSaveOnClick = () => {
+        dispatch(patchUser(USER_URL, {
+            email: editEmail,
+            name: editName
+        }))
+        setEditDisabled(true);
+    }
+
+    const handleCancelOnClick = () => {
+        setEditDisabled(true);
+    }
+
+    if (!isUserAuth) {
         return (
             <Navigate
                 to={'/login'}
-            />
+                replace />
         );
+    }
+
+    if (loading) {
+        return <div>Загрузка...</div>
     }
 
     return (
         <>
             <AppHeader />
             <div className='mt-20' style={{ display: 'flex' }}>
-                <ProfileMenu onClick={handleOnClick} />
-                <div className='ml-15'>
+                <ProfileMenu onClick={handleLogoutOnClick} />
+                {!loading && <div className='ml-15'>
                     <Input
+                        icon={'EditIcon'}
                         type={'text'}
                         placeholder={'Имя'}
-                        onChange={e => setValue(e.target.value)}
-                        value={value}
+                        onChange={onChangeName}
+                        value={editName}
                         name={'name'}
                         error={false}
                         errorText={'Ошибка'}
                         size={'default'}
-                        disabled={true}
-                        extraClass='mb-6' />
+                        disabled={isEditDisabled}
+                        extraClass='mb-6'
+                        onIconClick={handlerEditClick}
+                    />
                     <EmailInput
-                        onChange={onChange}
-                        value={value}
+                        icon={'EditIcon'}
+                        onChange={onChangeEmail}
+                        value={editEmail}
                         name={'email'}
-                        isIcon={false}
-                        disabled={true}
-                        extraClass='mb-6' />
+                        disabled={isEditDisabled}
+                        extraClass='mb-6'
+                        onIconClick={handlerEditClick}
+                    />
                     <PasswordInput
-                        onChange={onChange}
-                        value={value}
+                        icon={'EditIcon'}
+                        value='value'
                         name={'password'}
-                        disabled={true} />
-                </div>
+                    />
+                    {!isEditDisabled && <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '30px' }}>
+                        <Button onClick={handleCancelOnClick} htmlType={'button'}>Отменить</Button>
+                        <Button onClick={handleSaveOnClick} htmlType={'button'}>Сохранить</Button>
+                    </div>}
+                </div>}
             </div>
         </>
     );

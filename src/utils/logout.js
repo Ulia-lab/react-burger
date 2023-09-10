@@ -14,13 +14,11 @@ export const logout = (url, token) => async (dispatch) => {
         if (!response.ok) {
             throw new Error('Ошибка post(url)')
         }
-        const result = await response.json();
         dispatch(authLogoutSuccess());
 
+        window.location.href = '/login';
         setCookie("accessToken", null, { expires: -1 })
         localStorage.clear();
-
-        return result;
     }
     catch (error) {
         dispatch(authFailure(error.message));

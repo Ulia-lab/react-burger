@@ -1,11 +1,15 @@
 import { Navigate, useLocation } from "react-router-dom";
+import { getCookie } from "../utils/getCookie";
 
 const ProtectedElement = ({ onlyUnAuth = false, component }) => {
   // isAuthChecked это флаг, показывающий что проверка токена произведена
   // при этом результат этой проверки не имеет значения, важно только,
   // что сам факт проверки имел место.
-  const isAuth = localStorage.getItem('refreshToken');
+  const isAuth = getCookie("accessToken");
   const location = useLocation();
+
+  console.log('onlyUnAuth && isAuth', onlyUnAuth && isAuth)
+  console.log('!onlyUnAuth && !isAuth', !onlyUnAuth && !isAuth)
 
   if (onlyUnAuth && isAuth) {
     // Пользователь авторизован, но роут предназначен для неавторизованного пользователя
@@ -15,7 +19,7 @@ const ProtectedElement = ({ onlyUnAuth = false, component }) => {
   }
 
   if (!onlyUnAuth && !isAuth) {
-    return <Navigate to="/login" replace/>;
+    return <Navigate to="/login" />;
   }
 
   // !onlyUnAuth && user Пользователь авторизован и роут для авторизованного пользователя

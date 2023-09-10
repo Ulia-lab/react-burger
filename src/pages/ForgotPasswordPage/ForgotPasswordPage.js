@@ -18,7 +18,6 @@ export function ForgotPasswordPage() {
     dispatch(postPasswordReset(FORGOT_PASSWORD_URL, email));
   }
   const isEmailSend = useSelector(state => state?.postPasswordReset.data.success);
-  console.log('forgot', isEmailSend)
 
   if (isEmailSend) {
     return (
