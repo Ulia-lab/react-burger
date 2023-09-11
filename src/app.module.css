@@ -47,3 +47,7 @@ button {
   color: inherit;
   background-color: transparent;
 }
+
+Link:visited {
+  color: white;
+}
