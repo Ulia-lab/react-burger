@@ -18,15 +18,18 @@ const Card = ({ card }) => {
     
     const handleOpenModal = () => {
         dispatch(openCardModal(card));
+        localStorage.setItem('openModalCard', true);
     }
 
     const handleCloseModal = () => {
         dispatch(closeCardModal());
+        localStorage.removeItem('openModalCard');
     }
-    const isOpen = useSelector(state => state.modalIngredients.isOpen);
     const selectedCard = useSelector(state => state.modalIngredients.selectedCard);
     const constructorCards = useSelector(state => state.constructorItems.items);
     const count = useMemo(() => constructorCards.filter(item => item._id === card._id).length, [card._id, constructorCards]);
+    const isOpen = localStorage.getItem('openModalCard');
+
 
     //dnd
     const [, dragRef] = useDrag({
@@ -34,7 +37,6 @@ const Card = ({ card }) => {
         item: { card },
     });
 
-    console.log('location', location)
     return (
         <div ref={dragRef}>
             <button onClick={handleOpenModal} className={burgerIngredientsStyle.card}> 
