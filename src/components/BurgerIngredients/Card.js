@@ -10,10 +10,12 @@ import { openCardModal, closeCardModal } from '../../services/actions/modalngred
 import { useSelector } from 'react-redux';
 import { useDrag } from "react-dnd";
 import { propTypesCard } from '../../utils/prop-types'
+import { Link, useLocation } from "react-router-dom";
 
 const Card = ({ card }) => {
     const dispatch = useDispatch();
-
+    const location = useLocation();
+    
     const handleOpenModal = () => {
         dispatch(openCardModal(card));
     }
@@ -32,9 +34,11 @@ const Card = ({ card }) => {
         item: { card },
     });
 
+    console.log('location', location)
     return (
         <div ref={dragRef}>
-            <button onClick={handleOpenModal} className={burgerIngredientsStyle.card}>
+            <button onClick={handleOpenModal} className={burgerIngredientsStyle.card}> 
+            <Link to={`/ingredients/${card._id}`}  state={{ background: location }}>
                 {count !== 0 && <div className={burgerIngredientsStyle.counter}><Counter count={count} size="default" extraClass="m-1" /></div>}
                 <img alt={card.name} src={card.image} card={card} className="ml-4 mr-4 mb-1" />
                 <div className={burgerIngredientsStyle.price}>
@@ -44,6 +48,7 @@ const Card = ({ card }) => {
                     </div>
                 </div>
                 <p className={cn('text text_type_main-small mt-1', burgerIngredientsStyle.name)}>{card.name}</p>
+            </Link>
             </button>
             {isOpen && <Modal content={<IngredientDetails card={selectedCard} />} closeModal={handleCloseModal} />}
         </div>

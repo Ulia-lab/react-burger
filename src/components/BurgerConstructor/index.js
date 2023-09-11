@@ -16,7 +16,6 @@ import { useDrop } from 'react-dnd';
 import { UPDATE_TYPE } from '../../services/actions/constructorItems';
 import { DropZone } from './DropZone'
 import { getCookie } from "../../utils/getCookie";
-import { Navigate } from "react-router-dom";
 
 function BurgerConstructor() {
     const bunType = 'bun';

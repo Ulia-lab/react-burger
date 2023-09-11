@@ -11,11 +11,11 @@ import { fetchDataAction } from '../../utils/fetchData'
 import AppHeader from '../../components/AppHeader';
 
 export function HomePage() {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchDataAction(URL));
-  }, [dispatch])
+  // useEffect(() => {
+  //   dispatch(fetchDataAction(URL));
+  // }, [dispatch])
 
   const isLoading = useSelector(state => state.fetchData.loading);
   const error = useSelector(state => state.fetchData.error);
