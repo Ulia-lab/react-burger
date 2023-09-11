@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-// import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import { AuthForm } from '../../components/AuthForm'
 import { PASSWORD_RESET_URL } from '../../utils/constants'

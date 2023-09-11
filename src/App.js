@@ -13,7 +13,7 @@ import { IngPage } from './pages/IngPage/IngPage';
 import { useDispatch } from 'react-redux';
 import { fetchDataAction } from './utils/fetchData';
 import { URL } from './utils/constants';
-import { useSelector } from 'react-redux';
+import CardModal from './components/BurgerIngredients/CardModal';
 
 function App() {
   const location = useLocation();
@@ -24,10 +24,8 @@ function App() {
   useEffect(() => {
     dispatch(fetchDataAction(URL));
   }, [])
+  const isOpen = localStorage.getItem('openModalCard');
 
-//   const data = useSelector(state => state.fetchData.data);
-// console.log('state.background', state?.background)
-  
   return (
     <div className={appStyles.app}>
 
@@ -43,9 +41,9 @@ function App() {
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
 
-        {state?.background && (
+        {state?.background && isOpen && (
         <Routes>
-          <Route path="/ingredients/:id" element={<HomePage />} />
+          <Route path="/ingredients/:id" element={<CardModal />} />
         </Routes>
         )}
     </div>

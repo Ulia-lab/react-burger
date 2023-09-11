@@ -3,33 +3,20 @@ import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components
 import { Counter } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/counter";
 import burgerIngredientsStyle from "./burgerIngredients.module.css";
 import cn from 'classnames'
-import IngredientDetails from './IngredientDetails/index.js';
-import Modal from '../Modal';
-import { useDispatch } from 'react-redux';
-import { openCardModal, closeCardModal } from '../../services/actions/modalngredients'
 import { useSelector } from 'react-redux';
 import { useDrag } from "react-dnd";
 import { propTypesCard } from '../../utils/prop-types'
 import { Link, useLocation } from "react-router-dom";
 
 const Card = ({ card }) => {
-    const dispatch = useDispatch();
     const location = useLocation();
-    
+
     const handleOpenModal = () => {
-        dispatch(openCardModal(card));
         localStorage.setItem('openModalCard', true);
     }
 
-    const handleCloseModal = () => {
-        dispatch(closeCardModal());
-        localStorage.removeItem('openModalCard');
-    }
-    const selectedCard = useSelector(state => state.modalIngredients.selectedCard);
     const constructorCards = useSelector(state => state.constructorItems.items);
     const count = useMemo(() => constructorCards.filter(item => item._id === card._id).length, [card._id, constructorCards]);
-    const isOpen = localStorage.getItem('openModalCard');
-
 
     //dnd
     const [, dragRef] = useDrag({
@@ -52,7 +39,6 @@ const Card = ({ card }) => {
                 <p className={cn('text text_type_main-small mt-1', burgerIngredientsStyle.name)}>{card.name}</p>
             </Link>
             </button>
-            {isOpen && <Modal content={<IngredientDetails card={selectedCard} />} closeModal={handleCloseModal} />}
         </div>
     )
 };

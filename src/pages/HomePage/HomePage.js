@@ -3,19 +3,11 @@ import BurgerConstructor from '../../components/BurgerConstructor';
 import BurgerIngredients from '../../components/BurgerIngredients';
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { DndProvider } from "react-dnd";
-import React, { useEffect } from 'react';
-import { URL } from '../../utils/constants'
-import { useDispatch } from 'react-redux';
+import React from 'react';
 import { useSelector } from 'react-redux';
-import { fetchDataAction } from '../../utils/fetchData'
 import AppHeader from '../../components/AppHeader';
 
 export function HomePage() {
-  // const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   dispatch(fetchDataAction(URL));
-  // }, [dispatch])
 
   const isLoading = useSelector(state => state.fetchData.loading);
   const error = useSelector(state => state.fetchData.error);
