@@ -47,28 +47,25 @@ export function SignUpPage() {
   }
   const suggestions = [{ text: 'Уже зарегистрированы?', linkText: 'Войти', link: '/login' }]
   return (
-    <>
-      <AppHeader />
-      <AuthForm onClick={handleSignUp} title='Регистрация' btnTitle='Зарегистрироваться' suggestions={suggestions}>
-        <Input
-          type={'text'}
-          placeholder={'Имя'}
-          onChange={onChangeName}
-          value={name}
-          name={'name'}
-          error={false}
-          errorText={'Ошибка'}
-          size={'default'} />
-        <EmailInput
-          onChange={onChangeEmail}
-          value={email}
-          name={'email'}
-          isIcon={false} />
-        <PasswordInput
-          onChange={onChangePassword}
-          value={password}
-          name={'password'} />
-      </AuthForm>
-    </>
+    <AuthForm onClick={handleSignUp} title='Регистрация' btnTitle='Зарегистрироваться' suggestions={suggestions}>
+      <Input
+        type={'text'}
+        placeholder={'Имя'}
+        onChange={onChangeName}
+        value={name}
+        name={'name'}
+        error={false}
+        errorText={'Ошибка'}
+        size={'default'} />
+      <EmailInput
+        onChange={onChangeEmail}
+        value={email}
+        name={'email'}
+        isIcon={false} />
+      <PasswordInput
+        onChange={onChangePassword}
+        value={password}
+        name={'password'} />
+    </AuthForm>
   );
 }

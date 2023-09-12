@@ -21,12 +21,11 @@ export function HomePage() {
   }
 
   return (
-    <><AppHeader />
     <main className={appStyles.main}>
       <DndProvider backend={HTML5Backend}>
         <BurgerIngredients />
         <BurgerConstructor />
       </DndProvider>
-    </main></>
+    </main>
   );
 }

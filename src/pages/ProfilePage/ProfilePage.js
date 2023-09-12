@@ -72,45 +72,42 @@ export function ProfilePage() {
     }
 
     return (
-        <>
-            <AppHeader />
-            <div className='mt-20' style={{ display: 'flex' }}>
-                <ProfileMenu onClick={handleLogoutOnClick} />
-                {!loading && <div className='ml-15'>
-                    <Input
-                        icon={'EditIcon'}
-                        type={'text'}
-                        placeholder={'Имя'}
-                        onChange={onChangeName}
-                        value={editName}
-                        name={'name'}
-                        error={false}
-                        errorText={'Ошибка'}
-                        size={'default'}
-                        disabled={isEditDisabled}
-                        extraClass='mb-6'
-                        onIconClick={handlerEditClick}
-                    />
-                    <EmailInput
-                        icon={'EditIcon'}
-                        onChange={onChangeEmail}
-                        value={editEmail}
-                        name={'email'}
-                        disabled={isEditDisabled}
-                        extraClass='mb-6'
-                        onIconClick={handlerEditClick}
-                    />
-                    <PasswordInput
-                        icon={'EditIcon'}
-                        value='value'
-                        name={'password'}
-                    />
-                    {!isEditDisabled && <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '30px' }}>
-                        <Button onClick={handleCancelOnClick} htmlType={'button'}>Отменить</Button>
-                        <Button onClick={handleSaveOnClick} htmlType={'button'}>Сохранить</Button>
-                    </div>}
+        <div className='mt-20' style={{ display: 'flex' }}>
+            <ProfileMenu onClick={handleLogoutOnClick} />
+            {!loading && <div className='ml-15'>
+                <Input
+                    icon={'EditIcon'}
+                    type={'text'}
+                    placeholder={'Имя'}
+                    onChange={onChangeName}
+                    value={editName}
+                    name={'name'}
+                    error={false}
+                    errorText={'Ошибка'}
+                    size={'default'}
+                    disabled={isEditDisabled}
+                    extraClass='mb-6'
+                    onIconClick={handlerEditClick}
+                />
+                <EmailInput
+                    icon={'EditIcon'}
+                    onChange={onChangeEmail}
+                    value={editEmail}
+                    name={'email'}
+                    disabled={isEditDisabled}
+                    extraClass='mb-6'
+                    onIconClick={handlerEditClick}
+                />
+                <PasswordInput
+                    icon={'EditIcon'}
+                    value='value'
+                    name={'password'}
+                />
+                {!isEditDisabled && <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '30px' }}>
+                    <Button onClick={handleCancelOnClick} htmlType={'button'}>Отменить</Button>
+                    <Button onClick={handleSaveOnClick} htmlType={'button'}>Сохранить</Button>
                 </div>}
-            </div>
-        </>
+            </div>}
+        </div>
     );
 }

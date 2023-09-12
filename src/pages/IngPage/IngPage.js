@@ -13,8 +13,6 @@ export function IngPage() {
   let expCard = getIngredient(selectedCard, id);
 
   return (
-    <><AppHeader />
-      <IngredientDetails card={expCard} />
-    </>
+    <IngredientDetails card={expCard} />
   );
 }

@@ -41,21 +41,18 @@ export function LoginPage() {
   const suggestions = [{ text: 'Вы — новый пользователь?', linkText: 'Зарегистрироваться', link: '/register' },
   { text: 'Забыли пароль?', linkText: 'Восстановить пароль', link: '/forgot-password' }]
   return (
-    <>
-      <AppHeader />
-      <AuthForm onClick={handleSignIn} title='Вход' btnTitle='Войти' suggestions={suggestions}>
-        <EmailInput
-          onChange={onChangeEmail}
-          value={email}
-          name={'email'}
-          isIcon={false}
-          extraClass="mb-2" />
-        <PasswordInput
-          onChange={onChangePassword}
-          value={password}
-          name={'password'}
-          extraClass="mb-2" />
-      </AuthForm>
-    </>
+    <AuthForm onClick={handleSignIn} title='Вход' btnTitle='Войти' suggestions={suggestions}>
+      <EmailInput
+        onChange={onChangeEmail}
+        value={email}
+        name={'email'}
+        isIcon={false}
+        extraClass="mb-2" />
+      <PasswordInput
+        onChange={onChangePassword}
+        value={password}
+        name={'password'}
+        extraClass="mb-2" />
+    </AuthForm>
   );
 }

@@ -14,6 +14,7 @@ import { useDispatch } from 'react-redux';
 import { fetchDataAction } from './utils/fetchData';
 import { URL } from './utils/constants';
 import CardModal from './components/BurgerIngredients/CardModal';
+import AppHeader from './components/AppHeader';
 
 function App() {
   const location = useLocation();
@@ -28,7 +29,7 @@ function App() {
 
   return (
     <div className={appStyles.app}>
-
+        <AppHeader />
         <Routes location={state?.background || location}>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<OnlyUnAuth component={<LoginPage/>} />}  />

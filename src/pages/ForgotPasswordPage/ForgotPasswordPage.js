@@ -6,7 +6,6 @@ import { AuthForm } from '../../components/AuthForm'
 import { FORGOT_PASSWORD_URL } from '../../utils/constants'
 import { postPasswordReset } from '../../utils/postPasswordReset'
 
-import AppHeader from '../../components/AppHeader';
 import { Navigate } from 'react-router-dom';
 
 export function ForgotPasswordPage() {
@@ -33,7 +32,7 @@ export function ForgotPasswordPage() {
 
   const suggestions = [{ text: 'Вспомнили пароль?', linkText: 'Войти', link: '/login' }]
   return (
-    <><AppHeader /><AuthForm onClick={handleClick} title='Восстановление пароля' btnTitle='Восстановить' suggestions={suggestions}>
+    <AuthForm onClick={handleClick} title='Восстановление пароля' btnTitle='Восстановить' suggestions={suggestions}>
       <EmailInput
         onChange={onChange}
         value={email.email}
@@ -41,6 +40,6 @@ export function ForgotPasswordPage() {
         isIcon={false}
         placeholder='Укажите e-mail' />
 
-    </AuthForm></>
+    </AuthForm>
   );
 }
