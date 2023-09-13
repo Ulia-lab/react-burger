@@ -8,9 +8,6 @@ const ProtectedElement = ({ onlyUnAuth = false, component }) => {
   const isAuth = getCookie("accessToken");
   const location = useLocation();
 
-  console.log('onlyUnAuth && isAuth', onlyUnAuth && isAuth)
-  console.log('!onlyUnAuth && !isAuth', !onlyUnAuth && !isAuth)
-
   if (onlyUnAuth && isAuth) {
     // Пользователь авторизован, но роут предназначен для неавторизованного пользователя
     // Делаем редирект на главную страницу или на тот адрес, что записан в location.state.from

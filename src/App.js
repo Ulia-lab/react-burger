@@ -12,7 +12,7 @@ import { OnlyAuth, OnlyUnAuth } from './pages/ProtectedElement';
 import { IngPage } from './pages/IngPage/IngPage';
 import { useDispatch } from 'react-redux';
 import { fetchDataAction } from './utils/fetchData';
-import { URL } from './utils/constants';
+import { INGREDIENTS_URL } from './utils/constants';
 import CardModal from './components/BurgerIngredients/CardModal';
 import AppHeader from './components/AppHeader';
 
@@ -23,7 +23,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchDataAction(URL));
+    dispatch(fetchDataAction(INGREDIENTS_URL));
   }, [])
   const isOpen = localStorage.getItem('openModalCard');
 

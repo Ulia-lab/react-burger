@@ -13,7 +13,8 @@ export function ForgotPasswordPage() {
 
   const [email, setEmail] = React.useState({ email: '' })
 
-  const handleClick = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     dispatch(postPasswordReset(FORGOT_PASSWORD_URL, email));
   }
   const isEmailSend = useSelector(state => state?.postPasswordReset.data.success);
@@ -32,14 +33,13 @@ export function ForgotPasswordPage() {
 
   const suggestions = [{ text: 'Вспомнили пароль?', linkText: 'Войти', link: '/login' }]
   return (
-    <AuthForm onClick={handleClick} title='Восстановление пароля' btnTitle='Восстановить' suggestions={suggestions}>
+    <AuthForm onSubmit={handleSubmit} title='Восстановление пароля' btnTitle='Восстановить' suggestions={suggestions}>
       <EmailInput
         onChange={onChange}
         value={email.email}
         name={'email'}
         isIcon={false}
         placeholder='Укажите e-mail' />
-
     </AuthForm>
   );
 }

@@ -26,7 +26,8 @@ export function LoginPage() {
     setPassword(e.target.value)
   }
 
-  const handleSignIn = () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     dispatch(auth(SIGN_IN_URL, inputData))
   }
 
@@ -41,14 +42,16 @@ export function LoginPage() {
   const suggestions = [{ text: 'Вы — новый пользователь?', linkText: 'Зарегистрироваться', link: '/register' },
   { text: 'Забыли пароль?', linkText: 'Восстановить пароль', link: '/forgot-password' }]
   return (
-    <AuthForm onClick={handleSignIn} title='Вход' btnTitle='Войти' suggestions={suggestions}>
+    <AuthForm onSubmit={handleSubmit} title='Вход' btnTitle='Войти' suggestions={suggestions}>
       <EmailInput
+        autoComplete='on'
         onChange={onChangeEmail}
         value={email}
         name={'email'}
         isIcon={false}
         extraClass="mb-2" />
       <PasswordInput
+        autoComplete='on'
         onChange={onChangePassword}
         value={password}
         name={'password'}

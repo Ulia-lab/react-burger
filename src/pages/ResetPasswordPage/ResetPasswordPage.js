@@ -26,14 +26,15 @@ export function ResetPasswordPage() {
     setPassword({ ...password, token: e.target.value })
   }
 
-  const handleClick = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     dispatch(postPasswordReset(PASSWORD_RESET_URL, password));
   }
 
   const suggestions = [{ text: 'Вспомнили пароль?', linkText: 'Войти', link: '/' }]
 
   return (
-    <AuthForm onClick={handleClick}
+    <AuthForm onSubmit={handleSubmit}
       title='Восстановление пароля'
       btnTitle='Сохранить'
       suggestions={suggestions}>

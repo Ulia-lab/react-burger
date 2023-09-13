@@ -42,12 +42,14 @@ export function SignUpPage() {
     name: name
   }
 
-  const handleSignUp = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     dispatch(auth(SIGN_UP_URL, inputData));
   }
+  
   const suggestions = [{ text: 'Уже зарегистрированы?', linkText: 'Войти', link: '/login' }]
   return (
-    <AuthForm onClick={handleSignUp} title='Регистрация' btnTitle='Зарегистрироваться' suggestions={suggestions}>
+    <AuthForm onSubmit={handleSubmit} title='Регистрация' btnTitle='Зарегистрироваться' suggestions={suggestions}>
       <Input
         type={'text'}
         placeholder={'Имя'}

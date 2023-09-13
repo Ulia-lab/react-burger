@@ -47,7 +47,7 @@ export function ProfilePage() {
         dispatch(logout(LOGOUT_URL, token));
     }
 
-    const handleSaveOnClick = () => {
+    const handleSubmit = () => {
         dispatch(patchUser(USER_URL, {
             email: editEmail,
             name: editName
@@ -72,7 +72,7 @@ export function ProfilePage() {
     }
 
     return (
-        <div className='mt-20' style={{ display: 'flex' }}>
+        <form onSubmit={handleSubmit} className='mt-20' style={{ display: 'flex' }}>
             <ProfileMenu onClick={handleLogoutOnClick} />
             {!loading && <div className='ml-15'>
                 <Input
@@ -104,10 +104,10 @@ export function ProfilePage() {
                     name={'password'}
                 />
                 {!isEditDisabled && <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '30px' }}>
-                    <Button onClick={handleCancelOnClick} htmlType={'button'}>Отменить</Button>
-                    <Button onClick={handleSaveOnClick} htmlType={'button'}>Сохранить</Button>
+                    <Button onClick={handleCancelOnClick} htmlType='reset'>Отменить</Button>
+                    <Button htmlType='submit'>Сохранить</Button>
                 </div>}
             </div>}
-        </div>
+        </form>
     );
 }
