@@ -2,11 +2,10 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { EmailInput, PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import { AuthForm } from '../../components/AuthForm'
-import AppHeader from '../../components/AppHeader';
 import { useDispatch } from 'react-redux';
-import { auth } from './../../utils/auth'
 import { SIGN_UP_URL } from './../../utils/constants'
 import { Navigate } from 'react-router-dom';
+import { auth } from '../../services/actions/auth';
 
 export function SignUpPage() {
   const dispatch = useDispatch();

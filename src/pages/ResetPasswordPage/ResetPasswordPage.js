@@ -3,8 +3,7 @@ import { useDispatch } from 'react-redux';
 import { PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import { AuthForm } from '../../components/AuthForm'
 import { PASSWORD_RESET_URL } from '../../utils/constants'
-import { postPasswordReset } from '../../utils/postPasswordReset'
-import { passwordSetInitialState } from '../../services/actions/postPasswordReset';
+import { passwordSetInitialState, postPasswordReset } from '../../services/actions/postPasswordReset';
 
 export function ResetPasswordPage() {
   const dispatch = useDispatch();

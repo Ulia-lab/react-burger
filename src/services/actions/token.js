@@ -1,5 +1,5 @@
-import { TOKEN_URL } from './constants';
-import { setCookie } from './getCookie';
+import { TOKEN_URL } from '../../utils/constants';
+import { setCookie } from '../../utils/getCookie';
 
 export const getToken = () => async () => {
     try {

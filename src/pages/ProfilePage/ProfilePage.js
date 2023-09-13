@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import ProfileMenu from '../../components/ProfileMenu';
 import { EmailInput, PasswordInput, Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import AppHeader from '../../components/AppHeader';
 import { useDispatch } from 'react-redux';
 import { LOGOUT_URL, USER_URL } from '../../utils/constants';
-import { logout } from '../../utils/logout';
+import { logout } from '../../services/actions/logout';
 import { Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { getUser, patchUser } from '../../utils/user';
 import { getCookie } from '../../utils/getCookie';
+import { getUser, patchUser } from '../../services/actions/user';
 
 export function ProfilePage() {
     const dispatch = useDispatch();

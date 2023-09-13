@@ -11,10 +11,10 @@ import { ProfilePage } from './pages/ProfilePage/ProfilePage';
 import { OnlyAuth, OnlyUnAuth } from './pages/ProtectedElement';
 import { IngPage } from './pages/IngPage/IngPage';
 import { useDispatch } from 'react-redux';
-import { fetchDataAction } from './utils/fetchData';
 import { INGREDIENTS_URL } from './utils/constants';
 import CardModal from './components/BurgerIngredients/CardModal';
 import AppHeader from './components/AppHeader';
+import { fetchDataAction } from './services/actions/fetchData';
 
 function App() {
   const location = useLocation();

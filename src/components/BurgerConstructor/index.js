@@ -7,11 +7,10 @@ import Modal from '../Modal';
 import OrderDetails from './OrderDetails';
 import ConstructorCard from './constructorCard';
 import { v4 as uuidv4 } from 'uuid';
-import { postOrder } from "../../utils/postOrder";
 import { ORDER_URL } from '../../utils/constants'
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { postOrderModal } from '../../services/actions/postOrder';
+import { postOrder, postOrderModal } from '../../services/actions/postOrder';
 import { useDrop } from 'react-dnd';
 import { UPDATE_TYPE } from '../../services/actions/constructorItems';
 import { DropZone } from './DropZone'

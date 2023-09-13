@@ -1,3 +1,5 @@
+import { getCookie } from '../../utils/getCookie';
+import { getToken } from './token';
 import {initialState} from '../reducers/postOrder'
 export const POST_ORDER_ERROR = 'POST_ORDER_ERROR';
 export const POST_ORDER_SUCCESS = 'POST_ORDER_SUCCESS';
@@ -24,3 +26,28 @@ export const postOrderModal = () => ({
     payload: initialState,
     isOpen: false,
 });
+
+export const postOrder = (url, orderId) => async (dispatch) => {
+    getToken();
+    dispatch(postOrderRequest());
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + getCookie("accessToken")
+        },
+        body: JSON.stringify(orderId)
+      });
+      if (!response.ok) {
+        throw new Error('Ошибка post(url)')
+      }
+      const result = await response.json();
+      dispatch(postOrderSuccess(result));
+      return result;
+    }
+    catch (error) {
+      dispatch(postOrderFailure(error.message));
+    }
+  }
+  

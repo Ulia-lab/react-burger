@@ -3,10 +3,9 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { EmailInput, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { AuthForm } from '../../components/AuthForm'
-import AppHeader from '../../components/AppHeader';
-import { auth } from '../../utils/auth'
 import { SIGN_IN_URL } from './../../utils/constants'
 import { Navigate } from 'react-router-dom';
+import { auth } from '../../services/actions/auth';
 
 export function LoginPage() {
   const dispatch = useDispatch();

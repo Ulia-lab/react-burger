@@ -4,9 +4,8 @@ import { useSelector } from 'react-redux';
 import { EmailInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { AuthForm } from '../../components/AuthForm'
 import { FORGOT_PASSWORD_URL } from '../../utils/constants'
-import { postPasswordReset } from '../../utils/postPasswordReset'
-
 import { Navigate } from 'react-router-dom';
+import { postPasswordReset } from '../../services/actions/postPasswordReset';
 
 export function ForgotPasswordPage() {
   const dispatch = useDispatch();

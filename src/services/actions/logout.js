@@ -1,5 +1,5 @@
-import { authLogoutSuccess, authRequest, authFailure } from '../services/actions/auth'
-import { setCookie } from './getCookie';
+import { authLogoutSuccess, authRequest, authFailure } from './auth'
+import { setCookie } from '../../utils/getCookie';
 
 export const logout = (url, token) => async (dispatch) => {
     dispatch(authRequest());
