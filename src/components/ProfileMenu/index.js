@@ -4,7 +4,7 @@ import cn from 'classnames';
 import { NavLink } from "react-router-dom";
 
 export function ProfileMenu({ onClick }) {
-    const menuItems = [{ title: 'Профиль', link: '/profile'}, {title: 'История заказов', link: '/profile/orders'}];
+    const menuItems = [{ title: 'Профиль', link: '/profile' }, { title: 'История заказов', link: '/profile/orders' }];
     return (
         <div className={menuStyle.block}>
             {menuItems.map((item, index) => <NavLink to={item.link} key={index} active="true" className={cn("text text_type_main-medium", menuStyle.item)}>{item.title}</NavLink>)}

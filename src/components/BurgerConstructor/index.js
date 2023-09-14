@@ -6,7 +6,6 @@ import cn from 'classnames'
 import Modal from '../Modal';
 import OrderDetails from './OrderDetails';
 import ConstructorCard from './constructorCard';
-import { v4 as uuidv4 } from 'uuid';
 import { ORDER_URL } from '../../utils/constants'
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
@@ -22,7 +21,7 @@ function BurgerConstructor() {
     const dispatch = useDispatch();
 
     const cards = useSelector(state => state.constructorItems.items);
-    console.log('cards', cards)
+
     const isOpen = useSelector(state => state.postOrder.isOpen);
     const loading = useSelector(state => state.postOrder.loading);
     const error = useSelector(state => state.postOrder.error);
@@ -63,7 +62,8 @@ function BurgerConstructor() {
         dispatch(postOrder(ORDER_URL, orderId));
     }
 
-    const handleCloseModal = () => {
+    const handleCloseModal = e => {
+        e.preventDefault();
         dispatch(postOrderModal());
     }
 
@@ -89,7 +89,7 @@ function BurgerConstructor() {
     return (
         <><section className={cn('mt-25', burgerConstructorStyle.block)}>
             <div ref={dropItem} className={cn('ml-4', burgerConstructorStyle.bconstructor)}>
-                {(cards.length === 0) ? <div className="text text_type_digits-default" style={{ height: "100%", wight: "100%" }} >Перетащите элементы бургера</div> :
+                {(cards.length === 0) ? <div className="text text_type_main-medium text_color_inactive" style={{ height: "100%", wight: "100%" }} >Перетащите элементы бургера</div> :
                     <div className={cn('ml-4', burgerConstructorStyle.bconstructorActive)}>
                         {bunCards && <ConstructorCard card={bunCards} isLocked={isLocked} additionalName=' (верх)' />}
                         {mainCards.map((card, index) => (

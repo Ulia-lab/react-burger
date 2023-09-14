@@ -9,8 +9,7 @@ import { ForgotPasswordPage } from './pages/ForgotPasswordPage/ForgotPasswordPag
 import { ResetPasswordPage } from './pages/ResetPasswordPage/ResetPasswordPage';
 import { ProfilePage } from './pages/ProfilePage/ProfilePage';
 import { OnlyAuth, OnlyUnAuth } from './pages/ProtectedElement';
-import { IngPage } from './pages/IngPage/IngPage';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { INGREDIENTS_URL } from './utils/constants';
 import CardModal from './components/BurgerIngredients/CardModal';
 import AppHeader from './components/AppHeader';
@@ -25,28 +24,29 @@ function App() {
   useEffect(() => {
     dispatch(fetchDataAction(INGREDIENTS_URL));
   }, [])
-  const isOpen = localStorage.getItem('openModalCard');
+
+  const isOpen = useSelector(store => store.modalIngredients.isOpen);
 
   return (
     <div className={appStyles.app}>
-        <AppHeader />
-        <Routes location={state?.background || location}>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<OnlyUnAuth component={<LoginPage/>} />}  />
-          <Route path="/register" element={<OnlyUnAuth component={<SignUpPage/>} />}  />
-          <Route path="/forgot-password" element={<OnlyUnAuth component={<ForgotPasswordPage/>} />}  />
-          <Route path="/reset-password" element={<OnlyUnAuth component={<ResetPasswordPage/>} />} />
-          <Route path="/profile" element={<OnlyAuth component={<ProfilePage />} />}/>
-          {!state?.background && (<Route path="/ingredients/:id" element={<IngPage />}/>)}
+      <AppHeader />
+      <Routes location={state?.background || location}>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<OnlyUnAuth component={<LoginPage />} />} />
+        <Route path="/register" element={<OnlyUnAuth component={<SignUpPage />} />} />
+        <Route path="/forgot-password" element={<OnlyUnAuth component={<ForgotPasswordPage />} />} />
+        <Route path="/reset-password" element={<OnlyUnAuth component={<ResetPasswordPage />} />} />
+        <Route path="/profile" element={<OnlyAuth component={<ProfilePage />} />} />
+        {/* {!state?.background && (<Route path="/ingredients/:id" element={<IngPage />}/>)} */}
 
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
 
-        {state?.background && isOpen && (
+      {(state?.background && isOpen) && (
         <Routes>
           <Route path="/ingredients/:id" element={<CardModal />} />
         </Routes>
-        )}
+      )}
     </div>
   )
 }

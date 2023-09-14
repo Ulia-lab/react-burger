@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import cn from 'classnames';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
+// TODO const {values, handleChange, setValues} = useForm({});
 export function AuthForm({ onSubmit, title, btnTitle, suggestions, children }) {
   return (
     <div className={authStyle.block}>

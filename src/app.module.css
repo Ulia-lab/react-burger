@@ -18,7 +18,7 @@ li {
 }
 
 ul {
-  padding-left: 0; 
+  padding-left: 0;
 }
 
 .app {
@@ -30,7 +30,7 @@ p {
   margin: 0;
 }
 
-.main{
+.main {
   display: flex;
   justify-content: space-between;
 }

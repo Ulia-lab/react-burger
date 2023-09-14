@@ -1,6 +1,4 @@
 import React from 'react';
-import AppHeader from '../../components/AppHeader';
-
 
 export function NotFoundPage() {
     return (

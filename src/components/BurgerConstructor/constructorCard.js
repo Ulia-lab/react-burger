@@ -16,14 +16,14 @@ const ConstructorCard = ({ index, card, isLocked, additionalName = '' }) => {
         type: 'card',
         item: { index },
         collect: (monitor) => ({
-          isDragging: monitor.isDragging(),
+            isDragging: monitor.isDragging(),
         }),
-      });
-    
+    });
+
     const opacity = isDragging ? 0.5 : 1;
 
     const handleDrag = card.type !== 'bun' ? dragRef : null;
-    
+
     const handleRemoveBCItem = (_id) => {
         dispatch(removeBCItems(_id));
     }

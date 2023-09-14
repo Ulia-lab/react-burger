@@ -8,21 +8,36 @@ import { Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { getCookie } from '../../utils/getCookie';
 import { getUser, patchUser } from '../../services/actions/user';
+import { getToken } from '../../services/actions/token';
 
 export function ProfilePage() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getUser(USER_URL))
+        dispatch(getUser(USER_URL));
     }, [])
 
     const loading = useSelector(state => state.user.loading);
+    const error = useSelector(state => state.user.error);
 
-    const userEmail = useSelector(state => state?.user?.data?.user?.email);
-    const userName = useSelector(state => state?.user?.data?.user?.name);
+    if (error) {
+        dispatch(getToken());
+        dispatch(getUser(USER_URL));
+    }
 
-    const [editEmail, setEditEmail] = React.useState(userEmail)
-    const [editName, setEditName] = React.useState(userName)
+    const userEmail = useSelector(state => state?.user?.data?.user?.email) || '';
+    const userName = useSelector(state => state?.user?.data?.user?.name) || '';
+
+    const [editEmail, setEditEmail] = React.useState('')
+    const [editName, setEditName] = React.useState('')
+
+    useEffect(() => {
+        setEditEmail(userEmail);
+    }, [userEmail]);
+
+    useEffect(() => {
+        setEditName(userName)
+    }, [userName]);
 
     const [isEditDisabled, setEditDisabled] = React.useState(true);
     const handlerEditClick = () => {

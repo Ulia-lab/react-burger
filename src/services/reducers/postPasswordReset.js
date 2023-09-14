@@ -30,8 +30,8 @@ export const postPasswordResetReducer = (state = initialState, action) => {
         error: action.payload,
       };
 
-      case PASSWORD_SET_INITIAL_STATE:
-        return initialState;
+    case PASSWORD_SET_INITIAL_STATE:
+      return initialState;
 
     default:
       return state;

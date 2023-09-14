@@ -18,7 +18,6 @@ function Modal({ ...props }) {
         </div>
         ), modalRoot
     )
-
 }
 
 Modal.propTypes = {

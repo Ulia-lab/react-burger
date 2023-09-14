@@ -8,11 +8,11 @@ import { authReducer } from './auth'
 import { userReducer } from './user';
 
 export const rootReducer = combineReducers({
-    fetchData: fetchDataReducer,
-    constructorItems: constructorItemsReducer,
-    modalIngredients: modalIngredientsReducer,
-    postOrder: postOrderReducer,
-    postPasswordReset: postPasswordResetReducer,
-    auth: authReducer,
-    user: userReducer,
-  });
+  fetchData: fetchDataReducer,
+  constructorItems: constructorItemsReducer,
+  modalIngredients: modalIngredientsReducer,
+  postOrder: postOrderReducer,
+  postPasswordReset: postPasswordResetReducer,
+  auth: authReducer,
+  user: userReducer,
+});

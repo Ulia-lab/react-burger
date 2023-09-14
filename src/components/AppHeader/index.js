@@ -13,7 +13,7 @@ import { NavLink } from "react-router-dom";
 function AppHeader() {
   const primary = 'primary';
   const secondary = 'secondary';
- 
+
   return (
     <header>
       <ul className={cn('mb-4 mt-4', headerStyles.nav)}>
@@ -30,9 +30,7 @@ function AppHeader() {
           </nav>
         </li>
         <li>
-          <a href="/">
-            <Logo />
-          </a>
+          <Logo />
         </li>
         <li>
           <NavLink to="/profile">

@@ -13,7 +13,7 @@ export const getToken = () => async () => {
             })
         });
         if (!response.ok) {
-            throw new Error('Ошибка post(url)')
+            throw new Error(localStorage.getItem("refreshToken"))
         }
         const result = await response.json();
 

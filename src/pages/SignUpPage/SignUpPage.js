@@ -45,7 +45,7 @@ export function SignUpPage() {
     e.preventDefault();
     dispatch(auth(SIGN_UP_URL, inputData));
   }
-  
+
   const suggestions = [{ text: 'Уже зарегистрированы?', linkText: 'Войти', link: '/login' }]
   return (
     <AuthForm onSubmit={handleSubmit} title='Регистрация' btnTitle='Зарегистрироваться' suggestions={suggestions}>
