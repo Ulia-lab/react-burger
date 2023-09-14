@@ -22,7 +22,7 @@ function BurgerConstructor() {
     const dispatch = useDispatch();
 
     const cards = useSelector(state => state.constructorItems.items);
-
+    console.log('cards', cards)
     const isOpen = useSelector(state => state.postOrder.isOpen);
     const loading = useSelector(state => state.postOrder.loading);
     const error = useSelector(state => state.postOrder.error);
@@ -93,8 +93,8 @@ function BurgerConstructor() {
                     <div className={cn('ml-4', burgerConstructorStyle.bconstructorActive)}>
                         {bunCards && <ConstructorCard card={bunCards} isLocked={isLocked} additionalName=' (верх)' />}
                         {mainCards.map((card, index) => (
-                            <DropZone key={index} index={index}>
-                                <ConstructorCard index={index} key={uuidv4()} card={card} />
+                            <DropZone key={card.uniqueId} index={index}>
+                                <ConstructorCard key={card.uniqueId} index={index} card={card} />
                             </DropZone>
                         ))}
                         {bunCards && <ConstructorCard card={bunCards} isLocked={isLocked} additionalName=' (низ)' />}

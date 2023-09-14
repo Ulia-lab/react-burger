@@ -1,6 +1,8 @@
 import { ADD_BC_ITEMS, REMOVE_BC_ITEMS, UPDATE_TYPE, MOVE_ITEM } from "../actions/constructorItems";
+import { v4 as uuidv4 } from 'uuid';
+
 const initialState = {
-    items: []
+    items: [],
 };
 
 export const constructorItemsReducer = (state = initialState, action) => {
@@ -26,19 +28,21 @@ export const constructorItemsReducer = (state = initialState, action) => {
             }
         }
         case UPDATE_TYPE: {
-            if (action.item.type === 'bun') {
+            const item = action.item;
+            item.uniqueId = uuidv4();
+            if (item.type === 'bun') {
                 const bunIndex = state.items.findIndex(item => item.type === 'bun');
                 if (bunIndex !== -1) {
                     state.items.splice(bunIndex, 1);
                 }
                 return {
                     ...state,
-                    items: [action.item, ...state.items]
+                    items: [item, ...state.items]
                 };
             }
             return {
                 ...state,
-                items: [...state.items, action.item]
+                items: [...state.items, item]
             };
         }
         case MOVE_ITEM:
