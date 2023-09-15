@@ -6,6 +6,7 @@ import { PASSWORD_RESET_URL } from '../../utils/constants'
 import { passwordSetInitialState, postPasswordReset } from '../../services/actions/postPasswordReset';
 
 export function ResetPasswordPage() {
+  localStorage.removeItem('isEmailSend');
   const dispatch = useDispatch();
 
   useEffect(() => {

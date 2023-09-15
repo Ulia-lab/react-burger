@@ -8,7 +8,7 @@ import { SignUpPage } from './pages/SignUpPage/SignUpPage';
 import { ForgotPasswordPage } from './pages/ForgotPasswordPage/ForgotPasswordPage';
 import { ResetPasswordPage } from './pages/ResetPasswordPage/ResetPasswordPage';
 import { ProfilePage } from './pages/ProfilePage/ProfilePage';
-import { OnlyAuth, OnlyUnAuth } from './pages/ProtectedElement';
+import { OnlyAfterForgotPage, OnlyAuth, OnlyUnAuth } from './pages/ProtectedElement';
 import { useDispatch, useSelector } from 'react-redux';
 import { INGREDIENTS_URL } from './utils/constants';
 import CardModal from './components/BurgerIngredients/CardModal';
@@ -36,7 +36,7 @@ function App() {
         <Route path="/login" element={<OnlyUnAuth component={<LoginPage />} />} />
         <Route path="/register" element={<OnlyUnAuth component={<SignUpPage />} />} />
         <Route path="/forgot-password" element={<OnlyUnAuth component={<ForgotPasswordPage />} />} />
-        <Route path="/reset-password" element={<OnlyUnAuth component={<ResetPasswordPage />} />} />
+        <Route path="/reset-password" element={<OnlyAfterForgotPage component={<ResetPasswordPage />} />} />
         <Route path="/profile" element={<OnlyAuth component={<ProfilePage />} />} />
         {!state?.background && (<Route path="/ingredients/:id" element={<IngPage />}/>)}
 

@@ -19,6 +19,7 @@ export function ForgotPasswordPage() {
   const isEmailSend = useSelector(state => state?.postPasswordReset.data.success);
 
   if (isEmailSend) {
+    localStorage.setItem('isEmailSend', true)
     return (
       <Navigate
         to={'/reset-password'}
