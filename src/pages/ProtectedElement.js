@@ -12,13 +12,10 @@ const ProtectedElement = ({ AfterForgotPage = false, onlyUnAuth = false, compone
 
   // если страница reset-password и Forgot-емаил НЕ отправлен
   if (AfterForgotPage && !isEmailSend) {
-    console.log('AfterForgotPage && !isEmailSend', AfterForgotPage && !isEmailSend)
-
     return <Navigate to="/forgot-password" />;
   }
   // если страница reset-password и Forgot-емаил отправлен
   if (AfterForgotPage && isEmailSend) {
-    console.log('AfterForgotPage && isEmailSend', AfterForgotPage && isEmailSend)
     return component;
   }
 

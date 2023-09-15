@@ -21,7 +21,7 @@ const CardModal = () => {
     if (!isOpen) {
         return <Navigate to="/" replace/>;
     }
-      console.log(!isOpen)
+    
     return (
         <Modal content={<IngredientDetails card={card} />} closeModal={handleCloseModal} />
     )
