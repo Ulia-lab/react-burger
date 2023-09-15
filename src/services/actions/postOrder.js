@@ -1,6 +1,7 @@
 import { getCookie } from '../../utils/getCookie';
 import { getToken } from './token';
 import { initialState } from '../reducers/postOrder'
+import { request } from '../../utils/request';
 export const POST_ORDER_ERROR = 'POST_ORDER_ERROR';
 export const POST_ORDER_SUCCESS = 'POST_ORDER_SUCCESS';
 export const POST_ORDER_REQUEST = 'POST_ORDER_REQUEST';
@@ -31,7 +32,7 @@ export const postOrder = (url, orderId) => async (dispatch) => {
   getToken();
   dispatch(postOrderRequest());
   try {
-    const response = await fetch(url, {
+    const result = await request(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -39,10 +40,7 @@ export const postOrder = (url, orderId) => async (dispatch) => {
       },
       body: JSON.stringify(orderId)
     });
-    if (!response.ok) {
-      throw new Error('Ошибка post(url)')
-    }
-    const result = await response.json();
+
     dispatch(postOrderSuccess(result));
     return result;
   }

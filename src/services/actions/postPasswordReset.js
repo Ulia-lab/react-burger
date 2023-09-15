@@ -1,3 +1,5 @@
+import { request } from "../../utils/request";
+
 export const POST_PASSWORD_RESET_ERROR = 'POST_PASSWORD_RESET_ERROR';
 export const POST_PASSWORD_RESET_SUCCESS = 'POST_PASSWORD_RESET_SUCCESS';
 export const POST_PASSWORD_RESET_REQUEST = 'POST_PASSWORD_RESET_REQUEST';
@@ -24,17 +26,14 @@ export const passwordSetInitialState = () => ({
 export const postPasswordReset = (url, email) => async (dispatch) => {
   dispatch(postPasswordResetRequest());
   try {
-    const response = await fetch(url, {
+    const result = await request(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(email)
     });
-    if (!response.ok) {
-      throw new Error('Ошибка post(url)')
-    }
-    const result = await response.json();
+
     dispatch(postPasswordResetSuccess(result));
     return result;
   }

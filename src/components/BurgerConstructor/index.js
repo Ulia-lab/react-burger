@@ -91,13 +91,13 @@ function BurgerConstructor() {
             <div ref={dropItem} className={cn('ml-4', burgerConstructorStyle.bconstructor)}>
                 {(cards.length === 0) ? <div className="text text_type_main-medium text_color_inactive" style={{ height: "100%", wight: "100%" }} >Перетащите элементы бургера</div> :
                     <div className={cn('ml-4', burgerConstructorStyle.bconstructorActive)}>
-                        {bunCards && <ConstructorCard card={bunCards} isLocked={isLocked} additionalName=' (верх)' />}
+                        {bunCards && <ConstructorCard type='top' card={bunCards} isLocked={isLocked} additionalName=' (верх)' />}
                         {mainCards.map((card, index) => (
                             <DropZone key={card.uniqueId} index={index}>
-                                <ConstructorCard key={card.uniqueId} index={index} card={card} />
+                                <ConstructorCard type={undefined} key={card.uniqueId} index={index} card={card} />
                             </DropZone>
                         ))}
-                        {bunCards && <ConstructorCard card={bunCards} isLocked={isLocked} additionalName=' (низ)' />}
+                        {bunCards && <ConstructorCard type='bottom' card={bunCards} isLocked={isLocked} additionalName=' (низ)' />}
                     </div>}
             </div>
             <div className={cn('mt-10 ml-4 mr-4', burgerConstructorStyle.total)}>

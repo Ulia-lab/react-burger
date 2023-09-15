@@ -14,6 +14,7 @@ import { INGREDIENTS_URL } from './utils/constants';
 import CardModal from './components/BurgerIngredients/CardModal';
 import AppHeader from './components/AppHeader';
 import { fetchDataAction } from './services/actions/fetchData';
+import { IngPage } from './pages/IngPage/IngPage';
 
 function App() {
   const location = useLocation();
@@ -25,7 +26,7 @@ function App() {
     dispatch(fetchDataAction(INGREDIENTS_URL));
   }, [])
 
-  const isOpen = useSelector(store => store.modalIngredients.isOpen);
+  const isOpen = useSelector(state => state.modalIngredients.isOpen);
 
   return (
     <div className={appStyles.app}>
@@ -37,7 +38,7 @@ function App() {
         <Route path="/forgot-password" element={<OnlyUnAuth component={<ForgotPasswordPage />} />} />
         <Route path="/reset-password" element={<OnlyUnAuth component={<ResetPasswordPage />} />} />
         <Route path="/profile" element={<OnlyAuth component={<ProfilePage />} />} />
-        {/* {!state?.background && (<Route path="/ingredients/:id" element={<IngPage />}/>)} */}
+        {!state?.background && (<Route path="/ingredients/:id" element={<IngPage />}/>)}
 
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

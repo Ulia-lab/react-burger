@@ -1,4 +1,5 @@
 import { getCookie } from "../../utils/getCookie";
+import { request } from "../../utils/request";
 import { getToken } from "./token";
 
 export const USER_ERROR = 'USER_ERROR';
@@ -22,17 +23,14 @@ export const userFailure = (error) => ({
 export const getUser = (url) => async (dispatch) => {
   dispatch(userRequest());
   try {
-    const response = await fetch(url, {
+    const result = await request(url, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + getCookie("accessToken")
       },
     });
-    if (!response.ok) {
-      throw new Error('Ошибка get(url)')
-    }
-    const result = await response.json();
+
     dispatch(userSuccess(result));
     return result;
   }
@@ -45,7 +43,7 @@ export const patchUser = (url, user) => async (dispatch) => {
   getToken();
   dispatch(userRequest());
   try {
-    const response = await fetch(url, {
+    const result = await request(url, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -53,10 +51,7 @@ export const patchUser = (url, user) => async (dispatch) => {
       },
       body: JSON.stringify(user)
     });
-    if (!response.ok) {
-      throw new Error('Ошибка get(url)')
-    }
-    const result = await response.json();
+
     dispatch(userSuccess(result));
     return result;
   }

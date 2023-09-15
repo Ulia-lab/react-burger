@@ -1,9 +1,10 @@
 import { TOKEN_URL } from '../../utils/constants';
 import { setCookie } from '../../utils/getCookie';
+import { request } from '../../utils/request';
 
 export const getToken = () => async () => {
     try {
-        const response = await fetch(TOKEN_URL, {
+        const result = await request(TOKEN_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -12,11 +13,7 @@ export const getToken = () => async () => {
                 token: localStorage.getItem("refreshToken")
             })
         });
-        if (!response.ok) {
-            throw new Error(localStorage.getItem("refreshToken"))
-        }
-        const result = await response.json();
-
+ 
         let authToken;
         if (result.accessToken.indexOf('Bearer') === 0) {
             authToken = result.accessToken.split('Bearer ')[1];

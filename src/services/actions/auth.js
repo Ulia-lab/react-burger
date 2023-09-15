@@ -1,4 +1,5 @@
 import { setCookie } from "../../utils/getCookie";
+import { request } from "../../utils/request";
 import { userSuccess } from "./user";
 
 export const AUTH_SUCCESS = 'AUTH_SUCCESS';
@@ -28,17 +29,13 @@ export const authRequest = () => ({
 export const auth = (url, user) => async (dispatch) => {
   dispatch(authRequest());
   try {
-    const response = await fetch(url, {
+    const result = await request(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(user)
     });
-    if (!response.ok) {
-      throw new Error('Ошибка post(url)')
-    }
-    const result = await response.json();
     dispatch(authSuccess(result));
     dispatch(userSuccess(result));
 

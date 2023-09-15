@@ -1,19 +1,18 @@
 import { authLogoutSuccess, authRequest, authFailure } from './auth'
 import { setCookie } from '../../utils/getCookie';
+import { request } from '../../utils/request';
 
 export const logout = (url, token) => async (dispatch) => {
     dispatch(authRequest());
     try {
-        const response = await fetch(url, {
+        await request(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(token)
         });
-        if (!response.ok) {
-            throw new Error('Ошибка post(url)')
-        }
+
         dispatch(authLogoutSuccess());
 
         window.location.href = '/login';

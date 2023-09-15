@@ -8,7 +8,7 @@ import { Logo } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui
 import headerStyles from "./header.module.css";
 import cn from 'classnames'
 import NavItem from "./NavItem.js";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 function AppHeader() {
   const primary = 'primary';
@@ -30,7 +30,7 @@ function AppHeader() {
           </nav>
         </li>
         <li>
-          <Logo />
+          <Link to='/'><Logo /></Link>
         </li>
         <li>
           <NavLink to="/profile">

@@ -28,7 +28,7 @@ function IngredientDetails({ ...props }) {
 }
 
 IngredientDetails.propTypes = {
-    props: propTypesCard
+    card: propTypesCard
 };
 
 
