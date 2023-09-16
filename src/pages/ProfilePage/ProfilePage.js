@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import { getCookie } from '../../utils/getCookie';
 import { getUser, patchUser } from '../../services/actions/user';
 import { getToken } from '../../services/actions/token';
+import Loading from '../../components/common/Loading';
 
 export function ProfilePage() {
     const dispatch = useDispatch();
@@ -82,7 +83,7 @@ export function ProfilePage() {
     }
 
     if (loading) {
-        return <div>Загрузка...</div>
+        return (<div style={{ display: 'flex', justifyContent: "center"}}><Loading /></div>)
     }
 
     return (

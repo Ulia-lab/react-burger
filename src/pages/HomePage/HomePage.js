@@ -5,6 +5,7 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import { DndProvider } from "react-dnd";
 import React from 'react';
 import { useSelector } from 'react-redux';
+import Loading from '../../components/common/Loading';
 
 export function HomePage() {
 
@@ -12,7 +13,7 @@ export function HomePage() {
   const error = useSelector(state => state.fetchData.error);
 
   if (isLoading) {
-    return <div>Загрузка...</div>
+    return <div style={{ justifyContent: "space-between", margin: 'auto'}}><Loading /></div>
   }
 
   if (error) {

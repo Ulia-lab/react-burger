@@ -1,4 +1,4 @@
-import { ADD_BC_ITEMS, REMOVE_BC_ITEMS, MOVE_ITEM } from "../actions/constructorItems";
+import { ADD_BC_ITEMS, REMOVE_BC_ITEMS, MOVE_ITEM, GET_SAVED_BC_ITEMS, CLEAR_ALL_BC_ITEMS } from "../actions/constructorItems";
 
 const initialState = {
     items: [],
@@ -33,6 +33,16 @@ export const constructorItemsReducer = (state = initialState, action) => {
                 ...state,
                 items: newState
             }
+        }
+        case GET_SAVED_BC_ITEMS: {
+            if (action.items) return {
+                ...state,
+                items: action.items
+            }
+            return state
+        }
+        case CLEAR_ALL_BC_ITEMS: {
+            return initialState
         }
         case MOVE_ITEM:
             const { dragIndex, hoverIndex } = action.payload;

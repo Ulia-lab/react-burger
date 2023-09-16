@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/button";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
 import burgerConstructorStyle from "./burgerConstructor.module.css";
@@ -11,14 +11,20 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { postOrder, postOrderModal } from '../../services/actions/postOrder';
 import { useDrop } from 'react-dnd';
-import { UPDATE_TYPE, addBCItems } from '../../services/actions/constructorItems';
+import { addBCItems, clearBCItems, getSavedBCItems } from '../../services/actions/constructorItems';
 import { DropZone } from './DropZone'
 import { getCookie } from "../../utils/getCookie";
+import Loading from "../common/Loading";
 
 function BurgerConstructor() {
     const bunType = 'bun';
 
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        const savedCards = JSON.parse(localStorage.getItem('constructor'));
+        dispatch(getSavedBCItems(savedCards));
+    }, [])
 
     const cards = useSelector(state => state.constructorItems.items);
 
@@ -56,6 +62,8 @@ function BurgerConstructor() {
     const isUserAuth = getCookie("accessToken");
 
     const handleOpenModal = async () => {
+        localStorage.setItem('constructor', JSON.stringify(cards));
+
         if (!isUserAuth) {
             window.location.href = '/login'
         }
@@ -64,6 +72,8 @@ function BurgerConstructor() {
 
     const handleCloseModal = e => {
         e.preventDefault();
+        localStorage.removeItem('constructor');
+        dispatch(clearBCItems());
         dispatch(postOrderModal());
     }
 
@@ -76,7 +86,7 @@ function BurgerConstructor() {
     });
 
     if (loading) {
-        return <div>Загрузка...</div>
+        return <div style={{ justifyContent: "space-between", margin: 'auto', marginTop: '100px'}}><Loading /></div>
     }
 
     if (error) {
