@@ -11,7 +11,7 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { postOrder, postOrderModal } from '../../services/actions/postOrder';
 import { useDrop } from 'react-dnd';
-import { UPDATE_TYPE } from '../../services/actions/constructorItems';
+import { UPDATE_TYPE, addBCItems } from '../../services/actions/constructorItems';
 import { DropZone } from './DropZone'
 import { getCookie } from "../../utils/getCookie";
 
@@ -71,10 +71,7 @@ function BurgerConstructor() {
     const [, dropItem] = useDrop({
         accept: "item",
         drop(itemId) {
-            dispatch({
-                type: UPDATE_TYPE,
-                item: itemId.card,
-            });
+            dispatch(addBCItems(itemId.card));
         },
     });
 

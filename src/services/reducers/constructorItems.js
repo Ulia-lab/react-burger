@@ -1,4 +1,4 @@
-import { ADD_BC_ITEMS, REMOVE_BC_ITEMS, UPDATE_TYPE, MOVE_ITEM } from "../actions/constructorItems";
+import { ADD_BC_ITEMS, REMOVE_BC_ITEMS, MOVE_ITEM } from "../actions/constructorItems";
 
 const initialState = {
     items: [],
@@ -7,27 +7,7 @@ const initialState = {
 export const constructorItemsReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_BC_ITEMS: {
-            if (action.items.type === 'bun') {
-                return { ...state.items.unshift(action.items) };
-            }
-            return {
-                ...state,
-                items: { ...state.items.push(action.items) }
-            }
-        }
-        case REMOVE_BC_ITEMS: {
-            const newState = [...state.items];
-            const index = newState.findIndex(item => item._id === action._id);
-            if (index !== -1) {
-                newState.splice(index, 1);
-            }
-            return {
-                ...state,
-                items: newState
-            }
-        }
-        case UPDATE_TYPE: {
-            const item = action.item;
+            const item = action.payload;
             if (item.type === 'bun') {
                 const bunIndex = state.items.findIndex(item => item.type === 'bun');
                 if (bunIndex !== -1) {
@@ -42,6 +22,17 @@ export const constructorItemsReducer = (state = initialState, action) => {
                 ...state,
                 items: [...state.items, item]
             };
+        }
+        case REMOVE_BC_ITEMS: {
+            const newState = [...state.items];
+            const index = newState.findIndex(item => item._id === action._id);
+            if (index !== -1) {
+                newState.splice(index, 1);
+            }
+            return {
+                ...state,
+                items: newState
+            }
         }
         case MOVE_ITEM:
             const { dragIndex, hoverIndex } = action.payload;
