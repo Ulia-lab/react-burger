@@ -15,6 +15,7 @@ const CardModal = () => {
     let card = getIngredient(fetchData, id);
 
     const handleCloseModal = () => {
+        localStorage.removeItem('modalIngredientCard')
         dispatch(closeCardModal())
     }
 

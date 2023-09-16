@@ -15,15 +15,18 @@ import CardModal from './components/BurgerIngredients/CardModal';
 import AppHeader from './components/AppHeader';
 import { fetchDataAction } from './services/actions/fetchData';
 import { IngPage } from './pages/IngPage/IngPage';
+import { openCardModal } from './services/actions/modalngredients';
 
 function App() {
   const location = useLocation();
   let state = location.state;
 
   const dispatch = useDispatch();
+  const isIngredientCardModalOpen = JSON.parse((localStorage.getItem('modalIngredientCard')));
 
   useEffect(() => {
     dispatch(fetchDataAction(INGREDIENTS_URL));
+    if (isIngredientCardModalOpen) dispatch(openCardModal(isIngredientCardModalOpen)) 
   }, [])
 
   const isOpen = useSelector(state => state.modalIngredients.isOpen);
@@ -38,7 +41,7 @@ function App() {
         <Route path="/forgot-password" element={<OnlyUnAuth component={<ForgotPasswordPage />} />} />
         <Route path="/reset-password" element={<OnlyAfterForgotPage component={<ResetPasswordPage />} />} />
         <Route path="/profile" element={<OnlyAuth component={<ProfilePage />} />} />
-        {!state?.background && (<Route path="/ingredients/:id" element={<IngPage />}/>)}
+        {!state?.background && (<Route path="/ingredients/:id" element={<IngPage />} />)}
 
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

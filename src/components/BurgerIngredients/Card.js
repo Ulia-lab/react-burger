@@ -14,6 +14,7 @@ const Card = ({ card }) => {
     const location = useLocation();
 
     const handleOpenModal = () => {
+        localStorage.setItem('modalIngredientCard', JSON.stringify(card))
         dispatch(openCardModal(card))
     }
 
