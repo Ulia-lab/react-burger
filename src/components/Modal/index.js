@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReactDOM from 'react-dom';
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
 import modalStyles from "./modal.module.css";
@@ -9,6 +9,16 @@ import PropTypes from 'prop-types';
 const modalRoot = document.getElementById("react-modals");
 
 function Modal({ ...props }) {
+    useEffect(() => {
+        document.addEventListener("keydown", closeByEscape);
+    }, [])
+
+    function closeByEscape(evt) {
+        if (evt.key === "Escape") {
+            props.closeModal()
+            document.removeEventListener("keydown", closeByEscape);
+        }
+    }
     return ReactDOM.createPortal(
         (<div className={modalStyles.visible}><ModalOverlay className={modalStyles.visibleOverlay} onClick={props.closeModal} />
             <div className={cn(modalStyles.block, modalStyles.visible)}>
