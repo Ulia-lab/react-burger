@@ -9,7 +9,6 @@ import { closeCardModal } from "../../services/actions/modalngredients.js";
 const CardModal = () => {
     const dispatch = useDispatch();
     const fetchData = useSelector(state => state?.fetchData?.data) || null;
-    const isOpen = useSelector(state => state.modalIngredients.isOpen);
 
     const navigate = useNavigate();
     const { state } = useLocation();
