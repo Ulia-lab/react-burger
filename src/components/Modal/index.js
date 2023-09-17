@@ -10,15 +10,18 @@ const modalRoot = document.getElementById("react-modals");
 
 function Modal({ ...props }) {
     useEffect(() => {
-        document.addEventListener("keydown", closeByEscape);
-    }, [])
-
-    function closeByEscape(evt) {
-        if (evt.key === "Escape") {
-            props.closeModal()
-            document.removeEventListener("keydown", closeByEscape);
+        function closeByEscape(evt) {
+            
+            if (evt.key === "Escape") {
+                props.closeModal();
+            }
         }
-    }
+        document.addEventListener("keydown", closeByEscape);
+        return () => {  
+            document.removeEventListener("keydown", closeByEscape);
+        };
+    }, []);
+
     return ReactDOM.createPortal(
         (<div className={modalStyles.visible}><ModalOverlay className={modalStyles.visibleOverlay} onClick={props.closeModal} />
             <div className={cn(modalStyles.block, modalStyles.visible)}>

@@ -13,7 +13,7 @@ export function HomePage() {
   const error = useSelector(state => state.fetchData.error);
 
   if (isLoading) {
-    return <div style={{ justifyContent: "space-between", margin: 'auto'}}><Loading /></div>
+    return <div><Loading /></div>
   }
 
   if (error) {

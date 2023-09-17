@@ -83,7 +83,7 @@ export function ProfilePage() {
     }
 
     if (loading) {
-        return (<div style={{ display: 'flex', justifyContent: "center"}}><Loading /></div>)
+        return (<div><Loading /></div>)
     }
 
     return (

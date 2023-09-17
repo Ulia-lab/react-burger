@@ -20,7 +20,7 @@ function OrderDetails({ ...props }) {
 OrderDetails.propTypes = {
     orderId: PropTypes.shape({
         ingredient: PropTypes.arrayOf(PropTypes.string)
-    }).isRequired
+    })
 }
 
 export default OrderDetails;

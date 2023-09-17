@@ -70,8 +70,7 @@ function BurgerConstructor() {
         dispatch(postOrder(ORDER_URL, orderId));
     }
 
-    const handleCloseModal = e => {
-        e.preventDefault();
+    const handleCloseModal = () => {
         localStorage.removeItem('constructor');
         dispatch(clearBCItems());
         dispatch(postOrderModal());
@@ -86,7 +85,7 @@ function BurgerConstructor() {
     });
 
     if (loading) {
-        return <div style={{ justifyContent: "space-between", margin: 'auto', marginTop: '100px'}}><Loading /></div>
+        return <div className={burgerConstructorStyle.loading}><Loading /></div>
     }
 
     if (error) {
