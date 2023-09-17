@@ -1,9 +1,12 @@
-import { GET_BI_MODAL_ITEM, REMOVE_BI_MODAL_ITEM } from "../actions/modalngredients";
+import {
+    GET_BI_MODAL_ITEM,
+    REMOVE_BI_MODAL_ITEM,
+} from '../actions/modalngredients'
 
 const initialState = {
     selectedCard: {},
-    isOpen: false
-};
+    isOpen: false,
+}
 
 export const modalIngredientsReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -11,18 +14,18 @@ export const modalIngredientsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 selectedCard: action.payload,
-                isOpen: true
+                isOpen: true,
             }
         }
         case REMOVE_BI_MODAL_ITEM: {
             return {
                 ...state,
                 selectedCard: {},
-                isOpen: false
+                isOpen: false,
             }
         }
         default: {
-            return state;
+            return state
         }
     }
-} 
+}

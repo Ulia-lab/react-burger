@@ -1,55 +1,55 @@
 ::-webkit-scrollbar {
-  width: 8px;
-  background-color: #8585ad;
+    width: 8px;
+    background-color: #8585ad;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #c5c5c5;
+    background-color: #c5c5c5;
 }
 
 .block {
-  min-width: 600px;
-  margin: auto;
+    min-width: 600px;
+    margin: auto;
 }
 
 .bconstructor {
-  overflow: auto;
-  scrollbar-width: thin;
-  max-height: calc(100vh - 264px - 40px);
-  min-height: 200px;
-  min-width: 200px;
+    overflow: auto;
+    scrollbar-width: thin;
+    max-height: calc(100vh - 264px - 40px);
+    min-height: 200px;
+    min-width: 200px;
 }
 
 .bconstructorActive {
-  display: flex;
-  flex-direction: column;
-  scrollbar-width: thin;
-  align-items: end;
+    display: flex;
+    flex-direction: column;
+    scrollbar-width: thin;
+    align-items: end;
 }
 
 .element {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .element:last-child {
-  margin-bottom: 0px;
+    margin-bottom: 0px;
 }
 
 .item {
-  min-width: 532px;
+    min-width: 532px;
 }
 
 .total {
-  display: flex;
-  justify-content: end;
-  align-items: center;
-  margin-bottom: -50px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin-bottom: -50px;
 }
 
 .loading {
-  justify-content: space-between;
-  margin: auto;
-  margin-top: 100px;
+    justify-content: space-between;
+    margin: auto;
+    margin-top: 100px;
 }

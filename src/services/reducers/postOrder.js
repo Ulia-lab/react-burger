@@ -1,4 +1,9 @@
-import { POST_ORDER_ERROR, POST_ORDER_SUCCESS, POST_ORDER_REQUEST, REMOVE_ORDER_MODAL_ITEM } from "../actions/postOrder";
+import {
+    POST_ORDER_ERROR,
+    POST_ORDER_SUCCESS,
+    POST_ORDER_REQUEST,
+    REMOVE_ORDER_MODAL_ITEM,
+} from '../actions/postOrder'
 
 export const initialState = {
     items: {
@@ -6,12 +11,12 @@ export const initialState = {
         order: {
             number: 0,
         },
-        success: true
+        success: true,
     },
     isOpen: false,
     loading: false,
     error: null,
-};
+}
 
 export const postOrderReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -42,11 +47,11 @@ export const postOrderReducer = (state = initialState, action) => {
             return {
                 ...state,
                 selectedCard: {},
-                isOpen: false
+                isOpen: false,
             }
         }
         default: {
-            return state;
+            return state
         }
     }
 }

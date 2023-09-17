@@ -1,11 +1,16 @@
-import { AUTH_REQUEST, AUTH_SUCCESS, AUTH_LOGOUT_SUCCESS, AUTH_ERROR } from "../actions/auth";
+import {
+    AUTH_REQUEST,
+    AUTH_SUCCESS,
+    AUTH_LOGOUT_SUCCESS,
+    AUTH_ERROR,
+} from '../actions/auth'
 
 const initialState = {
     loading: false,
     error: false,
     success: null,
-    user: null
-};
+    user: null,
+}
 
 export const authReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -22,7 +27,7 @@ export const authReducer = (state = initialState, action) => {
                 success: true,
                 user: {
                     email: action.payload.user.email,
-                    name: action.payload.user.name
+                    name: action.payload.user.name,
                 },
             }
         }
@@ -37,7 +42,7 @@ export const authReducer = (state = initialState, action) => {
             }
         }
         default: {
-            return state;
+            return state
         }
     }
-} 
+}

@@ -1,6 +1,6 @@
-import { TOKEN_URL } from '../../utils/constants';
-import { setCookie } from '../../utils/getCookie';
-import { request } from '../../utils/request';
+import { TOKEN_URL } from '../../utils/constants'
+import { setCookie } from '../../utils/getCookie'
+import { request } from '../../utils/request'
 
 export const getToken = () => async () => {
     try {
@@ -10,20 +10,19 @@ export const getToken = () => async () => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                token: localStorage.getItem("refreshToken")
-            })
-        });
- 
-        let authToken;
+                token: localStorage.getItem('refreshToken'),
+            }),
+        })
+
+        let authToken
         if (result.accessToken.indexOf('Bearer') === 0) {
-            authToken = result.accessToken.split('Bearer ')[1];
+            authToken = result.accessToken.split('Bearer ')[1]
         }
 
         if (authToken) {
-            setCookie("accessToken", authToken)
+            setCookie('accessToken', authToken)
         }
-    }
-    catch (error) {
+    } catch (error) {
         console.log(error)
     }
 }
