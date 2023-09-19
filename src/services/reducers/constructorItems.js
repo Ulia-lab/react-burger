@@ -1,18 +1,27 @@
-import { ADD_BC_ITEMS, REMOVE_BC_ITEMS, UPDATE_TYPE, MOVE_ITEM } from "../actions/constructorItems";
+import { ADD_BC_ITEMS, REMOVE_BC_ITEMS, MOVE_ITEM, GET_SAVED_BC_ITEMS, CLEAR_ALL_BC_ITEMS } from "../actions/constructorItems";
+
 const initialState = {
-    items: []
+    items: [],
 };
 
 export const constructorItemsReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_BC_ITEMS: {
-            if (action.items.type === 'bun') {
-                return { ...state.items.unshift(action.items) };
+            const item = action.payload;
+            if (item.type === 'bun') {
+                const bunIndex = state.items.findIndex(item => item.type === 'bun');
+                if (bunIndex !== -1) {
+                    state.items.splice(bunIndex, 1);
+                }
+                return {
+                    ...state,
+                    items: [item, ...state.items]
+                };
             }
             return {
                 ...state,
-                items: { ...state.items.push(action.items) }
-            }
+                items: [...state.items, item]
+            };
         }
         case REMOVE_BC_ITEMS: {
             const newState = [...state.items];
@@ -25,21 +34,15 @@ export const constructorItemsReducer = (state = initialState, action) => {
                 items: newState
             }
         }
-        case UPDATE_TYPE: {
-            if (action.item.type === 'bun') {
-                const bunIndex = state.items.findIndex(item => item.type === 'bun');
-                if (bunIndex !== -1) {
-                    state.items.splice(bunIndex, 1);
-                }
-                return {
-                    ...state,
-                    items: [action.item, ...state.items]
-                };
-            }
-            return {
+        case GET_SAVED_BC_ITEMS: {
+            if (action.items) return {
                 ...state,
-                items: [...state.items, action.item]
-            };
+                items: action.items
+            }
+            return state
+        }
+        case CLEAR_ALL_BC_ITEMS: {
+            return initialState
         }
         case MOVE_ITEM:
             const { dragIndex, hoverIndex } = action.payload;

@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/button";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
 import burgerConstructorStyle from "./burgerConstructor.module.css";
@@ -6,20 +6,25 @@ import cn from 'classnames'
 import Modal from '../Modal';
 import OrderDetails from './OrderDetails';
 import ConstructorCard from './constructorCard';
-import { v4 as uuidv4 } from 'uuid';
-import { postOrder } from "../../utils/postOrder";
 import { ORDER_URL } from '../../utils/constants'
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { postOrderModal } from '../../services/actions/postOrder';
+import { postOrder, postOrderModal } from '../../services/actions/postOrder';
 import { useDrop } from 'react-dnd';
-import { UPDATE_TYPE } from '../../services/actions/constructorItems';
+import { addBCItems, clearBCItems, getSavedBCItems } from '../../services/actions/constructorItems';
 import { DropZone } from './DropZone'
+import { getCookie } from "../../utils/getCookie";
+import Loading from "../common/Loading";
 
 function BurgerConstructor() {
     const bunType = 'bun';
 
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        const savedCards = JSON.parse(localStorage.getItem('constructor'));
+        dispatch(getSavedBCItems(savedCards));
+    }, [])
 
     const cards = useSelector(state => state.constructorItems.items);
 
@@ -54,11 +59,20 @@ function BurgerConstructor() {
         }, { ingredients: [] })
     }, [cards]);
 
+    const isUserAuth = getCookie("accessToken");
+
     const handleOpenModal = async () => {
+        localStorage.setItem('constructor', JSON.stringify(cards));
+
+        if (!isUserAuth) {
+            window.location.href = '/login'
+        }
         dispatch(postOrder(ORDER_URL, orderId));
     }
 
     const handleCloseModal = () => {
+        localStorage.removeItem('constructor');
+        dispatch(clearBCItems());
         dispatch(postOrderModal());
     }
 
@@ -66,15 +80,12 @@ function BurgerConstructor() {
     const [, dropItem] = useDrop({
         accept: "item",
         drop(itemId) {
-            dispatch({
-                type: UPDATE_TYPE,
-                item: itemId.card,
-            });
+            dispatch(addBCItems(itemId.card));
         },
     });
 
     if (loading) {
-        return <div>Загрузка...</div>
+        return <div className={burgerConstructorStyle.loading}><Loading /></div>
     }
 
     if (error) {
@@ -84,16 +95,16 @@ function BurgerConstructor() {
     return (
         <><section className={cn('mt-25', burgerConstructorStyle.block)}>
             <div ref={dropItem} className={cn('ml-4', burgerConstructorStyle.bconstructor)}>
-                {(cards.length === 0) ? <div className="text text_type_digits-default" style={{height: "100%", wight: "100%"}} >Перетащите элементы бургера</div> : 
-                <div className={cn('ml-4', burgerConstructorStyle.bconstructorActive)}>
-                    {bunCards && <ConstructorCard card={bunCards} isLocked={isLocked} additionalName=' (верх)' />}
-                    {mainCards.map((card, index) => (
-                        <DropZone key={index} index={index}>
-                            <ConstructorCard index={index} key={uuidv4()} card={card} />
-                        </DropZone>
-                    ))}
-                    {bunCards && <ConstructorCard card={bunCards} isLocked={isLocked} additionalName=' (низ)' />}
-                </div>}
+                {(cards.length === 0) ? <div className="text text_type_main-medium text_color_inactive" style={{ height: "100%", wight: "100%" }} >Перетащите элементы бургера</div> :
+                    <div className={cn('ml-4', burgerConstructorStyle.bconstructorActive)}>
+                        {bunCards && <ConstructorCard type='top' card={bunCards} isLocked={isLocked} additionalName=' (верх)' />}
+                        {mainCards.map((card, index) => (
+                            <DropZone key={card.uniqueId} index={index}>
+                                <ConstructorCard type={undefined} key={card.uniqueId} index={index} card={card} />
+                            </DropZone>
+                        ))}
+                        {bunCards && <ConstructorCard type='bottom' card={bunCards} isLocked={isLocked} additionalName=' (низ)' />}
+                    </div>}
             </div>
             <div className={cn('mt-10 ml-4 mr-4', burgerConstructorStyle.total)}>
                 <p className="text text_type_digits-default">{totalPrice}</p>

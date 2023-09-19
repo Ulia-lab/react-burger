@@ -9,21 +9,21 @@ import { useDrag } from "react-dnd";
 import { removeBCItems } from '../../services/actions/constructorItems';
 import { useDispatch } from 'react-redux';
 
-const ConstructorCard = ({ index, card, isLocked, additionalName = '' }) => {
+const ConstructorCard = ({ type, index, card, isLocked, additionalName = '' }) => {
     const dispatch = useDispatch();
 
     const [{ isDragging }, dragRef] = useDrag({
         type: 'card',
         item: { index },
         collect: (monitor) => ({
-          isDragging: monitor.isDragging(),
+            isDragging: monitor.isDragging(),
         }),
-      });
-    
+    });
+
     const opacity = isDragging ? 0.5 : 1;
 
     const handleDrag = card.type !== 'bun' ? dragRef : null;
-    
+
     const handleRemoveBCItem = (_id) => {
         dispatch(removeBCItems(_id));
     }
@@ -33,7 +33,7 @@ const ConstructorCard = ({ index, card, isLocked, additionalName = '' }) => {
             <div className={cn('ml-2 mr-2', burgerConstructorStyle.item)}>
                 <ConstructorElement
                     handleClose={() => handleRemoveBCItem(card._id)}
-                    type={card.type}
+                    type={type}
                     isLocked={isLocked}
                     text={`${card.name}${additionalName}`}
                     price={card.price}

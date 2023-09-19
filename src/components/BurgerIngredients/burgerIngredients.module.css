@@ -36,6 +36,7 @@
 }
 
 .card {
+  max-width: 272px;
   margin-bottom: 32px;
   padding: 0;
   border: none;
@@ -63,4 +64,8 @@
   position: absolute;
   top: 0;
   right: 0;
+}
+
+.link {
+  color: white;
 }

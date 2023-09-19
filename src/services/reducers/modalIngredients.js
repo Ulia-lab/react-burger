@@ -6,7 +6,7 @@ const initialState = {
 };
 
 export const modalIngredientsReducer = (state = initialState, action) => {
-    switch(action.type) {
+    switch (action.type) {
         case GET_BI_MODAL_ITEM: {
             return {
                 ...state,

@@ -3,10 +3,16 @@ import { fetchDataReducer } from './fetchData'
 import { constructorItemsReducer } from './constructorItems'
 import { modalIngredientsReducer } from './modalIngredients'
 import { postOrderReducer } from './postOrder'
+import { postPasswordResetReducer } from './postPasswordReset'
+import { authReducer } from './auth'
+import { userReducer } from './user';
 
 export const rootReducer = combineReducers({
-    fetchData: fetchDataReducer,
-    constructorItems: constructorItemsReducer,
-    modalIngredients: modalIngredientsReducer,
-    postOrder: postOrderReducer,
-  });
+  fetchData: fetchDataReducer,
+  constructorItems: constructorItemsReducer,
+  modalIngredients: modalIngredientsReducer,
+  postOrder: postOrderReducer,
+  postPasswordReset: postPasswordResetReducer,
+  auth: authReducer,
+  user: userReducer,
+});

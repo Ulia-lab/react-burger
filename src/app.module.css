@@ -18,7 +18,7 @@ li {
 }
 
 ul {
-  padding-left: 0; 
+  padding-left: 0;
 }
 
 .app {
@@ -26,7 +26,11 @@ ul {
   margin: auto;
 }
 
-.main{
+p {
+  margin: 0;
+}
+
+.main {
   display: flex;
   justify-content: space-between;
 }
@@ -34,4 +38,16 @@ ul {
 #react-modals {
   position: relative;
   z-index: 999;
+}
+
+button {
+  padding: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+}
+
+Link:visited {
+  color: white;
 }

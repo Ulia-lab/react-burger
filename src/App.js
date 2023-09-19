@@ -1,43 +1,57 @@
 import React, { useEffect } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import { HomePage } from './pages/HomePage/HomePage'
+import { NotFoundPage } from './pages/NotFoundPage/NotFoundPage'
+import { LoginPage } from './pages/LoginPage/LoginPage'
 import appStyles from './app.module.css';
-import AppHeader from './components/AppHeader/index.js';
-import BurgerConstructor from './components/BurgerConstructor';
-import BurgerIngredients from './components/BurgerIngredients';
-import { URL } from './utils/constants'
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
-import { fetchDataAction } from './utils/fetchData'
-import { HTML5Backend } from "react-dnd-html5-backend";
-import { DndProvider } from "react-dnd";
+import { SignUpPage } from './pages/SignUpPage/SignUpPage';
+import { ForgotPasswordPage } from './pages/ForgotPasswordPage/ForgotPasswordPage';
+import { ResetPasswordPage } from './pages/ResetPasswordPage/ResetPasswordPage';
+import { ProfilePage } from './pages/ProfilePage/ProfilePage';
+import { OnlyAfterForgotPage, OnlyAuth, OnlyUnAuth } from './pages/ProtectedElement';
+import { useDispatch, useSelector } from 'react-redux';
+import { INGREDIENTS_URL } from './utils/constants';
+import CardModal from './components/BurgerIngredients/CardModal';
+import AppHeader from './components/AppHeader';
+import { fetchDataAction } from './services/actions/fetchData';
+import { IngPage } from './pages/IngPage/IngPage';
+import { openCardModal } from './services/actions/modalngredients';
 
 function App() {
+  const location = useLocation();
+  let state = location.state;
+
   const dispatch = useDispatch();
+  const isIngredientCardModalOpen = JSON.parse((localStorage.getItem('modalIngredientCard')));
 
   useEffect(() => {
-    dispatch(fetchDataAction(URL));
-  }, [dispatch])
+    dispatch(fetchDataAction(INGREDIENTS_URL));
+    if (isIngredientCardModalOpen) dispatch(openCardModal(isIngredientCardModalOpen)) 
+  }, [])
 
-  const isLoading = useSelector(state => state.fetchData.loading);
-  const error = useSelector(state => state.fetchData.error);
-
-  if (isLoading) {
-    return <div>Загрузка...</div>
-  }
-
-  if (error) {
-    return <div>Ошибка: {error}</div>
-  }
+  const isOpen = useSelector(state => state.modalIngredients.isOpen);
 
   return (
-    <><div className={appStyles.app}>
+    <div className={appStyles.app}>
       <AppHeader />
-      <main className={appStyles.main}>
-        <DndProvider backend={HTML5Backend}>
-          <BurgerIngredients />
-          <BurgerConstructor />
-        </DndProvider>
-      </main>
-    </div></>
+      <Routes location={state?.background || location}>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<OnlyUnAuth component={<LoginPage />} />} />
+        <Route path="/register" element={<OnlyUnAuth component={<SignUpPage />} />} />
+        <Route path="/forgot-password" element={<OnlyUnAuth component={<ForgotPasswordPage />} />} />
+        <Route path="/reset-password" element={<OnlyAfterForgotPage component={<ResetPasswordPage />} />} />
+        <Route path="/profile" element={<OnlyAuth component={<ProfilePage />} />} />
+        {!state?.background && (<Route path="/ingredients/:id" element={<IngPage />} />)}
+
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+
+      {(state?.background && isOpen) && (
+        <Routes>
+          <Route path="/ingredients/:id" element={<CardModal />} />
+        </Routes>
+      )}
+    </div>
   )
 }
 
