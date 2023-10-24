@@ -15,26 +15,31 @@ import { addBCItems, clearBCItems, getSavedBCItems } from '../../services/action
 import { DropZone } from './DropZone'
 import { getCookie } from "../../utils/getCookie";
 import Loading from "../common/Loading";
+import { propTypesCard } from "../../utils/prop-types";
 
 function BurgerConstructor() {
     const bunType = 'bun';
 
     const dispatch = useDispatch();
-
+    const getConstructor = localStorage.getItem('constructor') || '{}';
     useEffect(() => {
-        const savedCards = JSON.parse(localStorage.getItem('constructor'));
+        const savedCards = JSON.parse(getConstructor);
         dispatch(getSavedBCItems(savedCards));
     }, [])
-
+//@ts-ignore
     const cards = useSelector(state => state.constructorItems.items);
-
+//@ts-ignore
     const isOpen = useSelector(state => state.postOrder.isOpen);
+    //@ts-ignore
     const loading = useSelector(state => state.postOrder.loading);
+    //@ts-ignore
     const error = useSelector(state => state.postOrder.error);
+    //@ts-ignore
     const orderNum = useSelector(state => state.postOrder.items);
 
     const isLocked = true;
     const totalPrice = useMemo(() => {
+        //@ts-ignore
         return cards.reduce((acc, card) => {
             const price = card.type === bunType ? (card.price * 2) : card.price;
             return acc + price
@@ -42,16 +47,19 @@ function BurgerConstructor() {
     }, [cards]);
 
     const bunCards = useMemo(() => {
+        //@ts-ignore
         const bun = cards.find(item => item.type === bunType)
         return bun;
     }, [cards]);
 
     const mainCards = useMemo(() => {
+        //@ts-ignore
         const bun = cards.filter(item => (item.type !== bunType))
         return bun;
     }, [cards]);
 
     const orderId = useMemo(() => {
+        //@ts-ignore
         return cards.reduce((acc, card) => {
             acc.ingredients.push(card._id);
 
@@ -67,6 +75,7 @@ function BurgerConstructor() {
         if (!isUserAuth) {
             window.location.href = '/login'
         }
+        //@ts-ignore
         dispatch(postOrder(ORDER_URL, orderId));
     }
 
@@ -80,6 +89,7 @@ function BurgerConstructor() {
     const [, dropItem] = useDrop({
         accept: "item",
         drop(itemId) {
+            //@ts-ignore
             dispatch(addBCItems(itemId.card));
         },
     });
@@ -95,10 +105,11 @@ function BurgerConstructor() {
     return (
         <><section className={cn('mt-25', burgerConstructorStyle.block)}>
             <div ref={dropItem} className={cn('ml-4', burgerConstructorStyle.bconstructor)}>
+                            {/* @ts-ignore */}
                 {(cards.length === 0) ? <div className="text text_type_main-medium text_color_inactive" style={{ height: "100%", wight: "100%" }} >Перетащите элементы бургера</div> :
                     <div className={cn('ml-4', burgerConstructorStyle.bconstructorActive)}>
                         {bunCards && <ConstructorCard type='top' card={bunCards} isLocked={isLocked} additionalName=' (верх)' />}
-                        {mainCards.map((card, index) => (
+                        {mainCards.map((card: propTypesCard, index: string) => (
                             <DropZone key={card.uniqueId} index={index}>
                                 <ConstructorCard type={undefined} key={card.uniqueId} index={index} card={card} />
                             </DropZone>
@@ -114,6 +125,7 @@ function BurgerConstructor() {
                 </Button>
             </div>
         </section>
+            {/* @ts-ignore */}
             {isOpen && <Modal content={<OrderDetails order={orderNum} />} closeModal={handleCloseModal} />}
         </>
     );

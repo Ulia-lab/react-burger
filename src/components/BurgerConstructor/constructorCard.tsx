@@ -1,15 +1,14 @@
 import React from "react";
-import PropTypes from 'prop-types';
 import burgerConstructorStyle from "./burgerConstructor.module.css";
 import cn from 'classnames'
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/constructor-element";
 import { DragIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
-import { propTypesCard } from '../../utils/prop-types'
 import { useDrag } from "react-dnd";
 import { removeBCItems } from '../../services/actions/constructorItems';
 import { useDispatch } from 'react-redux';
+import { ConstructorCardProps } from "./interfaces";
 
-const ConstructorCard = ({ type, index, card, isLocked, additionalName = '' }) => {
+const ConstructorCard = ({ type, index, card, isLocked, additionalName = '' }: ConstructorCardProps) => {
     const dispatch = useDispatch();
 
     const [{ isDragging }, dragRef] = useDrag({
@@ -24,7 +23,7 @@ const ConstructorCard = ({ type, index, card, isLocked, additionalName = '' }) =
 
     const handleDrag = card.type !== 'bun' ? dragRef : null;
 
-    const handleRemoveBCItem = (_id) => {
+    const handleRemoveBCItem = (_id: string) => {
         dispatch(removeBCItems(_id));
     }
     return (
@@ -44,9 +43,3 @@ const ConstructorCard = ({ type, index, card, isLocked, additionalName = '' }) =
 
 
 export default ConstructorCard;
-
-ConstructorCard.propTypes = {
-    card: propTypesCard,
-    isLocked: PropTypes.bool,
-    additionalName: PropTypes.string,
-};

@@ -1,6 +1,5 @@
 import React from "react";
 import authStyle from "./auth.module.css";
-import { Link } from "react-router-dom";
 import cn from 'classnames';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { AuthFormProps } from "./interfaces";

@@ -1,11 +1,10 @@
 import React from "react";
-import Card from "./Card.js";
-import PropTypes from 'prop-types';
+import Card from "./Card";
 import burgerIngredientsStyle from "./burgerIngredients.module.css";
 import cn from 'classnames'
-import { propTypesCard } from '../../utils/prop-types.js'
+import { CardsListProps } from "./interfaces";
 
-const CardsList = ({ cardsTitle, cards }) => {
+const CardsList = ({ cardsTitle, cards }: CardsListProps) => {
 
     return (
         <div className={cn('mb-10 ml-4 mr-4', burgerIngredientsStyle.cardsList)}>
@@ -21,8 +20,3 @@ const CardsList = ({ cardsTitle, cards }) => {
 
 
 export default CardsList;
-
-CardsList.propTypes = {
-    cardsTitle: PropTypes.string.isRequired,
-    cards: PropTypes.arrayOf(propTypesCard).isRequired
-}; 

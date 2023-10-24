@@ -1,5 +1,4 @@
 import React from 'react';
-import AppHeader from '../../components/AppHeader';
 import IngredientDetails from '../../components/BurgerIngredients/IngredientDetails';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';

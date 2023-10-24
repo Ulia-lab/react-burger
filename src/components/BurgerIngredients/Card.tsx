@@ -5,11 +5,11 @@ import burgerIngredientsStyle from "./burgerIngredients.module.css";
 import cn from 'classnames'
 import { useDispatch, useSelector } from 'react-redux';
 import { useDrag } from "react-dnd";
-import { propTypesCard } from '../../utils/prop-types'
 import { Link, useLocation } from "react-router-dom";
 import { openCardModal } from "../../services/actions/modalngredients";
+import { CardProps } from "./interfaces";
 
-const Card = ({ card }) => {
+const Card = ({ card }: CardProps) => {
     const dispatch = useDispatch();
     const location = useLocation();
 
@@ -18,8 +18,11 @@ const Card = ({ card }) => {
         dispatch(openCardModal(card))
     }
 
+    //@ts-ignore
     const constructorCards = useSelector(state => state.constructorItems.items);
-    const count = useMemo(() => constructorCards.filter(item => item._id === card._id).length, [card._id, constructorCards]);
+    console.log('constructorCards', constructorCards)
+    //@ts-ignore
+    const count = useMemo(() => constructorCards.filter((item) => item._id === card._id).length, [card._id, constructorCards]);
 
     //dnd
     const [, dragRef] = useDrag({
@@ -32,6 +35,7 @@ const Card = ({ card }) => {
             <button onClick={handleOpenModal} className={burgerIngredientsStyle.card}>
                 <Link to={`/ingredients/${card._id}`} state={{ background: location }} className={burgerIngredientsStyle.link}>
                     {count !== 0 && <div className={burgerIngredientsStyle.counter}><Counter count={count} size="default" extraClass="m-1" /></div>}
+                    {/* @ts-ignore */}
                     <img alt={card.name} src={card.image} card={card} className="ml-4 mr-4 mb-1" />
                     <div className={burgerIngredientsStyle.price}>
                         <p className="text text_type_digits-default">{card.price}</p>
@@ -48,7 +52,3 @@ const Card = ({ card }) => {
 
 
 export default Card;
-
-Card.propTypes = {
-    card: propTypesCard
-}; 
