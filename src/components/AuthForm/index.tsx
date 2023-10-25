@@ -6,7 +6,6 @@ import { AuthFormProps } from "./interfaces";
 
 // TODO const {values, handleChange, setValues} = useForm({});
 export function AuthForm({ onSubmit, title, btnTitle, suggestions, children }: AuthFormProps) {
-  console.log('suggestions', suggestions)
   return (
     <div className={authStyle.block}>
       <form onSubmit={onSubmit} className={cn('mb-20 mt-20', authStyle.gap)}>

@@ -20,9 +20,8 @@ const Card = ({ card }: CardProps) => {
 
     //@ts-ignore
     const constructorCards = useSelector(state => state.constructorItems.items);
-    console.log('constructorCards', constructorCards)
     //@ts-ignore
-    const count = useMemo(() => constructorCards.filter((item) => item._id === card._id).length, [card._id, constructorCards]);
+    const count = useMemo(() => constructorCards.filter(item => item._id === card._id).length, [card._id, constructorCards]);
 
     //dnd
     const [, dragRef] = useDrag({
