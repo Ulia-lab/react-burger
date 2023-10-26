@@ -17,17 +17,18 @@ export function ResetPasswordPage() {
     password: "",
     token: ""
   })
-
+//@ts-ignore
   const onChangePw = e => {
     setPassword({ ...password, password: e.target.value })
   }
-
+//@ts-ignore
   const onChangeCode = e => {
     setPassword({ ...password, token: e.target.value })
   }
-
+//@ts-ignore
   const handleSubmit = async (e) => {
     e.preventDefault();
+    //@ts-ignore
     dispatch(postPasswordReset(PASSWORD_RESET_URL, password));
   }
 

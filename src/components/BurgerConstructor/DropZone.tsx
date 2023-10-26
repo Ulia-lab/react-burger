@@ -2,13 +2,15 @@ import React from "react";
 import { useDispatch } from 'react-redux';
 import { useDrop } from 'react-dnd';
 import { moveItem } from "../../services/actions/constructorItems";
+import { DropZoneProps } from "./interfaces";
 
-export const DropZone = ({ index, children }) => {
+export const DropZone = ({ index, children }: DropZoneProps) => {
   const dispatch = useDispatch();
 
   const [{ canDrop, isOver }, dropRef] = useDrop({
     accept: 'card',
     drop: (item, monitor) => {
+      //@ts-ignore
       const dragIndex = item.index;
       const hoverIndex = index;
 
@@ -17,6 +19,7 @@ export const DropZone = ({ index, children }) => {
       }
 
       dispatch(moveItem(dragIndex, hoverIndex));
+      //@ts-ignore
       item.index = hoverIndex;
     },
     collect: (monitor) => ({

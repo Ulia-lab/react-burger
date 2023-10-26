@@ -1,13 +1,15 @@
 import React, { useMemo, useState } from "react";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/tab";
-import CardsList from "./CardsList.js";
+import CardsList from "./CardsList";
 import burgerIngredientsStyle from "./burgerIngredients.module.css";
 import cn from 'classnames'
 import { useSelector } from 'react-redux';
 
 function BurgerIngredients() {
+    //@ts-ignore
     const data = useSelector(state => state.fetchData.data);
 
+    //@ts-ignore
     const result = useMemo(() => data.reduce((acc, item) => {
         acc[item.type].push(item);
         return acc;
@@ -21,7 +23,7 @@ function BurgerIngredients() {
 
     const [active, setActive] = useState('Булки');
 
-    const handleScroll = (event) => {
+    const handleScroll = (event: { target: any; }) => {
         const element = event.target;
         const { scrollTop, offsetHeight } = element;
 

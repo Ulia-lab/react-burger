@@ -7,7 +7,7 @@ import {
 import { Logo } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/logo";
 import headerStyles from "./header.module.css";
 import cn from 'classnames'
-import NavItem from "./NavItem.js";
+import NavItem from "./NavItem";
 import { Link, NavLink } from "react-router-dom";
 
 function AppHeader() {

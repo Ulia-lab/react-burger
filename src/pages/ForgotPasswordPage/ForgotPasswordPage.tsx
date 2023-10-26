@@ -12,14 +12,16 @@ export function ForgotPasswordPage() {
 
   const [email, setEmail] = React.useState({ email: '' })
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
+    //@ts-ignore
     dispatch(postPasswordReset(FORGOT_PASSWORD_URL, email));
   }
+  //@ts-ignore
   const isEmailSend = useSelector(state => state?.postPasswordReset.data.success);
 
   if (isEmailSend) {
-    localStorage.setItem('isEmailSend', true)
+    localStorage.setItem('isEmailSend', 'true')
     return (
       <Navigate
         to={'/reset-password'}
@@ -27,7 +29,7 @@ export function ForgotPasswordPage() {
     );
   }
 
-  const onChange = e => {
+  const onChange = (e: { target: { value: string; }; }) => {
     setEmail({ email: e.target.value })
   }
 

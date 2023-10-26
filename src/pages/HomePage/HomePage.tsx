@@ -9,7 +9,9 @@ import Loading from '../../components/common/Loading';
 
 export function HomePage() {
 
+  //@ts-ignore
   const isLoading = useSelector(state => state.fetchData.loading);
+  //@ts-ignore
   const error = useSelector(state => state.fetchData.error);
 
   if (isLoading) {
