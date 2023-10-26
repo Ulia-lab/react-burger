@@ -15,22 +15,30 @@ export function ProfilePage() {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        //@ts-ignore
         dispatch(getUser(USER_URL));
     }, [])
 
+    //@ts-ignore
     const loading = useSelector(state => state.user.loading);
+    //@ts-ignore
     const error = useSelector(state => state.user.error);
 
     if (error) {
+        //@ts-ignore
         dispatch(getToken());
+        //@ts-ignore
         dispatch(getUser(USER_URL));
     }
 
+    //@ts-ignore
     const userEmail = useSelector(state => state?.user?.data?.user?.email) || '';
+    //@ts-ignore
     const userName = useSelector(state => state?.user?.data?.user?.name) || '';
 
     const [editEmail, setEditEmail] = React.useState('')
     const [editName, setEditName] = React.useState('')
+    const [editPassword, setEditPassword] = React.useState('')
 
     useEffect(() => {
         setEditEmail(userEmail);
@@ -47,22 +55,29 @@ export function ProfilePage() {
 
     const isUserAuth = getCookie('accessToken');
 
-    const onChangeName = e => {
+    //@ts-ignore
+    const onChangeName = (e) => {
         setEditName(e.target.value)
     }
-    const onChangeEmail = e => {
+    //@ts-ignore
+    const onChangeEmail = (e) => {
         setEditEmail(e.target.value)
     }
-
+    //@ts-ignore
+    const onChangePassword = (e) => {
+        setEditPassword(e.target.value)
+    }
     const token = {
         token: localStorage.getItem('refreshToken')
     }
 
     const handleLogoutOnClick = () => {
+        //@ts-ignore
         dispatch(logout(LOGOUT_URL, token));
     }
 
     const handleSubmit = () => {
+        //@ts-ignore
         dispatch(patchUser(USER_URL, {
             email: editEmail,
             name: editName
@@ -105,6 +120,7 @@ export function ProfilePage() {
                     onIconClick={handlerEditClick}
                 />
                 <EmailInput
+                    //@ts-ignore
                     icon={'EditIcon'}
                     onChange={onChangeEmail}
                     value={editEmail}
@@ -114,8 +130,9 @@ export function ProfilePage() {
                     onIconClick={handlerEditClick}
                 />
                 <PasswordInput
+                    onChange={onChangePassword}
                     icon={'EditIcon'}
-                    value='value'
+                    value={editPassword}
                     name={'password'}
                 />
                 {!isEditDisabled && <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '30px' }}>

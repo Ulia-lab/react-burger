@@ -3,12 +3,13 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { EmailInput, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { AuthForm } from '../../components/AuthForm'
-import { SIGN_IN_URL } from './../../utils/constants'
+import { SIGN_IN_URL } from '../../utils/constants'
 import { Navigate } from 'react-router-dom';
 import { auth } from '../../services/actions/auth';
 
 export function LoginPage() {
   const dispatch = useDispatch();
+  //@ts-ignore
   const user = useSelector(state => state?.auth.user)
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
@@ -17,16 +18,17 @@ export function LoginPage() {
     email: email,
     password: password
   }
-  const onChangeEmail = e => {
+  const onChangeEmail = (e: { target: { value: React.SetStateAction<string>; }; }) => {
     setEmail(e.target.value)
   }
 
-  const onChangePassword = e => {
+  const onChangePassword = (e: { target: { value: React.SetStateAction<string>; }; }) => {
     setPassword(e.target.value)
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
+    //@ts-ignore
     dispatch(auth(SIGN_IN_URL, inputData))
   }
 

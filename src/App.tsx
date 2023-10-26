@@ -22,13 +22,15 @@ function App() {
   let state = location.state;
 
   const dispatch = useDispatch();
-  const isIngredientCardModalOpen = JSON.parse((localStorage.getItem('modalIngredientCard')));
+  const isIngredientCardModalOpen = JSON.parse((localStorage.getItem('modalIngredientCard')) || '[]');
 
   useEffect(() => {
+    //@ts-ignore
     dispatch(fetchDataAction(INGREDIENTS_URL));
     if (isIngredientCardModalOpen) dispatch(openCardModal(isIngredientCardModalOpen)) 
   }, [])
 
+  //@ts-ignore
   const isOpen = useSelector(state => state.modalIngredients.isOpen);
 
   return (
@@ -40,6 +42,7 @@ function App() {
         <Route path="/register" element={<OnlyUnAuth component={<SignUpPage />} />} />
         <Route path="/forgot-password" element={<OnlyUnAuth component={<ForgotPasswordPage />} />} />
         <Route path="/reset-password" element={<OnlyAfterForgotPage component={<ResetPasswordPage />} />} />
+        {/* @ts-ignore */}
         <Route path="/profile" element={<OnlyAuth component={<ProfilePage />} />} />
         {!state?.background && (<Route path="/ingredients/:id" element={<IngPage />} />)}
 

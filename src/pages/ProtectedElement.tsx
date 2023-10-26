@@ -1,7 +1,14 @@
 import { Navigate, useLocation } from "react-router-dom";
 import { getCookie } from "../utils/getCookie";
+import { ReactNode } from "react";
 
-const ProtectedElement = ({ AfterForgotPage = false, onlyUnAuth = false, component }) => {
+interface AuthFormProps {
+  AfterForgotPage?: boolean,
+  onlyUnAuth?: boolean, 
+  component: ReactNode,
+}
+
+const ProtectedElement = ({ AfterForgotPage = false, onlyUnAuth = false, component }: AuthFormProps) => {
   // isAuthChecked это флаг, показывающий что проверка токена произведена
   // при этом результат этой проверки не имеет значения, важно только,
   // что сам факт проверки имел место.
@@ -36,9 +43,11 @@ const ProtectedElement = ({ AfterForgotPage = false, onlyUnAuth = false, compone
 };
 
 export const OnlyAuth = ProtectedElement;
-export const OnlyUnAuth = ({ component }) => (
+export const OnlyUnAuth = ({ component }: AuthFormProps) => (
+  //@ts-ignore
   <ProtectedElement onlyUnAuth={true} component={component} />
 );
-export const OnlyAfterForgotPage = ({ component }) => (
+export const OnlyAfterForgotPage = ({ component }: AuthFormProps) => (
+  //@ts-ignore
   <ProtectedElement AfterForgotPage={true} component={component} />
 );

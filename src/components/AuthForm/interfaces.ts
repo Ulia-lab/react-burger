@@ -7,7 +7,7 @@ export interface AuthFormProps {
   /** текст кнопки авторизации */
   btnTitle: string;
   /** текст подсказок авторизации */
-  suggestions: Array<string>;
+  suggestions: {text: string, linkText: string, link: string}[];
   children?: ReactNode;
 }
 

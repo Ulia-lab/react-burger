@@ -6,6 +6,7 @@ import { getIngredient } from '../../utils/getIng';
 
 export function IngPage() {
 
+  //@ts-ignore
   const selectedCard = useSelector(state => state?.fetchData?.data) || null;
 
   let { id } = useParams();
