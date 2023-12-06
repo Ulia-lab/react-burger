@@ -16,6 +16,7 @@ import AppHeader from './components/AppHeader';
 import { fetchDataAction } from './services/actions/fetchData';
 import { IngPage } from './pages/IngPage/IngPage';
 import { openCardModal } from './services/actions/modalngredients';
+import { FeedPage } from './pages/FeedPage/FeedPage';
 
 function App() {
   const location = useLocation();
@@ -45,6 +46,11 @@ function App() {
         {/* @ts-ignore */}
         <Route path="/profile" element={<OnlyAuth component={<ProfilePage />} />} />
         {!state?.background && (<Route path="/ingredients/:id" element={<IngPage />} />)}
+
+        <Route path="/feed" element={<FeedPage />} />
+        {/* <Route path="/feed/:number" element={<OrderInfoPage />} /> */}
+        <Route path="/profile/orders" element={<OnlyUnAuth component={<LoginPage />} />} />
+        <Route path="/profile/orders/:number" element={<OnlyUnAuth component={<LoginPage />} />} />
 
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

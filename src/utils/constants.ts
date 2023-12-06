@@ -11,3 +11,5 @@ export const LOGOUT_URL = `${BASE_URL}/auth/logout`;
 export const TOKEN_URL = `${BASE_URL}/auth/token`;
 
 export const USER_URL = `${BASE_URL}/auth/user`;
+
+export const ORDERS_API_URL = (orderId: string) => `https://norma.nomoreparties.space/api/orders/${orderId}`;
