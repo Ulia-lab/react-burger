@@ -14,7 +14,6 @@ import OrderItem from "./orderItem";
 function OrdersList() {
   return (
     <section className={orderListStyle.section}>
-      <h1 className={cn("text text_type_main-large mb-4")}>Лента заказов</h1>
       <div
         className={orderListStyle.cardListBlock}
       >

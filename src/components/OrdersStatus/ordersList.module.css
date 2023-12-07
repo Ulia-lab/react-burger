@@ -1,0 +1,36 @@
+.section{
+  width: 50%;
+  margin-right: 60px;
+}
+
+.cardListBlock {
+  overflow: auto;
+  scrollbar-width: thin;
+  max-height: calc(100vh - 150px);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  background-color: #8585ad;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #c5c5c5;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px;
+  background-color: #1c1c21;
+  border-radius: 30px;
+}
+
+.itemInfo {
+  display: flex;
+  justify-content: space-between;
+}
