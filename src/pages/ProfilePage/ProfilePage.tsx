@@ -134,6 +134,7 @@ export function ProfilePage() {
                     icon={'EditIcon'}
                     value={editPassword}
                     name={'password'}
+                    disabled={isEditDisabled}
                 />
                 {!isEditDisabled && <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '30px' }}>
                     <Button onClick={handleCancelOnClick} htmlType='reset'>Отменить</Button>

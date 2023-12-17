@@ -1,0 +1,12 @@
+.section{
+  width: 50%;
+}
+
+.readyBlock{
+  display: flex;
+  gap: 36px;
+}
+
+.readyItem{
+  width: 50%;
+}
